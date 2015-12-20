@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mj.instashusha.SaveActivity">
+
+
+
+    <FrameLayout
+        android:id="@+id/frame_layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+
+
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center_horizontal|top" />
+
+
+
+        <include layout="@layout/toolbar_save_activity"/>
+
+
+    </FrameLayout>
+
+    <Button
+        android:padding="16dp"
+        android:id="@+id/btn_share"
+        style="@style/DopeButton"
+        android:text="SHARE"
+        android:layout_below="@id/frame_layout_container"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:padding="16dp"
+        android:id="@+id/btn_download"
+        style="@style/DopeButton"
+        android:text="DOWNLOAD"
+        android:layout_below="@id/frame_layout_container"
+        android:layout_toLeftOf="@id/btn_share"
+        />
+
+
+    <Button
+        android:padding="16dp"
+        android:id="@+id/btn_repost"
+        style="@style/DopeButton"
+        android:text="REPOST"
+        android:layout_toRightOf="@id/btn_share"
+        android:layout_below="@id/frame_layout_container"
+        />
+
+
+</RelativeLayout>

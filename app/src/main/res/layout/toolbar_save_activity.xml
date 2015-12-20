@@ -1,0 +1,24 @@
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar_save_activity"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/actionBarSize"
+    android:layout_gravity="center_horizontal|top"
+    android:background="#21000000">
+
+    <TextView
+        android:id="@+id/tv_appname"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="InstaShusha"
+        android:paddingLeft="12dp"
+        android:paddingBottom="24dp"
+        android:paddingTop="24dp"
+        android:textSize="24sp"
+        android:gravity="center_vertical"
+        />
+
+</android.support.v7.widget.Toolbar>
+
