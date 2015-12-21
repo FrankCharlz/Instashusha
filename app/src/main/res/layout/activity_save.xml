@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mj.instashusha.SaveActivity"
@@ -52,17 +53,15 @@
         android:layout_marginTop="4dp"
         android:layout_below="@id/progress_dl">
 
-        <Button
+        <TextView
             style="@style/DopeButton"
-            android:padding="16dp"
             android:id="@+id/btn_download"
             android:text="@string/btn.download"
             android:layout_weight="0.33"
             />
 
 
-        <Button
-            android:padding="16dp"
+        <TextView
             android:id="@+id/btn_share"
             style="@style/DopeButton"
             android:layout_weight="0.33"
@@ -71,8 +70,7 @@
 
 
 
-        <Button
-            android:padding="16dp"
+        <TextView
             android:id="@+id/btn_repost"
             style="@style/DopeButton"
             android:text="@string/btn.repost"
@@ -83,14 +81,14 @@
     </LinearLayout>
 
     <com.google.android.gms.ads.AdView
-    android:id="@+id/adView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
-    android:layout_alignParentBottom="true"
-    ads:adSize="BANNER"
-    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
-</com.google.android.gms.ads.AdView>
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+    </com.google.android.gms.ads.AdView>
 
 
 </RelativeLayout>

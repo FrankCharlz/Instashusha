@@ -22,6 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
 import com.mj.instashusha.utils.Utils;
@@ -52,7 +54,7 @@ public class SaveActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
 
-    private Button btnSave, btnShare, btnRepost;
+    private TextView btnSave, btnShare, btnRepost;
     private String mime_type, save_path;
 
     @Override
@@ -76,6 +78,7 @@ public class SaveActivity extends AppCompatActivity {
 
         Picasso.with(context).load(image_url).into(target);
 
+        //money baby...
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice("YOUR_DEVICE_HASH")
@@ -101,13 +104,13 @@ public class SaveActivity extends AppCompatActivity {
 
         ButtonClicks sl = new ButtonClicks();
 
-        btnSave = (Button) findViewById(R.id.btn_download);
+        btnSave = (TextView) findViewById(R.id.btn_download);
         btnSave.setOnClickListener(sl);
 
-        btnShare = (Button) findViewById(R.id.btn_share);
+        btnShare = (TextView) findViewById(R.id.btn_share);
         btnShare.setOnClickListener(sl);
 
-        btnRepost = (Button) findViewById(R.id.btn_repost);
+        btnRepost = (TextView) findViewById(R.id.btn_repost);
         btnRepost.setOnClickListener(sl);
 
         buttonsContainer = (LinearLayout) findViewById(R.id.buttons_container);
