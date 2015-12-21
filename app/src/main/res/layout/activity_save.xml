@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mj.instashusha.SaveActivity">
-
+    tools:context="com.mj.instashusha.SaveActivity"
+    android:background="@color/white">
 
 
     <FrameLayout
@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
+            android:src="@drawable/loading"
             android:layout_gravity="center_horizontal|top" />
 
 
@@ -30,33 +31,66 @@
 
     </FrameLayout>
 
-    <Button
-        android:padding="16dp"
-        android:id="@+id/btn_share"
-        style="@style/DopeButton"
-        android:text="SHARE"
-        android:layout_below="@id/frame_layout_container"
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/progress_dl"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
         android:layout_centerHorizontal="true"
-        />
-
-    <Button
-        android:padding="16dp"
-        android:id="@+id/btn_download"
-        style="@style/DopeButton"
-        android:text="DOWNLOAD"
+        android:progressTint="@color/black.alpha"
         android:layout_below="@id/frame_layout_container"
-        android:layout_toLeftOf="@id/btn_share"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:max="100"
+        android:progress="23"
+        android:visibility="gone"
         />
 
+    <LinearLayout
+        android:id="@+id/buttons_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/progress_dl">
 
-    <Button
-        android:padding="16dp"
-        android:id="@+id/btn_repost"
-        style="@style/DopeButton"
-        android:text="REPOST"
-        android:layout_toRightOf="@id/btn_share"
-        android:layout_below="@id/frame_layout_container"
-        />
+        <Button
+            style="@style/DopeButton"
+            android:padding="16dp"
+            android:id="@+id/btn_download"
+            android:text="@string/btn.download"
+            android:layout_weight="0.33"
+            />
+
+
+        <Button
+            android:padding="16dp"
+            android:id="@+id/btn_share"
+            style="@style/DopeButton"
+            android:layout_weight="0.33"
+            android:text="@string/btn.share"
+            />
+
+
+
+        <Button
+            android:padding="16dp"
+            android:id="@+id/btn_repost"
+            style="@style/DopeButton"
+            android:text="@string/btn.repost"
+            android:layout_weight="0.33"
+            />
+
+
+    </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+    android:id="@+id/adView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_alignParentBottom="true"
+    ads:adSize="BANNER"
+    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+</com.google.android.gms.ads.AdView>
 
 
 </RelativeLayout>

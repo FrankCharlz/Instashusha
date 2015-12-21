@@ -5,7 +5,7 @@
 
     <dimen name="padding.top.bottom">12dp</dimen>
     <dimen name="padding.left.right">18dp</dimen>
-    <dimen name="radius.small">0dip</dimen>
+    <dimen name="radius.small">4dp</dimen>
 
 
     <dimen name="button_margin_top">16dp</dimen>

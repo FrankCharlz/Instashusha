@@ -56,8 +56,8 @@ public class InstagramApp extends Application {
 
     public static void makeAppFolder() {
         File[] folders = {
-                new File(sdcard_path+"/InstaShusha/video/"),
-                new File(sdcard_path+"/InstaShusha/picha/")
+                new File(sdcard_path+"/InstaShusha/InstaShusha Video/"),
+                new File(sdcard_path+"/InstaShusha/InstaShusha Picha/")
         };
 
         for (File f : folders) {

@@ -2,10 +2,10 @@ package com.mj.instashusha;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,11 +17,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
+import com.mj.instashusha.utils.Utils;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.picasso.Picasso;
@@ -34,7 +37,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Random;
 
 public class SaveActivity extends AppCompatActivity {
 
@@ -46,44 +48,39 @@ public class SaveActivity extends AppCompatActivity {
     private FrameLayout frameLayout;
     private Toolbar toolbar;
     private TextView tvToolbar;
+    private LinearLayout buttonsContainer;
+
+    private ProgressBar progressBar;
 
     private Button btnSave, btnShare, btnRepost;
-    private String mime_type, shared_file_path;
+    private String mime_type, save_path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
 
         context = this;
-
         initViews();
 
-    /*
         Intent intent = getIntent();
         media_type = intent.getStringExtra(MainActivity.MEDIA_TYPE);
         image_url = intent.getStringExtra(MainActivity.IMAGE_URL);
         video_url = intent.getStringExtra(MainActivity.VIDEO_URL);
-        */
 
-        int ds[] = {
-                R.drawable.aaaaa,
-                R.drawable.bbbbb,
-                R.drawable.ccccc,
-                R.drawable.eeee,
-                R.drawable.fff,
-                R.drawable.ggg,
-                R.drawable.dddd,
-                R.drawable.hhh,
-                R.drawable.iiii,
-                R.drawable.jjjj
-        };
+        if (media_type.contains("video")) {
+            mime_type = "video/*";
+        } else {
+            mime_type = "image/*";
+        }
 
-        Picasso.with(context).load(ds[new Random().nextInt(ds.length)]).into(target);
+        Picasso.with(context).load(image_url).into(target);
 
-        //Picasso.with(context).load(image_url).into(target);
-
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("YOUR_DEVICE_HASH")
+                .build();
+        mAdView.loadAd(adRequest);
 
     }
 
@@ -102,10 +99,10 @@ public class SaveActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar_save_activity);
         tvToolbar = (TextView) findViewById(R.id.tv_appname);
 
-        ShareListener sl = new ShareListener();
+        ButtonClicks sl = new ButtonClicks();
 
         btnSave = (Button) findViewById(R.id.btn_download);
-        btnSave.setOnClickListener(new ButtonListener());
+        btnSave.setOnClickListener(sl);
 
         btnShare = (Button) findViewById(R.id.btn_share);
         btnShare.setOnClickListener(sl);
@@ -113,27 +110,47 @@ public class SaveActivity extends AppCompatActivity {
         btnRepost = (Button) findViewById(R.id.btn_repost);
         btnRepost.setOnClickListener(sl);
 
-        btnSave.setVisibility(View.GONE);
-        btnShare.setVisibility(View.GONE);
-        btnRepost.setVisibility(View.GONE);
+        buttonsContainer = (LinearLayout) findViewById(R.id.buttons_container);
+        buttonsContainer.setVisibility(View.GONE);
+
+        progressBar = (ProgressBar) findViewById(R.id.progress_dl);
     }
 
-    class ShareListener implements View.OnClickListener {
+    class ButtonClicks implements View.OnClickListener {
         @Override
         public void onClick(View view) {
 
             switch (view.getId()) {
-                case R.id.btn_share :
-                    createShareIntent(mime_type, shared_file_path);
+                case R.id.btn_share:
+                    download();
+                    createShareIntent(mime_type, save_path);
                     break;
 
                 case R.id.btn_repost:
-                    createInstagramIntent(mime_type, shared_file_path);
+                    download();
+                    createInstagramIntent(mime_type, save_path);
                     break;
+
+                case R.id.btn_download:
+                    download();
+                    break;
+
 
                 default: break;
             }
 
+        }
+    }
+
+    private void download() {
+        //sets the save path, so that it can be used in share intent...
+        //ugly though
+        if (media_type.contains("video")) {
+            save_path = InstagramApp.getAppVideoFolder() + getTimeStamp() + ".mp4";
+            saveVideo(video_url, save_path);
+        } else {
+            save_path = InstagramApp.getAppPhotoFolder()+getTimeStamp()+".png";
+            Utils.saveImage(context, imageView, save_path);
         }
     }
 
@@ -142,11 +159,9 @@ public class SaveActivity extends AppCompatActivity {
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
             imageView.setImageBitmap(bitmap);
 
-            btnSave.setVisibility(View.VISIBLE);
-            btnShare.setVisibility(View.VISIBLE);
-            btnRepost.setVisibility(View.VISIBLE);
+            buttonsContainer.setVisibility(View.VISIBLE);
 
-            doPalleteColourings(bitmap);
+            paletteThings(bitmap);
         }
 
         @Override
@@ -160,11 +175,11 @@ public class SaveActivity extends AppCompatActivity {
         }
     };
 
-    private void doPalleteColourings(Bitmap bitmap) {
+    private void paletteThings(Bitmap bitmap) {
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
             public void onGenerated(Palette palette) {
                 InstagramApp.log("Palette loaded");
-                Palette.Swatch swatch = palette.getDarkVibrantSwatch();
+                Palette.Swatch swatch = palette.getVibrantSwatch();
                 if (swatch != null) {
                     int vbg = swatch.getRgb(); vbg = addAlphaToColor(vbg, TOOLBAR_BG_ALPHA);
                     int vtc = swatch.getTitleTextColor();
@@ -172,53 +187,14 @@ public class SaveActivity extends AppCompatActivity {
                     //frameLayout.setBackgroundColor(swatch.getRgb());
 
                     toolbar.setBackgroundColor(vbg);
+                    buttonsContainer.setBackgroundColor(addAlphaToColor(vbg, 0.4f));
                     tvToolbar.setTextColor(vtc);
                 }
 
+                //progressBar.setProgressTintList(null);
+
             }
         });
-    }
-
-    class ButtonListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View view) {
-
-            final String save_path;
-
-            if (media_type.contains("video")) {
-                save_path = InstagramApp.getAppVideoFolder() + getTimeStamp() + ".mp4";
-                saveVideo(video_url, save_path);
-            } else {
-                save_path = InstagramApp.getAppPhotoFolder()+getTimeStamp()+".png";
-                saveImage(imageView, save_path);
-            }
-
-            InstagramApp.log(save_path);
-
-        }
-    }
-
-    private void saveImage(ImageView imageView, String save_path) {
-        imageView.setDrawingCacheEnabled(true);
-        imageView.buildDrawingCache();
-        Bitmap bitmap = imageView.getDrawingCache();
-
-        File save_file = new File(save_path);
-        try {
-            boolean fcs = save_file.createNewFile();
-            InstagramApp.log("File created : " + save_file.getAbsolutePath());
-            FileOutputStream ostream = new FileOutputStream(save_file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, ostream);
-            ostream.close();
-            addFileToMediaDatabase(save_path);
-            InstagramApp.toast(context, "Saved at: " + save_path);
-
-        }
-        catch (Exception e) {
-            InstagramApp.toast(context, "Imeshindwa kusave");
-            e.printStackTrace();
-        }
     }
 
     private String getTimeStamp() {
@@ -228,17 +204,8 @@ public class SaveActivity extends AppCompatActivity {
                 .replaceAll(" ","_");
     }
 
-    private void addFileToMediaDatabase(String file_path) {
-        MediaScannerConnection.scanFile(this,
-                new String[]{file_path}, null,
-                new MediaScannerConnection.OnScanCompletedListener() {
-                    public void onScanCompleted(String path, Uri uri) {
-                        InstagramApp.log("File is now on gallery");
-                    }
-                });
-    }
-
     private void saveVideo(String video_url, final String save_path) {
+        progressBar.setVisibility(View.VISIBLE);
         InstagramApp.getOkHttpClient()
                 .newCall(new Request.Builder()
                         .url(video_url)
@@ -267,19 +234,21 @@ public class SaveActivity extends AppCompatActivity {
                         publishProgress((int)(100.0 * downloaded/size));
                     }
 
+
+                } finally {
+                    if (in != null) in.close();
+                    if (fout != null) fout.close();
+
                     Handler h = new Handler(Looper.getMainLooper());
                     h.post(new Runnable() {
                         @Override
                         public void run() {
                             InstagramApp.toast(getApplicationContext(), "Video saved at: " + save_path);
                             InstagramApp.log("Video saved at: " + save_path);
-                            addFileToMediaDatabase(save_path);
+                            Utils.addFileToMediaDatabase(context, save_path);
+                            progressBar.setVisibility(View.GONE);
                         }
                     });
-
-                } finally {
-                    if (in != null) in.close();
-                    if (fout != null) fout.close();
                 }
 
             }
@@ -288,16 +257,14 @@ public class SaveActivity extends AppCompatActivity {
     }
 
 
-    private void publishProgress(final double v) {
+    private void publishProgress(final int progress) {
         //InstagramApp.log("Progress : "+v);
         Handler h = new Handler(Looper.getMainLooper());
         h.post(new Runnable() {
             @Override
             public void run() {
-                tvToolbar.setText(""+v);
-                //InstagramApp.toast(getApplicationContext(), "Video saved at: " + save_path);
-                //InstagramApp.log("Video saved at: " + save_path);
-                //addFileToMediaDatabase(save_path);
+                progressBar.setProgress(progress);
+                tvToolbar.setText(""+progress);
             }
         });
     }
@@ -310,7 +277,7 @@ public class SaveActivity extends AppCompatActivity {
         //set package
         share.setPackage("com.instagram.android");
         share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        share.putExtra(Intent.EXTRA_TEXT, "@InstaShusha");
+        share.putExtra(Intent.EXTRA_TEXT, "Repost by @InstaShusha");
 
         // Set the MIME type
         share.setType(type);
@@ -330,10 +297,7 @@ public class SaveActivity extends AppCompatActivity {
         // Create the new Intent using the 'Send' action.
         Intent share = new Intent(Intent.ACTION_SEND);
 
-        //set package
-        share.setPackage("com.instagram.android");
-        share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        share.putExtra(Intent.EXTRA_TEXT,"@InstaShusha");
+        share.putExtra(Intent.EXTRA_TEXT,"Shared from @InstaShusha");
 
         // Set the MIME type
         share.setType(type);

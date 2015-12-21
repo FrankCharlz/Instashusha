@@ -6,13 +6,13 @@
         android:width="2dp"
         />
 
-    <solid android:color="@color/transparent" />
+    <solid android:color="@color/myvaste" />
 
     <padding
-        android:top="@dimen/padding.top.bottom"
-        android:bottom="@dimen/padding.top.bottom"
-        android:left="@dimen/padding.left.right"
-        android:right="@dimen/padding.left.right"
+        android:top="2dp"
+        android:bottom="2dp"
+        android:left="2dp"
+        android:right="2dp"
         />
     <corners android:radius="@dimen/radius.small"/>
 

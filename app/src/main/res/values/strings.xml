@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">InstaShusha</string>
+
+
+    <string name="btn.download">DOWNLOAD</string>
+    <string name="btn.share">SHARE</string>
+    <string name="btn.repost">REPOST</string>
+
+
 </resources>
