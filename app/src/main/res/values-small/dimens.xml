@@ -1,0 +1,13 @@
+<resources>
+    <dimen name="padding.top.bottom">8dp</dimen>
+    <dimen name="padding.left.right">12dp</dimen>
+
+    <dimen name="radius.small">2dp</dimen>
+
+
+    <dimen name="margin.button">6dp</dimen>
+
+    <dimen name="text.size.button">12sp</dimen>
+    <dimen name="text.size.toolbar">16sp</dimen>
+
+</resources>

@@ -19,7 +19,7 @@
 
         <ImageView
             android:id="@+id/image_view"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:src="@drawable/loading"
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="16dp"
         android:layout_centerHorizontal="true"
-        android:progressTint="@color/black.alpha"
+        android:progressTint="@color/black"
         android:layout_below="@id/frame_layout_container"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:max="100"
@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="2dp"
         android:layout_below="@id/progress_dl">
 
         <TextView
@@ -58,7 +58,8 @@
             android:id="@+id/btn_download"
             android:text="@string/btn.download"
             android:layout_weight="0.33"
-            />
+            android:textSize="@dimen/text.size.button"
+            android:layout_margin="@dimen/margin.button"/>
 
 
         <TextView
@@ -66,6 +67,8 @@
             style="@style/DopeButton"
             android:layout_weight="0.33"
             android:text="@string/btn.share"
+            android:textSize="@dimen/text.size.button"
+            android:layout_margin="@dimen/margin.button"
             />
 
 
@@ -75,6 +78,8 @@
             style="@style/DopeButton"
             android:text="@string/btn.repost"
             android:layout_weight="0.33"
+            android:textSize="@dimen/text.size.button"
+            android:layout_margin="@dimen/margin.button"
             />
 
 

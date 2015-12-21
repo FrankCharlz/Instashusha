@@ -72,6 +72,9 @@ public class InstagramApp extends Application {
     public static String getAppVideoFolder() {
         return  video_folder_path;
     }
+    public static String getAppFolder() {
+        return  sdcard_path+"/InstaShusha/";
+    }
 
 
 

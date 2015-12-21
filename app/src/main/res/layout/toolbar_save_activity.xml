@@ -12,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="@string/app_name"
-        android:paddingLeft="12dp"
-        android:paddingBottom="24dp"
-        android:paddingTop="24dp"
-        android:textSize="24sp"
+        android:paddingLeft="@dimen/padding.left.right"
+        android:paddingBottom="@dimen/padding.top.bottom"
+        android:paddingTop="@dimen/padding.top.bottom"
+        android:textSize="@dimen/text.size.button"
         android:gravity="center_vertical"
         />
 

@@ -154,6 +154,7 @@ public class SaveActivity extends AppCompatActivity {
         } else {
             save_path = InstagramApp.getAppPhotoFolder()+getTimeStamp()+".png";
             Utils.saveImage(context, imageView, save_path);
+            openFinisherActivity();
         }
     }
 
@@ -250,6 +251,7 @@ public class SaveActivity extends AppCompatActivity {
                             InstagramApp.log("Video saved at: " + save_path);
                             Utils.addFileToMediaDatabase(context, save_path);
                             progressBar.setVisibility(View.GONE);
+                            openFinisherActivity();
                         }
                     });
                 }
@@ -257,6 +259,12 @@ public class SaveActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void openFinisherActivity() {
+        Intent intent = new Intent(context, FinisherActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 
