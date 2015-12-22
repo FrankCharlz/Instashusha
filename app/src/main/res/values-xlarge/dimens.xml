@@ -1,6 +1,6 @@
 <resources>
-    <dimen name="padding.top.bottom">24dp</dimen>
-    <dimen name="padding.left.right">16dp</dimen>
+    <dimen name="padding.top.bottom">18dp</dimen>
+    <dimen name="padding.left.right">24dp</dimen>
 
     <dimen name="radius.small">4dp</dimen>
 

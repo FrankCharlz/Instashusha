@@ -8,6 +8,17 @@
 
 
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="instructions">Open instagram and copy share url then Open InstaShusha .</string>
+    <string name="view_downloaded">View Downloaded</string>
+    <string name="open_instagram">Fungua Instagram</string>
+    <string name="open_tutorial">Soma maelezo zaidi</string>
+
+    <string name="maelezo_body_1">Open instagram app and tap on the three dots as shown above</string>
+    <string name="maelezo_title_1">Step 1</string>
+    <string name="maelezo_title_2">Step 2</string>
+    <string name="maelezo_body_2">Tap on \'copy share url\' button</string>
+    <string name="maelezo_title_3">Step 3</string>
+    <string name="maelezo_body_3">Close Instagram then Open InstaShusha App</string>
 
 
 </resources>

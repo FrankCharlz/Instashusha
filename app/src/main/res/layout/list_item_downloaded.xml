@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"
             android:textColor="@color/white"
             android:padding="@dimen/padding.top.bottom"
-            android:textSize="@dimen/button_text_size"/>
+            android:textSize="@dimen/text.size.button"/>
 
         <ImageView
             android:id="@+id/item_share"

@@ -1,17 +1,23 @@
-package com.mj.instashusha;
+package com.mj.instashusha.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.R;
 import com.mj.instashusha.fragments.InstructionFragment;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
 import com.squareup.okhttp.Request;
+
+import org.codechimp.apprater.AppRater;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         context = this;
         InstagramApp.makeAppFolder();
+
+        checkAppIntroduction();
 
         String url = InstagramApp.getLinkFromClipBoard(this);
 
@@ -63,6 +71,28 @@ public class MainActivity extends AppCompatActivity {
             pro();
         }
 
+
+    }
+
+    private void checkAppIntroduction() {
+        //using thread to read prefs...
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences getPrefs = PreferenceManager
+                        .getDefaultSharedPreferences(getBaseContext());
+
+                boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+                if (isFirstStart) {
+
+                    Intent i = new Intent(MainActivity.this, IntroActivity.class);
+                    startActivity(i);
+
+                    getPrefs.edit().putBoolean("firstStart", false).apply();
+                }
+            }
+        });
+        t.start();
 
     }
 

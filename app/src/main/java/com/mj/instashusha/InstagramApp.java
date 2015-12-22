@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.squareup.okhttp.OkHttpClient;
 
+import org.codechimp.apprater.AppRater;
+
 import java.io.File;
 
 /**
@@ -19,17 +21,23 @@ public class InstagramApp extends Application {
 
     private static final OkHttpClient okhttpClient = new OkHttpClient();
 
-    public  static OkHttpClient getOkHttpClient() {
-        return okhttpClient;
-    }
-
     private static String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
     private static String photo_folder_path = sdcard_path+"/InstaShusha/InstaShusha Picha/";
     private static String video_folder_path = sdcard_path+"/InstaShusha/InstaShusha Video/";
 
+
+    public  static OkHttpClient getOkHttpClient() {
+        return okhttpClient;
+    }
     public static void log(String str){
         Log.e("insta-dl", str);
     }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
+
 
     public static void toast(Context ctx, String s) {
         Toast.makeText(ctx, s, Toast.LENGTH_SHORT).show();

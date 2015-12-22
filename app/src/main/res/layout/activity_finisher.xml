@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    tools:context="com.mj.instashusha.FinisherActivity">
+    tools:context=".activities.FinisherActivity">
 
     <include
         android:id="@+id/included_in_finisher"
@@ -19,12 +19,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/included_in_finisher"
-        android:layout_above="@+id/adView" />
+        android:layout_above="@+id/adView_activity_finisher"
+       />
 
 
 
     <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
+        android:id="@+id/adView_activity_finisher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

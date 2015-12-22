@@ -1,8 +1,7 @@
-package com.mj.instashusha;
+package com.mj.instashusha.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -14,7 +13,6 @@ import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +22,8 @@ import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.R;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
 import com.mj.instashusha.utils.Utils;
@@ -31,6 +31,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import org.codechimp.apprater.AppRater;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -62,6 +64,9 @@ public class SaveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
 
+
+        AppRater.app_launched(this); //for ratings...
+
         context = this;
         initViews();
 
@@ -79,7 +84,7 @@ public class SaveActivity extends AppCompatActivity {
         Picasso.with(context).load(image_url).into(target);
 
         //money baby...
-        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdView mAdView = (AdView) findViewById(R.id.adView_activity_save);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice("YOUR_DEVICE_HASH")
                 .build();

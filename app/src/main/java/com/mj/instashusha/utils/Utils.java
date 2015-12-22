@@ -2,6 +2,7 @@ package com.mj.instashusha.utils;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -31,13 +32,19 @@ public class Utils {
 
         }
         catch (Exception e) {
-            InstagramApp.toast(context, "Imeshindwa kusave");
+            InstagramApp.toast(context, "Imeshindwa kusave picha : "+e.getMessage());
             InstagramApp.log(e.getLocalizedMessage());
             e.printStackTrace();
         }
     }
 
     public static void addFileToMediaDatabase(Context context, String file_path) {
+        Uri contentUri = Uri.fromFile(new File(file_path));
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        mediaScanIntent.setData(contentUri);
+        context.sendBroadcast(mediaScanIntent);
+
+        /*
         MediaScannerConnection.scanFile(context,
                 new String[]{file_path}, null,
                 new MediaScannerConnection.OnScanCompletedListener() {
@@ -45,6 +52,7 @@ public class Utils {
                         InstagramApp.log("File is now on gallery");
                     }
                 });
+        */
     }
 
 
