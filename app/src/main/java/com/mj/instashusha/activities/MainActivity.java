@@ -15,6 +15,7 @@ import com.mj.instashusha.R;
 import com.mj.instashusha.fragments.InstructionFragment;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
+import com.mj.instashusha.utils.Utils;
 import com.squareup.okhttp.Request;
 
 import org.codechimp.apprater.AppRater;
@@ -40,38 +41,50 @@ public class MainActivity extends AppCompatActivity {
 
         context = this;
         InstagramApp.makeAppFolder();
-
         checkAppIntroduction();
+        theMainFlow();
 
+    }
+
+    private void theMainFlow() {
         String url = InstagramApp.getLinkFromClipBoard(this);
-
         if (url.isEmpty()) {
             //no instagram link in clipboard
             //launch instruction fragment
             InstagramApp.log("No instagram url in clipboard");
+            showInstructionFragment();
 
-            InstructionFragment fragment = new InstructionFragment();
-
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            fragmentTransaction.add(R.id.main_container, fragment);
-            fragmentTransaction.commit();
 
         } else {
             //process instagram link
-            InstagramApp.log("Link is : " + url);
-            InstagramApp.toast(this, "URL : " + url);
+            InstagramApp.log("URL is : " + url);
 
-            request = new Request.Builder()
-                    .url(BASE_URL+ url)
-                    .build();
+            boolean isLastUrl = Utils.isTheLastUr(context, url);
+            if(isLastUrl) {
+                //no need to download it again...
+                showInstructionFragment();
+            } else {
+                proceedLoading(url);
+            }
 
-
-            pro();
         }
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        theMainFlow();
+    }
+
+    private void showInstructionFragment() {
+        InstructionFragment fragment = new InstructionFragment();
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.add(R.id.main_container, fragment);
+        fragmentTransaction.commit();
     }
 
     private void checkAppIntroduction() {
@@ -96,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void pro() {
+    public void proceedLoading(String url) {
 
         progressBar = new ProgressDialog(context);
         progressBar.setCancelable(true);
@@ -107,11 +120,15 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setMax(100);
         progressBar.show();
 
+        Utils.setLastUrl(context, url);
+        request = new Request.Builder()
+                .url(BASE_URL+ url)
+                .build();
+
         InstagramApp.getOkHttpClient().newCall(request).enqueue(
                 new HttpCallback() {
                     @Override
                     public void onUrlResponse(InstaResponse ir) {
-                        InstagramApp.log("If this fails try, MyInstagrammable");
                         InstagramApp.log(ir.toString());
                         Intent intent = new Intent(context, SaveActivity.class);
                         intent.putExtra(MEDIA_TYPE, ir.type);

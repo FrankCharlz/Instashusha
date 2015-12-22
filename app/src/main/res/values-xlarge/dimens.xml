@@ -7,7 +7,7 @@
 
     <dimen name="margin.button">16dp</dimen>
 
-    <dimen name="text.size.button">22sp</dimen>
+    <dimen name="text.size.button">28sp</dimen>
     <dimen name="text.size.toolbar">24sp</dimen>
 
 </resources>

@@ -67,9 +67,9 @@ public class InstructionFragment extends Fragment {
 
                 case R.id.btn_fungua_insta:
                     try {
-                        Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage("com.instagram.android");
-                        startActivity(launchIntent);
-                        getActivity().finish();
+                        Intent instaIntent = context.getPackageManager().getLaunchIntentForPackage("com.instagram.android");
+                        startActivity(instaIntent);
+                        //getActivity().finish();
                     } catch (Exception e) {
                         InstagramApp.log(e.getLocalizedMessage());
                     }

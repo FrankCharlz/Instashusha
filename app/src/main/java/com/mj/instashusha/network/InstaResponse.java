@@ -10,7 +10,8 @@ public class InstaResponse {
     public String video_url;
 
     public String toString() {
-        return success+"\n-"
+        return "\n"
+                +success+"\n-"
                 +type+"\n-"
                 +image_url+"\n-"
                 +video_url;
