@@ -14,10 +14,13 @@ import com.mj.instashusha.InstagramApp;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class Utils {
 
     private static final String LAST_URL = "last_insta_url_loaded";
+    private static final String PREFS_FILE_NAME = "Christina";
 
     public static  void saveImage(Context context, ImageView imageView, String save_path) {
         imageView.setDrawingCacheEnabled(true);
@@ -47,32 +50,29 @@ public class Utils {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         mediaScanIntent.setData(contentUri);
         context.sendBroadcast(mediaScanIntent);
-
-        /*
-        MediaScannerConnection.scanFile(context,
-                new String[]{file_path}, null,
-                new MediaScannerConnection.OnScanCompletedListener() {
-                    public void onScanCompleted(String path, Uri uri) {
-                        InstagramApp.log("File is now on gallery");
-                    }
-                });
-        */
     }
 
 
     public static boolean isTheLastUr(Context context, String url) {
-        SharedPreferences getPrefs = PreferenceManager
-                .getDefaultSharedPreferences(context);
-
+        SharedPreferences getPrefs =
+                context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE);
         String last_url = getPrefs.getString(LAST_URL, "");
+        InstagramApp.log("last url = " + last_url);
+        InstagramApp.log("current url = " + url);
         return (url.equalsIgnoreCase(last_url));
     }
 
     public static void setLastUrl(Context context, String url) {
-        PreferenceManager
-                .getDefaultSharedPreferences(context)
+        context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
                 .edit()
                 .putString(LAST_URL, url)
                 .apply();
+    }
+
+    public static String getTimeStamp() {
+        return new Timestamp(new Date().getTime())
+                .toString()
+                .replaceAll("\\.","_")
+                .replaceAll(" ","_");
     }
 }

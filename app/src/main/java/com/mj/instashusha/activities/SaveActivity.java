@@ -26,6 +26,7 @@ import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
+import com.mj.instashusha.utils.DopeTextView;
 import com.mj.instashusha.utils.Utils;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -45,10 +46,9 @@ import java.util.Date;
 public class SaveActivity extends AppCompatActivity {
 
     private static final float TOOLBAR_BG_ALPHA = 0.49f;
-    private String media_type, image_url, video_url;
+    private String media_type, image_url, video_url, source_url;
     private Context context;
     private ImageView imageView;
-    private OkHttpClient client;
     private FrameLayout frameLayout;
     private Toolbar toolbar;
     private TextView tvToolbar;
@@ -56,7 +56,7 @@ public class SaveActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
 
-    private TextView btnSave, btnShare, btnRepost;
+    private DopeTextView btnSave, btnShare, btnRepost;
     private String mime_type, save_path;
 
     @Override
@@ -74,6 +74,7 @@ public class SaveActivity extends AppCompatActivity {
         media_type = intent.getStringExtra(MainActivity.MEDIA_TYPE);
         image_url = intent.getStringExtra(MainActivity.IMAGE_URL);
         video_url = intent.getStringExtra(MainActivity.VIDEO_URL);
+        source_url = intent.getStringExtra(MainActivity.SRC_URL);
 
         if (media_type.contains("video")) {
             mime_type = "video/*";
@@ -92,14 +93,6 @@ public class SaveActivity extends AppCompatActivity {
 
     }
 
-    private Drawable getD(int id) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return getResources().getDrawable(id, context.getTheme());
-        } else {
-            return getResources().getDrawable(id);
-        }
-    }
-
     private void initViews() {
         imageView = (ImageView) findViewById(R.id.image_view);
         frameLayout = (FrameLayout) findViewById(R.id.frame_layout_container);
@@ -109,13 +102,13 @@ public class SaveActivity extends AppCompatActivity {
 
         ButtonClicks sl = new ButtonClicks();
 
-        btnSave = (TextView) findViewById(R.id.btn_download);
+        btnSave = (DopeTextView) findViewById(R.id.btn_download);
         btnSave.setOnClickListener(sl);
 
-        btnShare = (TextView) findViewById(R.id.btn_share);
+        btnShare = (DopeTextView) findViewById(R.id.btn_share);
         btnShare.setOnClickListener(sl);
 
-        btnRepost = (TextView) findViewById(R.id.btn_repost);
+        btnRepost = (DopeTextView) findViewById(R.id.btn_repost);
         btnRepost.setOnClickListener(sl);
 
         buttonsContainer = (LinearLayout) findViewById(R.id.buttons_container);
@@ -127,6 +120,8 @@ public class SaveActivity extends AppCompatActivity {
     class ButtonClicks implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            //puts the last url to shared prefs..
+            Utils.setLastUrl(context, source_url);
 
             switch (view.getId()) {
                 case R.id.btn_share:
@@ -154,10 +149,10 @@ public class SaveActivity extends AppCompatActivity {
         //sets the save path, so that it can be used in share intent...
         //ugly though
         if (media_type.contains("video")) {
-            save_path = InstagramApp.getAppVideoFolder() + getTimeStamp() + ".mp4";
+            save_path = InstagramApp.getAppVideoFolder() +Utils.getTimeStamp() + ".mp4";
             saveVideo(video_url, save_path);
         } else {
-            save_path = InstagramApp.getAppPhotoFolder()+getTimeStamp()+".png";
+            save_path = InstagramApp.getAppPhotoFolder()+Utils.getTimeStamp()+".png";
             Utils.saveImage(context, imageView, save_path);
             openFinisherActivity();
         }
@@ -201,17 +196,11 @@ public class SaveActivity extends AppCompatActivity {
                 }
 
                 //progressBar.setProgressTintList(null);
-
             }
         });
     }
 
-    private String getTimeStamp() {
-        return new Timestamp(new Date().getTime())
-                .toString()
-                .replaceAll("\\.","_")
-                .replaceAll(" ","_");
-    }
+
 
     private void saveVideo(String video_url, final String save_path) {
         progressBar.setVisibility(View.VISIBLE);

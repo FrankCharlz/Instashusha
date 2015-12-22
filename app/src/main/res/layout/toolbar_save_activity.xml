@@ -5,9 +5,9 @@
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/actionBarSize"
     android:layout_gravity="center_horizontal|top"
-    android:background="#21000000">
+    android:background="#22000000">
 
-    <TextView
+    <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/tv_appname"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

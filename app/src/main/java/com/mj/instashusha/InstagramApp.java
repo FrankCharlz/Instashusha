@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 
 import org.codechimp.apprater.AppRater;
@@ -19,12 +20,24 @@ import java.io.File;
  */
 public class InstagramApp extends Application {
 
-    private static final OkHttpClient okhttpClient = new OkHttpClient();
+    private static final long SIZE_OF_OKHTTP_CACHE = 5 * 1024 * 1024;
+    private final static OkHttpClient okhttpClient = new OkHttpClient();
 
     private static String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
     private static String photo_folder_path = sdcard_path+"/InstaShusha/InstaShusha Picha/";
     private static String video_folder_path = sdcard_path+"/InstaShusha/InstaShusha Video/";
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        try {
+            Cache responseCache = new Cache(getApplicationContext().getCacheDir(), SIZE_OF_OKHTTP_CACHE);
+            okhttpClient.setCache(responseCache);
+        } catch (Exception e) {
+            log("Unable to set http cache"+ e);
+        }
+
+    }
 
     public  static OkHttpClient getOkHttpClient() {
         return okhttpClient;
@@ -32,12 +45,6 @@ public class InstagramApp extends Application {
     public static void log(String str){
         Log.e("insta-dl", str);
     }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
 
     public static void toast(Context ctx, String s) {
         Toast.makeText(ctx, s, Toast.LENGTH_SHORT).show();

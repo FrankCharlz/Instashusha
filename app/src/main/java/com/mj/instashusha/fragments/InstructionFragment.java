@@ -16,6 +16,7 @@ import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.activities.FinisherActivity;
 import com.mj.instashusha.activities.IntroActivity;
+import com.mj.instashusha.utils.DopeTextView;
 
 /**
  * Created by Frank on 12/19/2015.
@@ -31,13 +32,13 @@ public class InstructionFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_instruction, container, false);
         context = getActivity();
 
-        final Button btnViewDownloaded = (Button) root.findViewById(R.id.btn_view_downloaded);
+        final DopeTextView btnViewDownloaded = (DopeTextView) root.findViewById(R.id.btn_view_downloaded);
         btnViewDownloaded.setOnClickListener(new ButtonClicks());
 
-        final Button btnOpenTutorial = (Button) root.findViewById(R.id.btn_maelezo_zaidi);
+        final DopeTextView btnOpenTutorial = (DopeTextView) root.findViewById(R.id.btn_maelezo_zaidi);
         btnOpenTutorial.setOnClickListener(new ButtonClicks());
 
-        final Button btnOpenInsta = (Button) root.findViewById(R.id.btn_fungua_insta);
+        final DopeTextView btnOpenInsta = (DopeTextView) root.findViewById(R.id.btn_fungua_insta);
         btnOpenInsta.setOnClickListener(new ButtonClicks());
 
 

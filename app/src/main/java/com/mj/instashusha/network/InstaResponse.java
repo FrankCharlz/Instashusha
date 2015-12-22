@@ -5,7 +5,7 @@ package com.mj.instashusha.network;
  */
 public class InstaResponse {
     public int success;
-    public String type;
+    public String type, source_url;
     public String image_url;
     public String video_url;
 

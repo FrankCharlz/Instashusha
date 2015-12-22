@@ -18,8 +18,6 @@ import com.mj.instashusha.network.InstaResponse;
 import com.mj.instashusha.utils.Utils;
 import com.squareup.okhttp.Request;
 
-import org.codechimp.apprater.AppRater;
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -29,10 +27,11 @@ public class MainActivity extends AppCompatActivity {
     public static final String MEDIA_TYPE = "media type";
     public static final String IMAGE_URL = "image url";
     public static final String VIDEO_URL = "video url";
+    public static final String SRC_URL = "UJYJHjy";
 
-    private Request request;
     private Context context;
     private ProgressDialog progressBar;
+    private boolean activityPaused = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        theMainFlow();
+        if (activityPaused) {
+            //onresume is called after oncreate at first..
+            theMainFlow();
+            activityPaused = false;
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        activityPaused = true;
     }
 
     private void showInstructionFragment() {
@@ -109,21 +118,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void proceedLoading(String url) {
+    public void proceedLoading(final String url) {
 
         progressBar = new ProgressDialog(context);
         progressBar.setCancelable(true);
-        progressBar.setMessage("Subiri kidogo...");
+        progressBar.setMessage(getResources().getString(R.string.message_when_loading));
         progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        //progressBar.setContentView(R.layout.progress_bar_view);
         progressBar.setProgress(0);
         progressBar.setMax(100);
         progressBar.show();
 
-        Utils.setLastUrl(context, url);
-        request = new Request.Builder()
-                .url(BASE_URL+ url)
+
+        final Request request = new Request.Builder()
+                .url(BASE_URL + url)
                 .build();
+
+        InstagramApp.log("Request built: for url");
 
         InstagramApp.getOkHttpClient().newCall(request).enqueue(
                 new HttpCallback() {
@@ -134,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra(MEDIA_TYPE, ir.type);
                         intent.putExtra(IMAGE_URL, ir.image_url);
                         intent.putExtra(VIDEO_URL, ir.video_url);
+                        intent.putExtra(SRC_URL, url);
 
                         //InstagramApp.getOkHttpClient().getDispatcher().getExecutorService().shutdown();
                         progressBar.dismiss();
@@ -142,9 +153,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onVideoResponse(InputStream stream, long size) throws IOException {
-
-                    }
+                    public void onVideoResponse(InputStream stream, long size) throws IOException {}
 
                 });
     }

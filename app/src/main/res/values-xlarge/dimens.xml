@@ -1,5 +1,5 @@
 <resources>
-    <dimen name="padding.top.bottom">18dp</dimen>
+    <dimen name="padding.top.bottom">32dp</dimen>
     <dimen name="padding.left.right">24dp</dimen>
 
     <dimen name="radius.small">4dp</dimen>
@@ -7,7 +7,8 @@
 
     <dimen name="margin.button">16dp</dimen>
 
-    <dimen name="text.size.button">28sp</dimen>
-    <dimen name="text.size.toolbar">24sp</dimen>
+    <dimen name="text.size.button">24sp</dimen>
+    <dimen name="text.size.toolbar">22sp</dimen>
+    <dimen name="text.size.large">32sp</dimen>
 
 </resources>
