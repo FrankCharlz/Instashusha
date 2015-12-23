@@ -2,6 +2,7 @@ package com.mj.instashusha.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -25,10 +26,15 @@ public class FinisherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_finisher);
 
         AdView mAdView = (AdView) findViewById(R.id.adView_activity_finisher);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("YOUR_DEVICE_HASH")
-                .build();
+
+
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        //AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+
+        final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings);
+        btnMenu.setOnClickListener(new MenuClick(this));
 
         File pics[] = new File(InstagramApp.getAppPhotoFolder()).listFiles();
         File vids[] = new File(InstagramApp.getAppVideoFolder()).listFiles();

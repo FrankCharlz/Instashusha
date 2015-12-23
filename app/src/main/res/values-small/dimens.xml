@@ -1,5 +1,5 @@
 <resources>
-    <dimen name="padding.top.bottom">8dp</dimen>
+    <dimen name="padding.top.bottom">12dp</dimen>
     <dimen name="padding.left.right">12dp</dimen>
 
     <dimen name="radius.small">2dp</dimen>

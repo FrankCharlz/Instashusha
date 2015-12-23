@@ -2,24 +2,27 @@
     <string name="app_name">InstaShusha</string>
 
 
-    <string name="btn.download">DOWNLOAD</string>
+    <string name="btn.download">SAVE</string>
     <string name="btn.share">SHARE</string>
     <string name="btn.repost">REPOST</string>
 
-
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="instructions">Open instagram and copy share url then Open InstaShusha \nand your photo will be downloaded automatically.</string>
-    <string name="view_downloaded">View Downloaded</string>
+    <string name="instructions">Share picha za Insta kwa Whatsapp,\n Download and Repost </string>
+    <string name="view_downloaded">Zilizoshushwa</string>
     <string name="open_instagram">Fungua Instagram</string>
-    <string name="open_tutorial">Soma maelezo zaidi</string>
+    <string name="open_tutorial">Maelezo zaidi</string>
 
-    <string name="maelezo_body_1">Open instagram app and tap on the three dots as shown above</string>
-    <string name="maelezo_title_1">Step 1</string>
-    <string name="maelezo_title_2">Step 2</string>
-    <string name="maelezo_body_2">Tap on \'copy share url\' button</string>
-    <string name="maelezo_title_3">Step 3</string>
-    <string name="maelezo_body_3">Close Instagram then Open InstaShusha App</string>
+    <string name="maelezo_body_1">Fungua Instagram na bonyeza vidoti vitatu kama inavoonekana hapo juu</string>
+    <string name="maelezo_title_1">Hatua ya 1</string>
+    <string name="maelezo_title_2">Hatua ya 2</string>
+    <string name="maelezo_body_2">Bonyeza \'copy share url\'</string>
+    <string name="maelezo_title_3">Hatua ya 3</string>
+    <string name="maelezo_body_3">Funga Instagram kisha fungua InstaShusha App</string>
     <string name="message_when_loading">Subiri kidogo</string>
+
+
+    <string name="banner_ad_unit_id_home">ca-app-pub-8621518791154354/3031579423</string>
+    <string name="banner_ad_unit_id_save">ca-app-pub-8621518791154354/6124646624</string>
+    <string name="banner_ad_unit_id_finisher">ca-app-pub-8621518791154354/9078113020</string>
 
 
 </resources>

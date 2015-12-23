@@ -1,9 +1,11 @@
 <resources>
-    <dimen name="padding.top.bottom">32dp</dimen>
-    <dimen name="padding.left.right">24dp</dimen>
+    <dimen name="padding.top.bottom">20dp</dimen>
+    <dimen name="padding.left.right">44dp</dimen>
 
     <dimen name="radius.small">4dp</dimen>
 
+
+    <dimen name="progress.height">12dp</dimen>
 
     <dimen name="margin.button">16dp</dimen>
 
@@ -11,4 +13,8 @@
     <dimen name="text.size.toolbar">22sp</dimen>
     <dimen name="text.size.large">32sp</dimen>
 
+
+    <dimen name="space.from.top">120dp</dimen>
+
 </resources>
+

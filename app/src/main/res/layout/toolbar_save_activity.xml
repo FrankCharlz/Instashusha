@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/actionBarSize"
     android:layout_gravity="center_horizontal|top"
-    android:background="#22000000">
+    android:padding="4dp"
+    android:background="#36000000">
 
     <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/tv_appname"
@@ -15,7 +16,7 @@
         android:paddingLeft="@dimen/padding.left.right"
         android:paddingBottom="@dimen/padding.top.bottom"
         android:paddingTop="@dimen/padding.top.bottom"
-        android:textSize="@dimen/text.size.button"
+        android:textSize="@dimen/text.size.toolbar"
         android:gravity="center_vertical"
         />
 
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|right"
         android:layout_margin="4dp"
-        android:src="@drawable/ic_action_more_vert"
+        android:src="@drawable/ic_action_home"
         />
 
 </android.support.v7.widget.Toolbar>

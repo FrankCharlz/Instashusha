@@ -41,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         InstagramApp.makeAppFolder();
         checkAppIntroduction();
+
+        Intent i = getIntent();
+        if (i.getBooleanExtra(InstagramApp.GO_TO_INSTRUCTUINS, false)) {
+            showInstructionFragment();
+            return;
+        }
+
         theMainFlow();
 
     }

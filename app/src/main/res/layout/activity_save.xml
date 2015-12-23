@@ -32,16 +32,15 @@
 
     </FrameLayout>
 
-    <android.support.v4.widget.ContentLoadingProgressBar
+    <ProgressBar
         android:id="@+id/progress_dl"
         android:layout_width="match_parent"
-        android:layout_height="16dp"
+        android:layout_height="@dimen/progress.height"
         android:layout_centerHorizontal="true"
-        android:progressTint="@color/black"
         android:layout_below="@id/frame_layout_container"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:max="100"
-        android:progress="23"
+        android:progress="0"
         android:visibility="gone"
         />
 
@@ -92,7 +91,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        ads:adUnitId="@string/banner_ad_unit_id_save">
     </com.google.android.gms.ads.AdView>
 
 

@@ -22,6 +22,7 @@ public class InstagramApp extends Application {
 
     private static final long SIZE_OF_OKHTTP_CACHE = 5 * 1024 * 1024;
     private final static OkHttpClient okhttpClient = new OkHttpClient();
+    public static final String GO_TO_INSTRUCTUINS = "hgGHGy";
 
     private static String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
     private static String photo_folder_path = sdcard_path+"/InstaShusha/InstaShusha Picha/";

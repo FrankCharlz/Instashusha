@@ -1,14 +1,18 @@
 <resources>
     <dimen name="padding.top.bottom">12dp</dimen>
-    <dimen name="padding.left.right">16dp</dimen>
+    <dimen name="padding.left.right">10dp</dimen>
 
-    <dimen name="radius.small">4dp</dimen>
+    <dimen name="radius.small">3dp</dimen>
 
 
-    <dimen name="margin.button">8dp</dimen>
+    <dimen name="margin.button">6dp</dimen>
 
-    <dimen name="text.size.button">14sp</dimen>
-    <dimen name="text.size.toolbar">17sp</dimen>
+    <dimen name="progress.height">8dp</dimen>
+
+    <dimen name="text.size.button">16sp</dimen>
+    <dimen name="text.size.toolbar">20sp</dimen>
     <dimen name="text.size.large">20sp</dimen>
+
+    <dimen name="space.from.top">96dp</dimen>
 
 </resources>

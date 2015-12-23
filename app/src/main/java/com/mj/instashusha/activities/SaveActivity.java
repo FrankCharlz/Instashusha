@@ -12,7 +12,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -86,9 +90,8 @@ public class SaveActivity extends AppCompatActivity {
 
         //money baby...
         AdView mAdView = (AdView) findViewById(R.id.adView_activity_save);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("YOUR_DEVICE_HASH")
-                .build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        //AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
     }
@@ -115,6 +118,10 @@ public class SaveActivity extends AppCompatActivity {
         buttonsContainer.setVisibility(View.GONE);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_dl);
+
+        final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings);
+        btnMenu.setOnClickListener(new MenuClick(this));
+
     }
 
     class ButtonClicks implements View.OnClickListener {

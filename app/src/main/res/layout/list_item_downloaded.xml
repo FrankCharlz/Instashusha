@@ -32,8 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_action_share"
-            android:padding="@dimen/padding.left.right"/>
+            android:paddingRight="@dimen/padding.left.right"
+            android:src="@drawable/ic_action_share"/>
 
     </RelativeLayout>
 

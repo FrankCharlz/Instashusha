@@ -28,13 +28,13 @@ public class IntroActivity extends AppIntro2 {
                 getResources().getString(R.string.maelezo_title_2),
                 getResources().getString(R.string.maelezo_body_2),
                 R.drawable.ins_copy_url,
-                Color.parseColor("#4dff4d")
+                Color.parseColor("#f0e209")
         ));
 
         addSlide(AppIntroFragment.newInstance(
                 getResources().getString(R.string.maelezo_title_3),
                 getResources().getString(R.string.maelezo_body_3),
-                R.mipmap.ic_launcher,
+                R.drawable.ins_icon,
                 Color.parseColor("#ff80d4")
         ));
 
