@@ -20,13 +20,11 @@ import java.io.File;
  */
 public class InstagramApp extends Application {
 
-    private static final long SIZE_OF_OKHTTP_CACHE = 5 * 1024 * 1024;
+    private static final long SIZE_OF_OKHTTP_CACHE = 10 * 1024 * 1024; //10MB
     private final static OkHttpClient okhttpClient = new OkHttpClient();
-    public static final String GO_TO_INSTRUCTUINS = "hgGHGy";
+    public static final String GO_TO_INSTRUCTIONS = "hgGHGy";
 
-    private static String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
-    private static String photo_folder_path = sdcard_path+"/InstaShusha/InstaShusha Picha/";
-    private static String video_folder_path = sdcard_path+"/InstaShusha/InstaShusha Video/";
+    public static String PHOTO_FOLDER_PATH, VIDEO_FOLDER_PATH;
 
     @Override
     public void onCreate() {
@@ -48,7 +46,7 @@ public class InstagramApp extends Application {
     }
 
     public static void toast(Context ctx, String s) {
-        Toast.makeText(ctx, s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ctx, s, Toast.LENGTH_LONG).show();
     }
 
     public static String getLinkFromClipBoard(Context context) {
@@ -70,28 +68,45 @@ public class InstagramApp extends Application {
         return url.contains("instagram");
     }
 
-    public static void makeAppFolder() {
-        File[] folders = {
-                new File(sdcard_path+"/InstaShusha/InstaShusha Video/"),
-                new File(sdcard_path+"/InstaShusha/InstaShusha Picha/")
-        };
-
-        for (File f : folders) {
-            if(!f.exists()) f.mkdirs();
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
         }
+        return false;
     }
 
-    public static String getAppPhotoFolder() {
-        return  photo_folder_path;
+    public static File createInstaShushaPhotosFolder(String folderName) {
+        // Get the directory for the user's public pictures directory.
+        File file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), folderName);
+        if (!file.mkdirs()) {
+            InstagramApp.log("Photos folder not created");
+        }
+        return file;
     }
 
-    public static String getAppVideoFolder() {
-        return  video_folder_path;
-    }
-    public static String getAppFolder() {
-        return  sdcard_path+"/InstaShusha/";
+    public static File createInstaShushaVideosFolder(String folderName) {
+        // Get the directory for the user's public pictures directory.
+        File file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_MOVIES), folderName);
+        if (!file.mkdirs()) {
+            InstagramApp.log("Videos folder not created");
+        }
+        return file;
     }
 
+
+    public static void makeAppFolder() {
+        //called on MainActivity
+        File photoFolder = createInstaShushaPhotosFolder("InstashushaPicha");
+        File videosFolder = createInstaShushaVideosFolder("InstashushaVideos");
+
+        PHOTO_FOLDER_PATH = photoFolder.getAbsolutePath();
+        VIDEO_FOLDER_PATH = videosFolder.getAbsolutePath();
+
+    }
 
 
 }

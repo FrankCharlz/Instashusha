@@ -21,7 +21,7 @@ public class MenuClick implements View.OnClickListener {
         InstagramApp.log("Home clicked...");
         //start main activity and go to instruction fragment...
         Intent t = new Intent(context, MainActivity.class);
-        t.putExtra(InstagramApp.GO_TO_INSTRUCTUINS, true);
+        t.putExtra(InstagramApp.GO_TO_INSTRUCTIONS, true);
         context.startActivity(t);
 
     }

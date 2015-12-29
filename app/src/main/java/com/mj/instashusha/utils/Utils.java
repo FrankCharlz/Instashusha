@@ -20,7 +20,7 @@ import java.util.Date;
 public class Utils {
 
     private static final String LAST_URL = "last_insta_url_loaded";
-    private static final String PREFS_FILE_NAME = "Christina";
+    private static final String PREFS_FILE_NAME = "FhYmkF";
 
     public static  void saveImage(Context context, ImageView imageView, String save_path) {
         imageView.setDrawingCacheEnabled(true);
@@ -39,7 +39,6 @@ public class Utils {
 
         }
         catch (Exception e) {
-            InstagramApp.toast(context, "Imeshindwa kusave picha : "+e.getMessage());
             InstagramApp.log(e.getLocalizedMessage());
             e.printStackTrace();
         }
@@ -73,6 +72,8 @@ public class Utils {
         return new Timestamp(new Date().getTime())
                 .toString()
                 .replaceAll("\\.","_")
+                .replaceAll(":","_")
                 .replaceAll(" ","_");
+
     }
 }

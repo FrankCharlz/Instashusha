@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         checkAppIntroduction();
 
         Intent i = getIntent();
-        if (i.getBooleanExtra(InstagramApp.GO_TO_INSTRUCTUINS, false)) {
+        if (i.getBooleanExtra(InstagramApp.GO_TO_INSTRUCTIONS, false)) {
             showInstructionFragment();
             return;
         }

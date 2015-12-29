@@ -28,16 +28,16 @@ public class FinisherActivity extends AppCompatActivity {
         AdView mAdView = (AdView) findViewById(R.id.adView_activity_finisher);
 
 
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
-        //AdRequest adRequest = new AdRequest.Builder().build();
+        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
 
         final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings);
         btnMenu.setOnClickListener(new MenuClick(this));
 
-        File pics[] = new File(InstagramApp.getAppPhotoFolder()).listFiles();
-        File vids[] = new File(InstagramApp.getAppVideoFolder()).listFiles();
+        File pics[] = new File(InstagramApp.PHOTO_FOLDER_PATH).listFiles();
+        File vids[] = new File(InstagramApp.VIDEO_FOLDER_PATH).listFiles();
 
         Collections.addAll(filesArray, pics);
         Collections.addAll(filesArray, vids);

@@ -50,6 +50,8 @@ import java.util.Date;
 public class SaveActivity extends AppCompatActivity {
 
     private static final float TOOLBAR_BG_ALPHA = 0.49f;
+    private static final String MIME_TYPE_VIDEO = "video/*";
+    private static final String MIME_TYPE_IMAGE = "image/*";
     private String media_type, image_url, video_url, source_url;
     private Context context;
     private ImageView imageView;
@@ -80,18 +82,15 @@ public class SaveActivity extends AppCompatActivity {
         video_url = intent.getStringExtra(MainActivity.VIDEO_URL);
         source_url = intent.getStringExtra(MainActivity.SRC_URL);
 
-        if (media_type.contains("video")) {
-            mime_type = "video/*";
-        } else {
-            mime_type = "image/*";
-        }
+        //Setting mime type...
+        mime_type = (media_type.contains("video")) ? MIME_TYPE_VIDEO: MIME_TYPE_IMAGE;
 
         Picasso.with(context).load(image_url).into(target);
 
         //money baby...
         AdView mAdView = (AdView) findViewById(R.id.adView_activity_save);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
-        //AdRequest adRequest = new AdRequest.Builder().build();
+        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
     }
@@ -127,18 +126,24 @@ public class SaveActivity extends AppCompatActivity {
     class ButtonClicks implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            //puts the last url to shared prefs..
-            Utils.setLastUrl(context, source_url);
 
             switch (view.getId()) {
                 case R.id.btn_share:
-                    download();
-                    createShareIntent(mime_type, save_path);
+                    if (mime_type.equalsIgnoreCase(MIME_TYPE_IMAGE)) {
+                        download();
+                        createShareIntent(mime_type, save_path);
+                    } else {
+                        InstagramApp.toast(context, "Sorry...\nSAVE kwanza ndo ushee.");
+                    }
                     break;
 
                 case R.id.btn_repost:
-                    download();
-                    createInstagramIntent(mime_type, save_path);
+                    if (mime_type.equalsIgnoreCase(MIME_TYPE_IMAGE)) {
+                        download();
+                        createInstagramIntent(mime_type, save_path);
+                    } else {
+                        InstagramApp.toast(context, "Sorry...\nSAVE kwanza ndo urepost");
+                    }
                     break;
 
                 case R.id.btn_download:
@@ -153,13 +158,16 @@ public class SaveActivity extends AppCompatActivity {
     }
 
     private void download() {
+        //puts the last url to shared prefs..
+        Utils.setLastUrl(context, source_url);
+
         //sets the save path, so that it can be used in share intent...
         //ugly though
         if (media_type.contains("video")) {
-            save_path = InstagramApp.getAppVideoFolder() +Utils.getTimeStamp() + ".mp4";
+            save_path = InstagramApp.VIDEO_FOLDER_PATH+"/"+Utils.getTimeStamp() + ".mp4";
             saveVideo(video_url, save_path);
         } else {
-            save_path = InstagramApp.getAppPhotoFolder()+Utils.getTimeStamp()+".png";
+            save_path = InstagramApp.PHOTO_FOLDER_PATH+"/"+Utils.getTimeStamp()+".png";
             Utils.saveImage(context, imageView, save_path);
             openFinisherActivity();
         }
@@ -239,6 +247,7 @@ public class SaveActivity extends AppCompatActivity {
                         publishProgress((int)(100.0 * downloaded/size));
                     }
 
+                    InstagramApp.log("Video saved at: " + save_path);
 
                 } finally {
                     if (in != null) in.close();
@@ -248,8 +257,6 @@ public class SaveActivity extends AppCompatActivity {
                     h.post(new Runnable() {
                         @Override
                         public void run() {
-                            InstagramApp.toast(getApplicationContext(), "Video saved at: " + save_path);
-                            InstagramApp.log("Video saved at: " + save_path);
                             Utils.addFileToMediaDatabase(context, save_path);
                             progressBar.setVisibility(View.GONE);
                             openFinisherActivity();
