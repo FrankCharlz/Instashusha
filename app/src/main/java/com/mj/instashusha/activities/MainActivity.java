@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
@@ -24,19 +25,19 @@ import java.io.InputStream;
 public class MainActivity extends AppCompatActivity {
 
     private static final String BASE_URL = "http://insta-dl.appspot.com/dl?source=";
-    public static final String MEDIA_TYPE = "media type";
-    public static final String IMAGE_URL = "image url";
-    public static final String VIDEO_URL = "video url";
     public static final String SRC_URL = "UJYJHjy";
 
     private Context context;
     private ProgressDialog progressBar;
-    private boolean activityPaused = false;
+    private boolean activityWasPaused = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //hide home icon.. Because it not used here in this activity..
+        findViewById(R.id.toolbar_action_settings_home).setVisibility(View.GONE);
 
         context = this;
         InstagramApp.makeAppFolder();
@@ -48,18 +49,17 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        theMainFlow();
+        programFlow();
 
     }
 
-    private void theMainFlow() {
+    private void programFlow() {
         String url = InstagramApp.getLinkFromClipBoard(this);
         if (url.isEmpty()) {
             //no instagram link in clipboard
             //launch instruction fragment
             InstagramApp.log("No instagram url in clipboard");
             showInstructionFragment();
-
 
         } else {
             //process instagram link
@@ -80,17 +80,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (activityPaused) {
+        if (activityWasPaused) {
             //onresume is called after oncreate at first..
-            theMainFlow();
-            activityPaused = false;
+            programFlow();
+            activityWasPaused = false;
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        activityPaused = true;
+        activityWasPaused = true;
     }
 
     private void showInstructionFragment() {
@@ -131,8 +131,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setCancelable(true);
         progressBar.setMessage(getResources().getString(R.string.message_when_loading));
         progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressBar.setProgress(0);
-        progressBar.setMax(100);
+        //progressBar.setContentView(R.layout.activity_save);
         progressBar.show();
 
 
@@ -150,8 +149,6 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(context, SaveActivity.class);
                         intent.putExtra(InstaResponse.SERIALIZE, ir);
                         intent.putExtra(SRC_URL, url);
-
-                        //InstagramApp.getOkHttpClient().getDispatcher().getExecutorService().shutdown();
                         progressBar.dismiss();
                         startActivity(intent);
                         finish();

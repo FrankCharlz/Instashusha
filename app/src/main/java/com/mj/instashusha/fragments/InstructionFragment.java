@@ -27,9 +27,15 @@ public class InstructionFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View root = inflater.inflate(R.layout.fragment_instruction, container, false);
         context = getActivity();
+
+        //money baby...
+        final AdView mAdView = (AdView) root.findViewById(R.id.adView_fragment);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
         final DopeTextView btnViewDownloaded = (DopeTextView) root.findViewById(R.id.btn_view_downloaded);
         btnViewDownloaded.setOnClickListener(new ButtonClicks());
@@ -39,13 +45,6 @@ public class InstructionFragment extends Fragment {
 
         final DopeTextView btnOpenInsta = (DopeTextView) root.findViewById(R.id.btn_fungua_insta);
         btnOpenInsta.setOnClickListener(new ButtonClicks());
-
-
-        //money baby...
-        AdView mAdView = (AdView) root.findViewById(R.id.adView_fragment);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
-        //AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
         return root;
     }

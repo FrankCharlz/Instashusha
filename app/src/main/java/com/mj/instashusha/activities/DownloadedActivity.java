@@ -2,7 +2,6 @@ package com.mj.instashusha.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -30,7 +29,7 @@ public class DownloadedActivity extends AppCompatActivity {
         //AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings);
+        final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings_home);
         btnMenu.setOnClickListener(new MenuClick(this));
 
 

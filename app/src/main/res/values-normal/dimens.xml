@@ -2,9 +2,9 @@
     <dimen name="padding.top.bottom">8dp</dimen>
     <dimen name="padding.left.right">12dp</dimen>
 
-    <dimen name="padding.top.bottom.toolbar">8dp</dimen>
+    <dimen name="padding.top.bottom.toolbar">7dp</dimen>
 
-    <dimen name="radius.small">4dp</dimen>
+    <dimen name="radius.small">3dp</dimen>
 
 
     <dimen name="margin.button">6dp</dimen>
@@ -12,7 +12,7 @@
     <dimen name="progress.height">8dp</dimen>
 
     <dimen name="text.size.button">15sp</dimen>
-    <dimen name="text.size.toolbar">20sp</dimen>
+    <dimen name="text.size.toolbar">19sp</dimen>
     <dimen name="text.size.large">20sp</dimen>
 
     <dimen name="space.from.top">96dp</dimen>

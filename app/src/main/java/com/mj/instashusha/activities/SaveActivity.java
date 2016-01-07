@@ -117,7 +117,7 @@ public class SaveActivity extends AppCompatActivity {
 
         progressBar = (ProgressBar) findViewById(R.id.progress_dl);
 
-        final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings);
+        final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings_home);
         btnMenu.setOnClickListener(new MenuClick(this));
 
     }
