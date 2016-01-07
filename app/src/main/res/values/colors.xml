@@ -2,13 +2,12 @@
 <resources>
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
 
-    <color name="myvaste">#10b27c</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="black.alpha">#63000000</color>
 
     <color name="transparent">#00ffffff</color>
-    <color name="grey.transparent">#22000000</color>
+    <color name="grey.white">#eaeaea</color>
+    <color name="grey">#908e8989</color>
 </resources>

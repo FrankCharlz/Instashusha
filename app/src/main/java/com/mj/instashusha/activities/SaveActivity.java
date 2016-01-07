@@ -56,12 +56,18 @@ public class SaveActivity extends AppCompatActivity {
 
     private DopeTextView btnSave, btnShare, btnRepost;
     private String mime_type, save_path;
+    private String vidExtension;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
 
+        //money baby...
+        AdView mAdView = (AdView) findViewById(R.id.adView_activity_save);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        // AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         AppRater.app_launched(this); //for ratings...
 
@@ -69,21 +75,27 @@ public class SaveActivity extends AppCompatActivity {
         initViews();
 
         Intent intent = getIntent();
-        media_type = intent.getStringExtra(MainActivity.MEDIA_TYPE);
-        image_url = intent.getStringExtra(MainActivity.IMAGE_URL);
-        video_url = intent.getStringExtra(MainActivity.VIDEO_URL);
+        InstaResponse response = (InstaResponse) intent.getSerializableExtra(InstaResponse.SERIALIZE);
+
+        media_type = response.type;
+        image_url = response.image_url;
+        video_url = response.video_url;
+
         source_url = intent.getStringExtra(MainActivity.SRC_URL);
+
+        //String extension = source_url.substring()
 
         //Setting mime type...
         mime_type = (media_type.contains("video")) ? MIME_TYPE_VIDEO: MIME_TYPE_IMAGE;
 
         Picasso.with(context).load(image_url).into(target);
 
-        //money baby...
-        AdView mAdView = (AdView) findViewById(R.id.adView_activity_save);
-        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //start to download here to enhance user experience...
+        downloadInBackground();
+
+    }
+
+    private void downloadInBackground() {
 
     }
 
@@ -91,7 +103,7 @@ public class SaveActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.image_view);
         frameLayout = (FrameLayout) findViewById(R.id.frame_layout_container);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_save_activity);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_universal);
         tvToolbar = (TextView) findViewById(R.id.tv_appname);
 
         ButtonClicks sl = new ButtonClicks();
@@ -113,6 +125,10 @@ public class SaveActivity extends AppCompatActivity {
         final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings);
         btnMenu.setOnClickListener(new MenuClick(this));
 
+    }
+
+    public String getVidExtension() {
+        return vidExtension;
     }
 
     class ButtonClicks implements View.OnClickListener {
@@ -156,10 +172,10 @@ public class SaveActivity extends AppCompatActivity {
         //sets the save path, so that it can be used in share intent...
         //ugly though
         if (media_type.contains("video")) {
-            save_path = InstagramApp.VIDEO_FOLDER_PATH+"/"+Utils.getTimeStamp() + ".mp4";
+            save_path = InstagramApp.VIDEO_FOLDER_PATH + "/" + Utils.getTimeStamp() + getVidExtension();
             saveVideo(video_url, save_path);
         } else {
-            save_path = InstagramApp.PHOTO_FOLDER_PATH+"/"+Utils.getTimeStamp()+".png";
+            save_path = InstagramApp.PHOTO_FOLDER_PATH + "/" + Utils.getTimeStamp() + ".png";
             Utils.saveImage(context, imageView, save_path);
             openFinisherActivity();
         }

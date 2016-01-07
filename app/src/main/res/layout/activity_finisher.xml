@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/included_in_finisher"
-        layout="@layout/toolbar_save_activity">
+        layout="@layout/toolbar_universal">
 
     </include>
 

@@ -2,6 +2,7 @@ package com.mj.instashusha.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -27,13 +28,26 @@ import java.util.ArrayList;
  */
 public class FilesListAdapter extends BaseAdapter {
     private final Context context;
-    private final ArrayList<DownloadedActivity.Item> items;
     private final LayoutInflater inflater;
+    private ArrayList<Item> items;
 
-    public FilesListAdapter(Context context, ArrayList<DownloadedActivity.Item> items) {
+    public FilesListAdapter(Context context, File[] pics, File[] vidz) {
         this.context = context;
-        this.items = items;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        init(pics, vidz);
+    }
+
+    private void init(File[] pics, File[] vidz) {
+        items = new ArrayList<>();
+
+        for (File f : pics) {
+            items.add(new Item(f));
+        }
+
+        for (File f : vidz) {
+            items.add(new Item(f));
+        }
     }
 
     @Override
@@ -68,17 +82,17 @@ public class FilesListAdapter extends BaseAdapter {
             holder=(ViewHolder)view.getTag();
         }
 
-        DownloadedActivity.Item current_item = items.get(i);
+        Item current_item = items.get(i);
 
         String fname = current_item.name;
         if (!current_item.isImage) {
             fname = "Video : "+fname;
+            holder.fpic.setImageBitmap(current_item.thumbnail);
         } else {
             fname = "Picha : "+fname;
+            Picasso.with(context).load(Uri.fromFile(current_item.file)).into(holder.fpic);
         }
 
-
-        holder.fpic.setImageBitmap(current_item.thumbnail);
         holder.name.setText(fname.substring(0, fname.length()-4));
         holder.fshare.setOnClickListener(new Clix(i));
         holder.fpic.setOnClickListener(new Clix(i));
@@ -107,7 +121,6 @@ public class FilesListAdapter extends BaseAdapter {
     static class ViewHolder {
         ImageView fpic, fshare;
         TextView name;
-        int vpos;
     }
 
     private void openItem(int i) {
@@ -119,7 +132,7 @@ public class FilesListAdapter extends BaseAdapter {
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(items.get(i).uri, type);
+        intent.setDataAndType(Uri.fromFile(items.get(i).file), type);
         context.startActivity(intent);
     }
 
@@ -139,7 +152,7 @@ public class FilesListAdapter extends BaseAdapter {
         share.setType(type);
 
         // Create the URI from the media
-        Uri uri = items.get(i).uri;
+        Uri uri = Uri.fromFile(items.get(i).file);
 
         // Add the URI to the Intent.
         share.putExtra(Intent.EXTRA_STREAM, uri);
@@ -148,6 +161,25 @@ public class FilesListAdapter extends BaseAdapter {
         context.startActivity(Intent.createChooser(share, "Share to"));
 
     }
+
+    public class Item {
+        public long date;
+        public boolean isImage;
+        public String name;
+        public Bitmap thumbnail;
+        File file;
+
+        public Item(File f) {
+            file = f;
+            date = f.lastModified();
+            name = f.getName();
+            isImage = name.endsWith(".png");
+            if (!isImage) {
+                thumbnail = ThumbnailUtils.createVideoThumbnail(f.getAbsolutePath(), 0); //if video load kabiisaa
+            }
+        }
+    }
+
 
 
 }

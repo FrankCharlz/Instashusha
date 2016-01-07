@@ -1,9 +1,12 @@
 package com.mj.instashusha.network;
 
+import java.io.Serializable;
+
 /**
  * Created by Frank on 12/18/2015.
  */
-public class InstaResponse {
+public class InstaResponse implements Serializable {
+    public static final String SERIALIZE = "jb7j";
     public int success;
     public String type, source_url;
     public String image_url;

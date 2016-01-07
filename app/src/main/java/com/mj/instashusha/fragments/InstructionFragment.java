@@ -43,8 +43,8 @@ public class InstructionFragment extends Fragment {
 
         //money baby...
         AdView mAdView = (AdView) root.findViewById(R.id.adView_fragment);
-        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        //AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         return root;

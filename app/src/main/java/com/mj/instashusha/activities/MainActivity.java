@@ -148,9 +148,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onUrlResponse(InstaResponse ir) {
                         InstagramApp.log(ir.toString());
                         Intent intent = new Intent(context, SaveActivity.class);
-                        intent.putExtra(MEDIA_TYPE, ir.type);
-                        intent.putExtra(IMAGE_URL, ir.image_url);
-                        intent.putExtra(VIDEO_URL, ir.video_url);
+                        intent.putExtra(InstaResponse.SERIALIZE, ir);
                         intent.putExtra(SRC_URL, url);
 
                         //InstagramApp.getOkHttpClient().getDispatcher().getExecutorService().shutdown();

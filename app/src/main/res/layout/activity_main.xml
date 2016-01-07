@@ -6,6 +6,6 @@
     tools:context=".activities.MainActivity"
     android:id="@+id/main_container">
 
-    <include layout="@layout/toolbar_save_activity"></include>
+    <include layout="@layout/toolbar_universal"></include>
 
 </RelativeLayout>
