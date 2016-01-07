@@ -1,3 +1,4 @@
+
 package com.mj.instashusha.adapters;
 
 import android.content.Context;
@@ -13,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mj.instashusha.R;
-import com.mj.instashusha.activities.DownloadedActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -30,24 +30,28 @@ public class FilesListAdapter extends BaseAdapter {
     private final Context context;
     private final LayoutInflater inflater;
     private ArrayList<Item> items;
+    private int clicked_pos;
+    private Clix clix;
 
-    public FilesListAdapter(Context context, File[] pics, File[] vidz) {
+    public FilesListAdapter(Context context, File[] pics, File[] vids) {
         this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        init(pics, vidz);
+        init(pics, vids);
     }
 
-    private void init(File[] pics, File[] vidz) {
+    private void init(File[] pics, File[] vids) {
         items = new ArrayList<>();
 
         for (File f : pics) {
             items.add(new Item(f));
         }
 
-        for (File f : vidz) {
+        for (File f : vids) {
             items.add(new Item(f));
         }
+
+        clix = new Clix();
     }
 
     @Override
@@ -93,27 +97,23 @@ public class FilesListAdapter extends BaseAdapter {
             Picasso.with(context).load(Uri.fromFile(current_item.file)).into(holder.fpic);
         }
 
+        clicked_pos = i;
         holder.name.setText(fname.substring(0, fname.length()-4));
-        holder.fshare.setOnClickListener(new Clix(i));
-        holder.fpic.setOnClickListener(new Clix(i));
+        holder.fshare.setOnClickListener(clix);
+        holder.fpic.setOnClickListener(clix);
 
         return view;
     }
 
 
     class Clix implements View.OnClickListener {
-        private final int pos;
-
-        public Clix(int pos) {
-            this.pos = pos;
-        }
 
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.item_share) {
-                shareItem(pos);
+                shareItem(clicked_pos);
             } else {
-                openItem(pos);
+                openItem(clicked_pos);
             }
 
         }
@@ -179,7 +179,4 @@ public class FilesListAdapter extends BaseAdapter {
             }
         }
     }
-
-
-
 }

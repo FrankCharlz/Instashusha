@@ -3,7 +3,6 @@ package com.mj.instashusha.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -44,19 +42,19 @@ public class SaveActivity extends AppCompatActivity {
     private static final float TOOLBAR_BG_ALPHA = 0.49f;
     private static final String MIME_TYPE_VIDEO = "video/*";
     private static final String MIME_TYPE_IMAGE = "image/*";
-    private String media_type, image_url, video_url, source_url;
+    private String image_url, video_url, source_url;
     private Context context;
     private ImageView imageView;
-    private FrameLayout frameLayout;
     private Toolbar toolbar;
-    private TextView tvToolbar;
+    private TextView textViewToolbar;
     private LinearLayout buttonsContainer;
 
     private ProgressBar progressBar;
 
-    private DopeTextView btnSave, btnShare, btnRepost;
+    private DopeTextView btnSave;
+    private DopeTextView btnRepost;
     private String mime_type, save_path;
-    private String vidExtension;
+    private boolean isImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,21 +75,19 @@ public class SaveActivity extends AppCompatActivity {
         Intent intent = getIntent();
         InstaResponse response = (InstaResponse) intent.getSerializableExtra(InstaResponse.SERIALIZE);
 
-        media_type = response.type;
         image_url = response.image_url;
         video_url = response.video_url;
-
         source_url = intent.getStringExtra(MainActivity.SRC_URL);
 
-        //String extension = source_url.substring()
+        isImage = video_url.isEmpty();
 
         //Setting mime type...
-        mime_type = (media_type.contains("video")) ? MIME_TYPE_VIDEO: MIME_TYPE_IMAGE;
+        mime_type = isImage ? MIME_TYPE_IMAGE :  MIME_TYPE_VIDEO;
 
-        Picasso.with(context).load(image_url).into(target);
+        Picasso.with(context).load(image_url).into(picasso_target);
 
-        //start to download here to enhance user experience...
-        downloadInBackground();
+        //start to download video here to enhance user experience...
+        if (!isImage) downloadInBackground();
 
     }
 
@@ -101,17 +97,16 @@ public class SaveActivity extends AppCompatActivity {
 
     private void initViews() {
         imageView = (ImageView) findViewById(R.id.image_view);
-        frameLayout = (FrameLayout) findViewById(R.id.frame_layout_container);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_universal);
-        tvToolbar = (TextView) findViewById(R.id.tv_appname);
+        textViewToolbar = (TextView) findViewById(R.id.tv_appname);
 
         ButtonClicks sl = new ButtonClicks();
 
         btnSave = (DopeTextView) findViewById(R.id.btn_download);
         btnSave.setOnClickListener(sl);
 
-        btnShare = (DopeTextView) findViewById(R.id.btn_share);
+        DopeTextView btnShare = (DopeTextView) findViewById(R.id.btn_share);
         btnShare.setOnClickListener(sl);
 
         btnRepost = (DopeTextView) findViewById(R.id.btn_repost);
@@ -128,7 +123,8 @@ public class SaveActivity extends AppCompatActivity {
     }
 
     public String getVidExtension() {
-        return vidExtension;
+        int urf = source_url.length();
+        return source_url.substring(urf-4, urf);
     }
 
     class ButtonClicks implements View.OnClickListener {
@@ -137,7 +133,7 @@ public class SaveActivity extends AppCompatActivity {
 
             switch (view.getId()) {
                 case R.id.btn_share:
-                    if (mime_type.equalsIgnoreCase(MIME_TYPE_IMAGE)) {
+                    if (isImage) {
                         download();
                         createShareIntent(mime_type, save_path);
                     } else {
@@ -146,7 +142,7 @@ public class SaveActivity extends AppCompatActivity {
                     break;
 
                 case R.id.btn_repost:
-                    if (mime_type.equalsIgnoreCase(MIME_TYPE_IMAGE)) {
+                    if (isImage) {
                         download();
                         createInstagramIntent(mime_type, save_path);
                     } else {
@@ -157,8 +153,6 @@ public class SaveActivity extends AppCompatActivity {
                 case R.id.btn_download:
                     download();
                     break;
-
-
                 default: break;
             }
 
@@ -171,7 +165,7 @@ public class SaveActivity extends AppCompatActivity {
 
         //sets the save path, so that it can be used in share intent...
         //ugly though
-        if (media_type.contains("video")) {
+        if (!isImage) {
             save_path = InstagramApp.VIDEO_FOLDER_PATH + "/" + Utils.getTimeStamp() + getVidExtension();
             saveVideo(video_url, save_path);
         } else {
@@ -181,14 +175,14 @@ public class SaveActivity extends AppCompatActivity {
         }
     }
 
-    private Target target = new Target() {
+    private Target picasso_target = new Target() {
         @Override
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
             imageView.setImageBitmap(bitmap);
 
             buttonsContainer.setVisibility(View.VISIBLE);
 
-            paletteThings(bitmap);
+            paletteColors(bitmap);
         }
 
         @Override
@@ -202,23 +196,21 @@ public class SaveActivity extends AppCompatActivity {
         }
     };
 
-    private void paletteThings(Bitmap bitmap) {
+    private void paletteColors(Bitmap bitmap) {
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
             public void onGenerated(Palette palette) {
                 InstagramApp.log("Palette loaded");
                 Palette.Swatch swatch = palette.getVibrantSwatch();
                 if (swatch != null) {
-                    int vbg = swatch.getRgb(); vbg = addAlphaToColor(vbg, TOOLBAR_BG_ALPHA);
+                    int vbg = swatch.getRgb();
+                    vbg = Utils.addAlphaToColor(vbg, TOOLBAR_BG_ALPHA);
                     int vtc = swatch.getTitleTextColor();
 
-                    //frameLayout.setBackgroundColor(swatch.getRgb());
-
                     toolbar.setBackgroundColor(vbg);
-                    buttonsContainer.setBackgroundColor(addAlphaToColor(vbg, 0.4f));
-                    tvToolbar.setTextColor(vtc);
+                    buttonsContainer.setBackgroundColor(Utils.addAlphaToColor(vbg, 0.41f));
+                    textViewToolbar.setTextColor(vtc);
                 }
 
-                //progressBar.setProgressTintList(null);
             }
         });
     }
@@ -233,7 +225,6 @@ public class SaveActivity extends AppCompatActivity {
                         .build()).enqueue(new HttpCallback() {
             @Override
             public void onUrlResponse(InstaResponse ir) {
-
             }
 
             @Override
@@ -252,7 +243,7 @@ public class SaveActivity extends AppCompatActivity {
                     while ((count = in.read(data, 0, 1024)) != -1) {
                         downloaded += count;
                         fout.write(data, 0, count);
-                        publishProgress((int)(100.0 * downloaded/size));
+                        publishProgress((int) (100.0 * downloaded / size));
                     }
 
                     InstagramApp.log("Video saved at: " + save_path);
@@ -291,7 +282,7 @@ public class SaveActivity extends AppCompatActivity {
             @Override
             public void run() {
                 progressBar.setProgress(progress);
-                tvToolbar.setText(""+progress);
+                textViewToolbar.setText(progress);
             }
         });
     }
@@ -341,15 +332,4 @@ public class SaveActivity extends AppCompatActivity {
     }
 
 
-    public int addAlphaToColor(int color, float factor) {
-        int alpha = Math.round(Color.alpha(color) * factor);
-        int red = Color.red(color);
-        int green = Color.green(color);
-        int blue = Color.blue(color);
-        return Color.argb(alpha, red, green, blue);
-    }
-
 }
-
-
-
