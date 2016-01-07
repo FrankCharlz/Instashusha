@@ -6,17 +6,12 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
-import android.view.ContextMenu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,7 +27,6 @@ import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
 import com.mj.instashusha.utils.DopeTextView;
 import com.mj.instashusha.utils.Utils;
-import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -44,8 +38,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Timestamp;
-import java.util.Date;
 
 public class SaveActivity extends AppCompatActivity {
 
@@ -270,7 +262,7 @@ public class SaveActivity extends AppCompatActivity {
     }
 
     private void openFinisherActivity() {
-        Intent intent = new Intent(context, FinisherActivity.class);
+        Intent intent = new Intent(context, DownloadedActivity.class);
         startActivity(intent);
         finish();
     }

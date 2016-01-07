@@ -71,9 +71,11 @@ public class Utils {
     public static String getTimeStamp() {
         return new Timestamp(new Date().getTime())
                 .toString()
+                .substring(0,20)
+                .trim()
                 .replaceAll("\\.","_")
-                .replaceAll(":","_")
-                .replaceAll(" ","_");
+                .replaceAll(":","")
+                .replaceAll("-","");
 
     }
 }

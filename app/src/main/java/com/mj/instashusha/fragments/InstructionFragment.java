@@ -8,13 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
-import com.mj.instashusha.activities.FinisherActivity;
+import com.mj.instashusha.activities.DownloadedActivity;
 import com.mj.instashusha.activities.IntroActivity;
 import com.mj.instashusha.utils.DopeTextView;
 
@@ -57,7 +56,7 @@ public class InstructionFragment extends Fragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.btn_view_downloaded:
-                    Intent t = new Intent(context, FinisherActivity.class);
+                    Intent t = new Intent(context, DownloadedActivity.class);
                     startActivity(t);
                     break;
                 case R.id.btn_maelezo_zaidi:

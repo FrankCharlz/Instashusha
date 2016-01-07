@@ -2,7 +2,6 @@ package com.mj.instashusha.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -13,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mj.instashusha.R;
+import com.mj.instashusha.activities.DownloadedActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -27,23 +27,23 @@ import java.util.ArrayList;
  */
 public class FilesListAdapter extends BaseAdapter {
     private final Context context;
-    private final ArrayList<File> fileArrayList;
+    private final ArrayList<DownloadedActivity.Item> items;
     private final LayoutInflater inflater;
 
-    public FilesListAdapter(Context context, ArrayList<File> files) {
+    public FilesListAdapter(Context context, ArrayList<DownloadedActivity.Item> items) {
         this.context = context;
-        this.fileArrayList = files;
+        this.items = items;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return fileArrayList.size();
+        return items.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return fileArrayList.get(i);
+        return items.get(i);
     }
 
     @Override
@@ -68,15 +68,17 @@ public class FilesListAdapter extends BaseAdapter {
             holder=(ViewHolder)view.getTag();
         }
 
-        String fname = fileArrayList.get(i).getName();
-        if (fname.endsWith(".mp4")) {
+        DownloadedActivity.Item current_item = items.get(i);
+
+        String fname = current_item.name;
+        if (!current_item.isImage) {
             fname = "Video : "+fname;
-            holder.fpic.setImageBitmap(ThumbnailUtils.createVideoThumbnail(fileArrayList.get(i).getAbsolutePath(), 0));
         } else {
             fname = "Picha : "+fname;
-            Picasso.with(context).load(Uri.fromFile(fileArrayList.get(i))).into(holder.fpic);
         }
 
+
+        holder.fpic.setImageBitmap(current_item.thumbnail);
         holder.name.setText(fname.substring(0, fname.length()-4));
         holder.fshare.setOnClickListener(new Clix(i));
         holder.fpic.setOnClickListener(new Clix(i));
@@ -109,16 +111,15 @@ public class FilesListAdapter extends BaseAdapter {
     }
 
     private void openItem(int i) {
-        String fpath = fileArrayList.get(i).getAbsolutePath();
         String type;
-        if (fpath.endsWith(".mp4"))
+        if (!items.get(i).isImage)
             type = "video/*";
         else
             type = "image/*";
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(fileArrayList.get(i)), type);
+        intent.setDataAndType(items.get(i).uri, type);
         context.startActivity(intent);
     }
 
@@ -128,10 +129,8 @@ public class FilesListAdapter extends BaseAdapter {
 
         share.putExtra(Intent.EXTRA_TEXT, "Shared from @InstaShusha");
 
-        String fpath = fileArrayList.get(i).getAbsolutePath();
         String type;
-
-        if (fpath.endsWith(".mp4"))
+        if (!items.get(i).isImage)
             type = "video/*";
         else
             type = "image/*";
@@ -140,8 +139,7 @@ public class FilesListAdapter extends BaseAdapter {
         share.setType(type);
 
         // Create the URI from the media
-        File media = new File(fpath);
-        Uri uri = Uri.fromFile(media);
+        Uri uri = items.get(i).uri;
 
         // Add the URI to the Intent.
         share.putExtra(Intent.EXTRA_STREAM, uri);

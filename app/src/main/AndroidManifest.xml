@@ -39,7 +39,7 @@
         </activity>
 
         <activity
-            android:name=".activities.FinisherActivity"
+            android:name=".activities.DownloadedActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DopeTheme">
             <intent-filter>
