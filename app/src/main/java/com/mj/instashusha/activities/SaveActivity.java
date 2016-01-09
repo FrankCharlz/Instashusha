@@ -282,7 +282,7 @@ public class SaveActivity extends AppCompatActivity {
             @Override
             public void run() {
                 progressBar.setProgress(progress);
-                textViewToolbar.setText(progress);
+                textViewToolbar.setText(""+progress+"%");
             }
         });
     }

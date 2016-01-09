@@ -20,7 +20,6 @@ public class DownloadedItem {
     public DownloadedItem(File f) {
         file = f;
         date = f.lastModified();
-        InstagramApp.log(""+date);
         name = f.getName();
         isImage = name.endsWith(".png");
         if (!isImage) {

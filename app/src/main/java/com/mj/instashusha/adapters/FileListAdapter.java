@@ -1,6 +1,7 @@
 package com.mj.instashusha.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.mj.instashusha.R;
 import com.mj.instashusha.utils.DownloadedItem;
+import com.mj.instashusha.utils.Sharer;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -27,8 +29,6 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
     private final Context context;
     private final LayoutInflater inflater;
     private ArrayList<DownloadedItem> items;
-    private Clix clix;
-    private int clicked_pos;
 
     public FileListAdapter(Context context, File[] pics, File[] vids) {
         this.context = context;
@@ -53,8 +53,6 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                 return Long.valueOf(b.date).compareTo(a.date);
             }
         });
-
-        clix = new Clix();
     }
 
     @Override
@@ -69,7 +67,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         DownloadedItem current_item = items.get(position);
 
         String fname = current_item.name;
-        fname = fname.substring(fname.length()-10, fname.length()-4);
+        fname = fname.substring(fname.length()-10, fname.length()-5);
         if (!current_item.isImage) {
             fname = "Video : "+fname;
             holder.fpic.setImageBitmap(current_item.thumbnail);
@@ -78,8 +76,9 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
             Picasso.with(context).load(Uri.fromFile(current_item.file)).into(holder.fpic);
         }
 
-        clicked_pos = position;
         holder.name.setText(fname);
+
+        Clix clix = new Clix(position);
         holder.fshare.setOnClickListener(clix);
         holder.fpic.setOnClickListener(clix);
     }
@@ -103,14 +102,32 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
     class Clix implements View.OnClickListener {
 
+        private final int pos;
+
+        public Clix(int position) {
+            this.pos = position;
+        }
+
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.item_share) {
-                //shareItem(clicked_pos);
+                Sharer.share(context, items.get(pos).file);
             } else {
-                //openItem(clicked_pos);
+                openItem(pos);
             }
 
         }
+    }
+
+    private void openItem(int pos) {
+        String mime;
+        if (items.get(pos).isImage)
+            mime = "image/*";
+        else
+            mime = "video/*";
+        Intent intent = new Intent();
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(items.get(pos).file), mime);
+        context.startActivity(intent);
     }
 }
