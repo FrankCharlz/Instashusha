@@ -3,21 +3,24 @@ package com.mj.instashusha.utils;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 
+import com.mj.instashusha.InstagramApp;
+
 import java.io.File;
 
 /**
  * Created by Frank on 1/9/2016.
  */
-public class Item {
+public class DownloadedItem {
     public long date;
     public boolean isImage;
     public String name;
     public Bitmap thumbnail;
     public File file;
 
-    public Item(File f) {
+    public DownloadedItem(File f) {
         file = f;
         date = f.lastModified();
+        InstagramApp.log(""+date);
         name = f.getName();
         isImage = name.endsWith(".png");
         if (!isImage) {

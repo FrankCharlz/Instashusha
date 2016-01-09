@@ -25,6 +25,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:textColor="@color/white"
+            android:maxLines="2"
+            android:singleLine="false"
             android:padding="@dimen/padding.top.bottom"
             android:textSize="@dimen/text.size.button"/>
 

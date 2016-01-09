@@ -10,25 +10,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mj.instashusha.R;
-import com.mj.instashusha.utils.Item;
+import com.mj.instashusha.utils.DownloadedItem;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by Frank on 1/9/2016.
  */
-public class FileListAdapter2 extends RecyclerView.Adapter<FileListAdapter2.ViewHolder> {
+public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHolder> {
 
 
     private final Context context;
     private final LayoutInflater inflater;
-    private ArrayList<Item> items;
+    private ArrayList<DownloadedItem> items;
     private Clix clix;
     private int clicked_pos;
 
-    public FileListAdapter2(Context context, File[] pics, File[] vids) {
+    public FileListAdapter(Context context, File[] pics, File[] vids) {
         this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         init(pics, vids);
@@ -38,12 +40,19 @@ public class FileListAdapter2 extends RecyclerView.Adapter<FileListAdapter2.View
         items = new ArrayList<>();
 
         for (File f : pics) {
-            items.add(new Item(f));
+            items.add(new DownloadedItem(f));
         }
 
         for (File f : vids) {
-            items.add(new Item(f));
+            items.add(new DownloadedItem(f));
         }
+
+        Collections.sort(items, new Comparator<DownloadedItem>() {
+            @Override
+            public int compare(DownloadedItem a, DownloadedItem b) {
+                return Long.valueOf(b.date).compareTo(a.date);
+            }
+        });
 
         clix = new Clix();
     }
@@ -57,9 +66,10 @@ public class FileListAdapter2 extends RecyclerView.Adapter<FileListAdapter2.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Item current_item = items.get(position);
+        DownloadedItem current_item = items.get(position);
 
         String fname = current_item.name;
+        fname = fname.substring(fname.length()-10, fname.length()-4);
         if (!current_item.isImage) {
             fname = "Video : "+fname;
             holder.fpic.setImageBitmap(current_item.thumbnail);
@@ -69,7 +79,7 @@ public class FileListAdapter2 extends RecyclerView.Adapter<FileListAdapter2.View
         }
 
         clicked_pos = position;
-        holder.name.setText(fname.substring(0, fname.length()-4));
+        holder.name.setText(fname);
         holder.fshare.setOnClickListener(clix);
         holder.fpic.setOnClickListener(clix);
     }

@@ -63,8 +63,8 @@ public class SaveActivity extends AppCompatActivity {
 
         //money baby...
         AdView mAdView = (AdView) findViewById(R.id.adView_activity_save);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
-        // AdRequest adRequest = new AdRequest.Builder().build();
+        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         AppRater.app_launched(this); //for ratings...

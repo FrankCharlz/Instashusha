@@ -18,6 +18,9 @@
         <item name="android:layout_margin">@dimen/margin.button</item>
         <item name="android:background">@drawable/button_bg_selector</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:paddingTop">@dimen/padding.top.bottom</item>
+        <item name="android:paddingBottom">@dimen/padding.top.bottom</item>
+
     </style>
 
 </resources>
