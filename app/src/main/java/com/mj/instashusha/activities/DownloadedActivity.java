@@ -2,6 +2,8 @@ package com.mj.instashusha.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -9,6 +11,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
+import com.mj.instashusha.adapters.FileListAdapter2;
 import com.mj.instashusha.adapters.FilesListAdapter;
 
 import java.io.File;
@@ -32,14 +35,20 @@ public class DownloadedActivity extends AppCompatActivity {
         final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings_home);
         btnMenu.setOnClickListener(new MenuClick(this));
 
-
-        final ListView listViewFiles = (ListView) findViewById(R.id.list_view_files);
-
         File pics[] = new File(InstagramApp.PHOTO_FOLDER_PATH).listFiles();
         File vids[] = new File(InstagramApp.VIDEO_FOLDER_PATH).listFiles();
 
-        FilesListAdapter adapter = new FilesListAdapter(this, pics, vids);
-        listViewFiles.setAdapter(adapter);
+        FileListAdapter2 adapter = new FileListAdapter2(this, pics, vids);
+        //listViewFiles.setAdapter(adapter);
+
+        //final ListView listViewFiles = (ListView) findViewById(R.id.list_view_files);
+        final RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_downloaded);
+        mRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager lm = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(lm);
+
+        mRecyclerView.setAdapter(adapter);
+
     }
 
 

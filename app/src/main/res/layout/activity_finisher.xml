@@ -12,16 +12,11 @@
 
     </include>
 
-
-    <ListView
-        android:id="@+id/list_view_files"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_downloaded"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/included_in_finisher"
-        android:layout_above="@+id/adView_activity_finisher"
-       />
-
+        android:layout_height="match_parent"/>
 
 
     <com.google.android.gms.ads.AdView
