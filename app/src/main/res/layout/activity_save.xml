@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.SaveActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:id="@+id/container_layout_activity_save">
 
     <FrameLayout
         android:id="@+id/frame_layout_container"

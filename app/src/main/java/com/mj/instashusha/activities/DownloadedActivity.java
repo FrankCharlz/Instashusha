@@ -13,8 +13,12 @@ import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import android.support.v7.widget.Toolbar;
 import com.mj.instashusha.adapters.FileListAdapter;
+import com.mj.instashusha.utils.DownloadedItem;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DownloadedActivity extends AppCompatActivity {
 
@@ -44,7 +48,18 @@ public class DownloadedActivity extends AppCompatActivity {
         File pics[] = new File(InstagramApp.PHOTO_FOLDER_PATH).listFiles();
         File vids[] = new File(InstagramApp.VIDEO_FOLDER_PATH).listFiles();
 
-        FileListAdapter adapter = new FileListAdapter(this, pics, vids);
+
+        ArrayList<File> items = new ArrayList<>(pics.length + vids.length);
+        Collections.addAll(items, pics);
+        Collections.addAll(items, vids);
+        Collections.sort(items, new Comparator<File>() {
+            @Override
+            public int compare(File a, File b) {
+                return Long.valueOf(b.lastModified()).compareTo(a.lastModified());
+            }
+        });
+
+        FileListAdapter adapter = new FileListAdapter(this, items);
 
         final RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_downloaded);
         mRecyclerView.setHasFixedSize(true);

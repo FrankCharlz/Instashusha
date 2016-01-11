@@ -2,7 +2,7 @@
     <dimen name="padding.top.bottom">7dp</dimen>
     <dimen name="padding.left.right">12dp</dimen>
 
-    <dimen name="radius.small">2dp</dimen>
+    <dimen name="radius.small">3dp</dimen>
 
 
     <dimen name="margin.button">6dp</dimen>

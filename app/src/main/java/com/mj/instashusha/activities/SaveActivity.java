@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.mj.instashusha.R;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
 import com.mj.instashusha.utils.DopeTextView;
+import com.mj.instashusha.utils.Sharer;
 import com.mj.instashusha.utils.Utils;
 import com.squareup.okhttp.Request;
 import com.squareup.picasso.Picasso;
@@ -40,8 +42,8 @@ import java.io.InputStream;
 public class SaveActivity extends AppCompatActivity {
 
     private static final float TOOLBAR_BG_ALPHA = 0.49f;
-    private static final String MIME_TYPE_VIDEO = "video/*";
-    private static final String MIME_TYPE_IMAGE = "image/*";
+    public static final String MIME_TYPE_VIDEO = "video/*";
+    public static final String MIME_TYPE_IMAGE = "image/*";
     private String image_url, video_url, source_url;
     private Context context;
     private ImageView imageView;
@@ -55,6 +57,8 @@ public class SaveActivity extends AppCompatActivity {
     private DopeTextView btnRepost;
     private String mime_type, save_path;
     private boolean isImage;
+    private View containerActivitySave;
+    private boolean share_after_download = false, repost_after_download = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +124,8 @@ public class SaveActivity extends AppCompatActivity {
         final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings_home);
         btnMenu.setOnClickListener(new MenuClick(this));
 
+        containerActivitySave = findViewById(R.id.container_layout_activity_save);
+
     }
 
     public String getVidExtension() {
@@ -133,21 +139,25 @@ public class SaveActivity extends AppCompatActivity {
 
             switch (view.getId()) {
                 case R.id.btn_share:
-                    if (isImage) {
-                        download();
-                        createShareIntent(mime_type, save_path);
-                    } else {
-                        InstagramApp.toast(context, "Sorry...\nSAVE kwanza ndo ushee.");
-                    }
+                    share_after_download = true;
+                    download();
+                    Snackbar
+                            .make(containerActivitySave,
+                                    "Wait while the video is being downloaded.\n" +
+                                            "It will be shared thereafter",
+                                    Snackbar.LENGTH_LONG)
+                            .show();
                     break;
 
                 case R.id.btn_repost:
-                    if (isImage) {
-                        download();
-                        createInstagramIntent(mime_type, save_path);
-                    } else {
-                        InstagramApp.toast(context, "Sorry...\nSAVE kwanza ndo urepost");
-                    }
+                    repost_after_download = true;
+                    download();
+                    Snackbar
+                            .make(containerActivitySave,
+                                    "Wait while the video is being downloaded.\n" +
+                                            "It will be reposted thereafter",
+                                    Snackbar.LENGTH_LONG)
+                            .show();
                     break;
 
                 case R.id.btn_download:
@@ -171,7 +181,14 @@ public class SaveActivity extends AppCompatActivity {
         } else {
             save_path = InstagramApp.PHOTO_FOLDER_PATH + "/" + Utils.getTimeStamp() + ".png";
             Utils.saveImage(context, imageView, save_path);
-            openFinisherActivity();
+
+            if (repost_after_download) {
+                Sharer.repost(context, new File(save_path));
+            } else if (share_after_download) {
+                Sharer.share(context, new File(save_path));
+            } else {
+                openFinisherActivity();
+            }
         }
     }
 
@@ -256,9 +273,15 @@ public class SaveActivity extends AppCompatActivity {
                     h.post(new Runnable() {
                         @Override
                         public void run() {
-                            Utils.addFileToMediaDatabase(context, save_path);
                             progressBar.setVisibility(View.GONE);
-                            openFinisherActivity();
+                            if (share_after_download) {
+                                Sharer.share(context, new File(save_path));
+                            } else if (repost_after_download) {
+                                Sharer.repost(context, new File(save_path));
+                            } else {
+                                openFinisherActivity();
+                            }
+                            Utils.addFileToMediaDatabase(context, save_path);
                         }
                     });
                 }
@@ -282,54 +305,11 @@ public class SaveActivity extends AppCompatActivity {
             @Override
             public void run() {
                 progressBar.setProgress(progress);
-                textViewToolbar.setText(""+progress+"%");
+                textViewToolbar.setText("" + progress + "%");
             }
         });
     }
 
-
-    private void createInstagramIntent(String type, String mediaPath){
-        // Create the new Intent using the 'Send' action.
-        Intent share = new Intent(Intent.ACTION_SEND);
-
-        //set package
-        share.setPackage("com.instagram.android");
-        share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        share.putExtra(Intent.EXTRA_TEXT, "Repost by @InstaShusha");
-
-        // Set the MIME type
-        share.setType(type);
-
-        // Create the URI from the media
-        File media = new File(mediaPath);
-        Uri uri = Uri.fromFile(media);
-
-        // Add the URI to the Intent.
-        share.putExtra(Intent.EXTRA_STREAM, uri);
-
-        // Broadcast the Intent.
-        startActivity(share);
-    }
-
-    private void createShareIntent(String type, String mediaPath) {
-        // Create the new Intent using the 'Send' action.
-        Intent share = new Intent(Intent.ACTION_SEND);
-
-        share.putExtra(Intent.EXTRA_TEXT,"Shared from @InstaShusha");
-
-        // Set the MIME type
-        share.setType(type);
-
-        // Create the URI from the media
-        File media = new File(mediaPath);
-        Uri uri = Uri.fromFile(media);
-
-        // Add the URI to the Intent.
-        share.putExtra(Intent.EXTRA_STREAM, uri);
-
-        // Broadcast the Intent.
-        startActivity(Intent.createChooser(share, "Share to"));
-    }
 
 
 }
