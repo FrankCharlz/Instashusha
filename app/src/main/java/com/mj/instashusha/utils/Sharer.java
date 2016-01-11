@@ -16,12 +16,9 @@ import java.io.File;
 public class Sharer {
 
     public static void share(Context context, File file) {
-        String mime_type;
-        if (file.getName().endsWith(".png")) {
-            mime_type = "image/*";
-        } else {
-            mime_type = "video/*";
-        }
+        String mime_type = (file.getName().endsWith("png"))
+                ? SaveActivity.MIME_TYPE_IMAGE
+                : SaveActivity.MIME_TYPE_VIDEO;
         createShareIntent(context, mime_type, file);
 
     }
@@ -51,15 +48,12 @@ public class Sharer {
         //set package
         share.setPackage("com.instagram.android");
         share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        share.putExtra(Intent.EXTRA_TEXT, "Repost by @InstaShusha");
 
-        String mime_type;
-        // Set the MIME type
-        if (file.getName().endsWith("png")) {
-            mime_type = SaveActivity.MIME_TYPE_IMAGE;
-        } else {
-            mime_type = SaveActivity.MIME_TYPE_VIDEO;
-        }
+        //mime ish
+        String mime_type = (file.getName().endsWith("png"))
+                ? SaveActivity.MIME_TYPE_IMAGE
+                : SaveActivity.MIME_TYPE_VIDEO;
+
         share.setType(mime_type);
 
         // Create the URI from the media

@@ -2,8 +2,6 @@ package com.mj.instashusha.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,16 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mj.instashusha.R;
-import com.mj.instashusha.activities.DownloadedActivity;
-import com.mj.instashusha.utils.DownloadedItem;
 import com.mj.instashusha.utils.Sharer;
 import com.mj.instashusha.utils.VideoThumbnailCache;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Created by Frank on 1/9/2016.

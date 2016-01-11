@@ -3,6 +3,7 @@
     <dimen name="padding.left.right">44dp</dimen>
 
     <dimen name="radius.small">4dp</dimen>
+    <dimen name="radius.card">9dp</dimen>
 
 
     <dimen name="progress.height">12dp</dimen>

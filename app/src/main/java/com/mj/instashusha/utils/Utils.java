@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.widget.ImageView;
 
 import com.mj.instashusha.InstagramApp;
@@ -30,13 +28,12 @@ public class Utils {
 
         File save_file = new File(save_path);
         try {
-            boolean fcs = save_file.createNewFile();
+            save_file.createNewFile();
             InstagramApp.log("File created : " + save_file.getAbsolutePath());
             FileOutputStream ostream = new FileOutputStream(save_file);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, ostream);
             ostream.close();
             addFileToMediaDatabase(context, save_path);
-            InstagramApp.toast(context, "Saved at: " + save_path);
 
         }
         catch (Exception e) {

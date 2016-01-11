@@ -4,19 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -184,8 +183,10 @@ public class SaveActivity extends AppCompatActivity {
 
             if (repost_after_download) {
                 Sharer.repost(context, new File(save_path));
+                repost_after_download = false;
             } else if (share_after_download) {
                 Sharer.share(context, new File(save_path));
+                share_after_download = false;
             } else {
                 openFinisherActivity();
             }
@@ -276,8 +277,10 @@ public class SaveActivity extends AppCompatActivity {
                             progressBar.setVisibility(View.GONE);
                             if (share_after_download) {
                                 Sharer.share(context, new File(save_path));
+                                share_after_download = false;
                             } else if (repost_after_download) {
                                 Sharer.repost(context, new File(save_path));
+                                repost_after_download = false;
                             } else {
                                 openFinisherActivity();
                             }

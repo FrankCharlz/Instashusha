@@ -6,7 +6,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
@@ -45,10 +44,6 @@ public class InstagramApp extends Application {
         Log.e("insta-dl", str);
     }
 
-    public static void toast(Context ctx, String s) {
-        Toast.makeText(ctx, s, Toast.LENGTH_LONG).show();
-    }
-
     public static String getLinkFromClipBoard(Context context) {
         //should return link or empty string
         ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
@@ -66,15 +61,6 @@ public class InstagramApp extends Application {
 
     private static boolean isValidInstaLink(String url) {
         return url.contains("instagram");
-    }
-
-    /* Checks if external storage is available for read and write */
-    public boolean isExternalStorageWritable() {
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
     }
 
     public static File createInstaShushaPhotosFolder(String folderName) {
