@@ -28,5 +28,14 @@
     <string name="share_to_string">Shared from @InstaShusha. Get it from play store:\nhttps://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
     <string name="msg.subiri.kidogo">subiri kidogo...</string>
 
+    <array name="ins_messages" >
+        <item>My dad is the best</item>
+        <item>My mom olso</item>
+        <item>If u got a problem with that, go kill yourself</item>
+        <item>Jus testing</item>
+    </array>
+
+
+
 
 </resources>

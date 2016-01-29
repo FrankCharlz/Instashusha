@@ -14,7 +14,7 @@
 
     <dimen name="text.size.button">15sp</dimen>
     <dimen name="text.size.toolbar">20sp</dimen>
-    <dimen name="text.size.large">20sp</dimen>
+    <dimen name="text.size.large">24sp</dimen>
 
     <dimen name="space.from.top">96dp</dimen>
 
