@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding.left.right"
+    android:id="@+id/lyt_subiri_kidogo">
+
+
+    <com.mj.instashusha.utils.DopeTextView
+        android:id="@+id/tv_subiri"
+        android:textSize="@dimen/text.size.toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="......"
+        android:layout_gravity="center"
+        android:padding="32dp"/>
+
+    <com.mj.instashusha.utils.DopeTextView
+        android:id="@+id/tv_subiri2"
+        android:textSize="@dimen/text.size.toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/msg.subiri.kidogo"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin.button"/>
+
+</LinearLayout>

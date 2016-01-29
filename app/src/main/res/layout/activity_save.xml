@@ -14,12 +14,14 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">
 
+        <include layout="@layout/layout_subiri_kidogo"></include>
+
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@drawable/loading"
+            android:visibility="gone"
             android:layout_gravity="center_horizontal|top" />
 
         <include layout="@layout/toolbar_universal_layout"/>
@@ -36,44 +38,10 @@
         android:max="100"
         android:progress="0"
         android:visibility="gone"
+        android:progressTint="@color/silver"
         />
 
-    <LinearLayout
-        android:id="@+id/buttons_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="0dp"
-        android:layout_below="@id/progress_dl">
-
-        <com.mj.instashusha.utils.DopeTextView
-            style="@style/DopeButton"
-            android:id="@+id/btn_download"
-            android:text="@string/btn.download"
-            android:layout_weight="0.33"
-            android:textSize="@dimen/text.size.button"
-            android:layout_margin="@dimen/margin.button"/>
-
-
-        <com.mj.instashusha.utils.DopeTextView
-            android:id="@+id/btn_share"
-            style="@style/DopeButton"
-            android:layout_weight="0.33"
-            android:text="@string/btn.share"
-            android:textSize="@dimen/text.size.button"
-            android:layout_margin="@dimen/margin.button"
-            />
-
-        <com.mj.instashusha.utils.DopeTextView
-            android:id="@+id/btn_repost"
-            style="@style/DopeButton"
-            android:text="@string/btn.repost"
-            android:layout_weight="0.33"
-            android:textSize="@dimen/text.size.button"
-            android:layout_margin="@dimen/margin.button"
-            />
-
-    </LinearLayout>
+    <include layout="@layout/layout_buttons"/>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView_activity_save"

@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -54,10 +56,12 @@ public class SaveActivity extends AppCompatActivity {
 
     private DopeTextView btnSave;
     private DopeTextView btnRepost;
-    private String mime_type, save_path;
     private boolean isImage;
     private View containerActivitySave;
-    private boolean share_after_download = false, repost_after_download = false;
+    private boolean share_after_download = false,
+            repost_after_download = false;
+
+    private static final String BASE_URL = "http://insta-dl.appspot.com/dl?source=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,36 +70,51 @@ public class SaveActivity extends AppCompatActivity {
 
         //money baby...
         AdView mAdView = (AdView) findViewById(R.id.adView_activity_save);
-        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        //AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         AppRater.app_launched(this); //for ratings...
 
         context = this;
         initViews();
+        animateLoading();
 
         Intent intent = getIntent();
-        InstaResponse response = (InstaResponse) intent.getSerializableExtra(InstaResponse.SERIALIZE);
-
-        image_url = response.image_url;
-        video_url = response.video_url;
         source_url = intent.getStringExtra(MainActivity.SRC_URL);
 
-        isImage = video_url.isEmpty();
-
-        //Setting mime type...
-        mime_type = isImage ? MIME_TYPE_IMAGE :  MIME_TYPE_VIDEO;
-
-        Picasso.with(context).load(image_url).into(picasso_target);
-
-        //start to download video here to enhance user experience...
-        if (!isImage) downloadInBackground();
+        proceed(source_url);
 
     }
 
-    private void downloadInBackground() {
 
+
+    private void proceed(String source_url) {
+
+        final Request request = new Request.Builder()
+                .url(BASE_URL + source_url)
+                .build();
+
+        InstagramApp.log("Request built: for url");
+
+        InstagramApp.getOkHttpClient().newCall(request).enqueue(
+                new HttpCallback() {
+                    @Override
+                    public void onUrlResponse(InstaResponse response) {
+                        image_url = response.image_url;
+                        video_url = response.video_url;
+                        isImage = video_url.isEmpty();
+
+                        //Setting mime type...
+                        //String mime_type = isImage ? MIME_TYPE_IMAGE : MIME_TYPE_VIDEO;
+
+                        Picasso.with(context).load(image_url).into(picasso_target);
+                    }
+
+                    @Override
+                    public void onVideoResponse(InputStream stream, long size) throws IOException {}
+
+                });
     }
 
     private void initViews() {
@@ -125,6 +144,12 @@ public class SaveActivity extends AppCompatActivity {
 
         containerActivitySave = findViewById(R.id.container_layout_activity_save);
 
+    }
+
+    private void animateLoading() {
+        //TextView subiri = (TextView) findViewById(R.id.tv_subiri);
+        Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        findViewById(R.id.tv_subiri).startAnimation(rotateAnimation);
     }
 
     public String getVidExtension() {
@@ -174,6 +199,7 @@ public class SaveActivity extends AppCompatActivity {
 
         //sets the save path, so that it can be used in share intent...
         //ugly though
+        String save_path;
         if (!isImage) {
             save_path = InstagramApp.VIDEO_FOLDER_PATH + "/" + Utils.getTimeStamp() + getVidExtension();
             saveVideo(video_url, save_path);
@@ -196,10 +222,10 @@ public class SaveActivity extends AppCompatActivity {
     private Target picasso_target = new Target() {
         @Override
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            findViewById(R.id.lyt_subiri_kidogo).setVisibility(View.GONE);
+            imageView.setVisibility(View.VISIBLE);
             imageView.setImageBitmap(bitmap);
-
             buttonsContainer.setVisibility(View.VISIBLE);
-
             paletteColors(bitmap);
         }
 
@@ -232,8 +258,6 @@ public class SaveActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void saveVideo(String video_url, final String save_path) {
         progressBar.setVisibility(View.VISIBLE);

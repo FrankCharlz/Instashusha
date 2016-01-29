@@ -1,6 +1,5 @@
 package com.mj.instashusha.activities;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,12 +23,10 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String BASE_URL = "http://insta-dl.appspot.com/dl?source=";
     public static final String SRC_URL = "UJYJHjy";
 
     private Context context;
-    private ProgressDialog progressBar;
-    private boolean activityWasPaused = false;
+    private boolean waking_from_pause = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,17 +77,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (activityWasPaused) {
+        if (waking_from_pause) {
             //onresume is called after oncreate at first..
             programFlow();
-            activityWasPaused = false;
+            waking_from_pause = false;
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        activityWasPaused = true;
+        waking_from_pause = true;
     }
 
     private void showInstructionFragment() {
@@ -127,37 +124,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void proceedLoading(final String url) {
 
-        progressBar = new ProgressDialog(context);
-        progressBar.setCancelable(true);
-        progressBar.setMessage(getResources().getString(R.string.message_when_loading));
-        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        //progressBar.setContentView(R.layout.activity_save);
-        progressBar.show();
+        Intent intent = new Intent(context, SaveActivity.class);
+        intent.putExtra(SRC_URL, url);
+        startActivity(intent);
+        finish();
 
-
-        final Request request = new Request.Builder()
-                .url(BASE_URL + url)
-                .build();
-
-        InstagramApp.log("Request built: for url");
-
-        InstagramApp.getOkHttpClient().newCall(request).enqueue(
-                new HttpCallback() {
-                    @Override
-                    public void onUrlResponse(InstaResponse ir) {
-                        InstagramApp.log(ir.toString());
-                        Intent intent = new Intent(context, SaveActivity.class);
-                        intent.putExtra(InstaResponse.SERIALIZE, ir);
-                        intent.putExtra(SRC_URL, url);
-                        progressBar.dismiss();
-                        startActivity(intent);
-                        finish();
-                    }
-
-                    @Override
-                    public void onVideoResponse(InputStream stream, long size) throws IOException {}
-
-                });
     }
 
 }

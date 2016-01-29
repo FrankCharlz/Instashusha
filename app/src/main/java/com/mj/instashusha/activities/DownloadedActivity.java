@@ -19,10 +19,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class DownloadedActivity extends AppCompatActivity {
 
 
+    private static final int MAX_DISPLAY_FILES = 25;
     private Toolbar toolbar;
 
     @Override
@@ -38,8 +40,8 @@ public class DownloadedActivity extends AppCompatActivity {
         }
 
         AdView mAdView = (AdView) findViewById(R.id.adView_activity_finisher);
-        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        //AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings_home);
@@ -49,9 +51,10 @@ public class DownloadedActivity extends AppCompatActivity {
         File vids[] = new File(InstagramApp.VIDEO_FOLDER_PATH).listFiles();
 
 
-        ArrayList<File> items = new ArrayList<>(pics.length + vids.length);
+        List<File> items = new ArrayList<>(pics.length + vids.length);
         Collections.addAll(items, pics);
         Collections.addAll(items, vids);
+
         Collections.sort(items, new Comparator<File>() {
             @Override
             public int compare(File a, File b) {
@@ -59,7 +62,9 @@ public class DownloadedActivity extends AppCompatActivity {
             }
         });
 
-        FileListAdapter adapter = new FileListAdapter(this, items);
+
+
+        FileListAdapter adapter = new FileListAdapter(this, items.subList(0, MAX_DISPLAY_FILES));
 
         final RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_downloaded);
         mRecyclerView.setHasFixedSize(true);

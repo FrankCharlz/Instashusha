@@ -35,10 +35,12 @@ public class IntroActivity extends AppIntro2 {
                 getResources().getString(R.string.maelezo_title_3),
                 getResources().getString(R.string.maelezo_body_3),
                 R.drawable.ins_icon,
-                Color.parseColor("#ff80d4")
+                Color.parseColor("#8810bfc7")
         ));
 
-        setFadeAnimation();
+        //setFadeAnimation();
+        //setZoomAnimation();
+        setDepthAnimation();
 
     }
 

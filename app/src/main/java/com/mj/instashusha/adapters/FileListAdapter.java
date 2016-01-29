@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Frank on 1/9/2016.
@@ -26,9 +27,9 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
     private final Context context;
     private final LayoutInflater inflater;
-    private ArrayList<File> items;
+    private List<File> items;
 
-    public FileListAdapter(Context context, ArrayList<File> items) {
+    public FileListAdapter(Context context, List<File> items) {
         this.context = context;
         this.items = items;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
