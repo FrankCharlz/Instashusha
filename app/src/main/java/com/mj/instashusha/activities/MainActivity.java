@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void proceedLoading(final String url) {
-
         Intent intent = new Intent(context, SaveActivity.class);
         intent.putExtra(SRC_URL, url);
         startActivity(intent);

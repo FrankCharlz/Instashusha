@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.network.HttpCallback;
@@ -70,11 +72,19 @@ public class SaveActivity extends AppCompatActivity {
 
         //money baby...
         AdView mAdView = (AdView) findViewById(R.id.adView_activity_save);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
-        //AdRequest adRequest = new AdRequest.Builder().build();
+        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         AppRater.app_launched(this); //for ratings...
+
+        Tracker mTracker = ((InstagramApp) getApplication()).getDefaultTracker();
+        mTracker.enableAdvertisingIdCollection(true);
+        mTracker.setScreenName("SCREEN_SAVE_ACTIVITY");
+
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+
 
         context = this;
         initViews();
@@ -82,7 +92,6 @@ public class SaveActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         source_url = intent.getStringExtra(MainActivity.SRC_URL);
-
         proceed(source_url);
 
     }
@@ -104,9 +113,6 @@ public class SaveActivity extends AppCompatActivity {
                         image_url = response.image_url;
                         video_url = response.video_url;
                         isImage = video_url.isEmpty();
-
-                        //Setting mime type...
-                        //String mime_type = isImage ? MIME_TYPE_IMAGE : MIME_TYPE_VIDEO;
 
                         Picasso.with(context).load(image_url).into(picasso_target);
                     }

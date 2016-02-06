@@ -7,23 +7,26 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
+import com.google.android.gms.analytics.Tracker;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 
-import org.codechimp.apprater.AppRater;
+import com.google.android.gms.analytics.GoogleAnalytics;
 
 import java.io.File;
 
 /**
  * Created by Frank on 12/18/2015.
+ *
+ * TODO: migrate some methods from here to Utils
  */
 public class InstagramApp extends Application {
+    private static final String APP_FOLDER_NAME = "Instashusha/";
+    private Tracker mTracker;
 
-    private static final long SIZE_OF_OKHTTP_CACHE = 10 * 1024 * 1024; //10MB
+    private static final long SIZE_OF_OKHTTP_CACHE = 20 * 1024 * 1024; //20MB
     private final static OkHttpClient okhttpClient = new OkHttpClient();
     public static final String GO_TO_INSTRUCTIONS = "hgGHGy";
-
-    public static String PHOTO_FOLDER_PATH, VIDEO_FOLDER_PATH;
 
     @Override
     public void onCreate() {
@@ -35,6 +38,9 @@ public class InstagramApp extends Application {
             log("Unable to set http cache"+ e);
         }
 
+    }
+    public static int mediaDownloaded() {
+        return InstagramApp.getAppFolder().listFiles().length;
     }
 
     public  static OkHttpClient getOkHttpClient() {
@@ -63,36 +69,22 @@ public class InstagramApp extends Application {
         return url.contains("instagram");
     }
 
-    public static File createInstaShushaPhotosFolder(String folderName) {
-        // Get the directory for the user's public pictures directory.
-        File file = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), folderName);
+    public static File getAppFolder() {
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+APP_FOLDER_NAME);
         if (!file.mkdirs()) {
-            InstagramApp.log("Photos folder not created");
-        }
-        return file;
-    }
-
-    public static File createInstaShushaVideosFolder(String folderName) {
-        // Get the directory for the user's public pictures directory.
-        File file = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_MOVIES), folderName);
-        if (!file.mkdirs()) {
-            InstagramApp.log("Videos folder not created");
+            InstagramApp.log("folder not created");
         }
         return file;
     }
 
 
-    public static void makeAppFolder() {
-        //called on MainActivity
-        File photoFolder = createInstaShushaPhotosFolder("InstashushaPicha");
-        File videosFolder = createInstaShushaVideosFolder("InstashushaVideos");
-
-        PHOTO_FOLDER_PATH = photoFolder.getAbsolutePath();
-        VIDEO_FOLDER_PATH = videosFolder.getAbsolutePath();
-
+    synchronized public Tracker getDefaultTracker() {
+        if (mTracker == null) {
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+            mTracker = analytics.newTracker(R.xml.global_tracker);
+        }
+        return mTracker;
     }
-
 
 }

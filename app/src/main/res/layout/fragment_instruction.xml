@@ -2,10 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/download_view_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/space.from.top"
     tools:context=".activities.MainActivity">
+
 
     <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/tv_instructions"
@@ -14,7 +16,6 @@
         android:padding="@dimen/padding.left.right"
         android:text="@string/instructions"
         android:layout_margin="@dimen/padding.top.bottom"
-        android:layout_centerHorizontal="true"
         android:gravity="center"
         android:textSize="@dimen/text.size.toolbar"
         />

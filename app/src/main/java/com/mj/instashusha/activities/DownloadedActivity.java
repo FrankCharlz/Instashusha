@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import android.support.v7.widget.Toolbar;
@@ -24,7 +26,7 @@ import java.util.List;
 public class DownloadedActivity extends AppCompatActivity {
 
 
-    private static final int MAX_DISPLAY_FILES = 25;
+    private static final int MAX_DISPLAY_FILES = 20;
     private Toolbar toolbar;
 
     @Override
@@ -40,20 +42,16 @@ public class DownloadedActivity extends AppCompatActivity {
         }
 
         AdView mAdView = (AdView) findViewById(R.id.adView_activity_finisher);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
-        //AdRequest adRequest = new AdRequest.Builder().build();
+        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings_home);
         btnMenu.setOnClickListener(new MenuClick(this));
 
-        File pics[] = new File(InstagramApp.PHOTO_FOLDER_PATH).listFiles();
-        File vids[] = new File(InstagramApp.VIDEO_FOLDER_PATH).listFiles();
 
-
-        List<File> items = new ArrayList<>(pics.length + vids.length);
-        Collections.addAll(items, pics);
-        Collections.addAll(items, vids);
+        List<File> items = new ArrayList<>();
+        Collections.addAll(items, InstagramApp.getAppFolder().listFiles());
 
         Collections.sort(items, new Comparator<File>() {
             @Override
@@ -61,7 +59,6 @@ public class DownloadedActivity extends AppCompatActivity {
                 return Long.valueOf(b.lastModified()).compareTo(a.lastModified());
             }
         });
-
 
 
         FileListAdapter adapter = new FileListAdapter(this, items.subList(0, MAX_DISPLAY_FILES));
@@ -72,6 +69,13 @@ public class DownloadedActivity extends AppCompatActivity {
         StaggeredGridLayoutManager sl = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(sl);
         mRecyclerView.setAdapter(adapter);
+
+        Tracker mTracker = ((InstagramApp) getApplication()).getDefaultTracker();
+        mTracker.enableAdvertisingIdCollection(true);
+        mTracker.setScreenName("SCREEN_DOWNLOADED_ACTIVITY");
+
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
 
     }
 
