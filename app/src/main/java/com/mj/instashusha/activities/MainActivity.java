@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.toolbar_action_settings_home).setVisibility(View.GONE);
 
         context = this;
-        InstagramApp.makeAppFolder();
         checkAppIntroduction();
 
         Intent i = getIntent();
@@ -126,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(context, SaveActivity.class);
         intent.putExtra(SRC_URL, url);
         startActivity(intent);
-        finish();
+        //finish();
 
     }
 

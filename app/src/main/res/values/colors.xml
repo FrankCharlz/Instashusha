@@ -5,6 +5,7 @@
 
     <color name="white">#ffffff</color>
     <color name="black">#ff000000</color>
+    <color name="black97">#de000000</color>
     <color name="black.alpha">#63000000</color>
 
     <color name="transparent">#00ffffff</color>

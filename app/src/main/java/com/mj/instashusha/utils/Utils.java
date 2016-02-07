@@ -73,7 +73,9 @@ public class Utils {
                 .trim()
                 .replaceAll("\\.","_")
                 .replaceAll(":","")
-                .replaceAll("-","");
+                .replaceAll("-","")
+                .replaceAll(" ","");
+
 
     }
 

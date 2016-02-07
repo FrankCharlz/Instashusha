@@ -1,15 +1,14 @@
 <resources>
     <string name="app_name">InstaShusha</string>
 
-
     <string name="btn.download">SAVE</string>
     <string name="btn.share">SHARE</string>
     <string name="btn.repost">REPOST</string>
 
     <string name="instructions">Download picha kutoka Instagram, share na repost</string>
     <string name="view_downloaded">Zilizoshushwa</string>
-    <string name="open_instagram">   Fungua Instagram   </string>
     <string name="open_tutorial">Maelezo zaidi</string>
+    <string name="open_instagram">     Fungua Instagram     </string>
 
     <string name="maelezo_body_1">Fungua Instagram na bonyeza vidoti vitatu kama inavoonekana hapo juu</string>
     <string name="maelezo_title_1">Hatua ya 1</string>
@@ -27,15 +26,5 @@
     <string name="save_finished">Created by @instashusha \n Playstore: https://play.google.com/?id=com.mj.pichazainsta</string>
     <string name="share_to_string">Shared from @InstaShusha. Get it from play store:\nhttps://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
     <string name="msg.subiri.kidogo">subiri kidogo...</string>
-
-    <array name="ins_messages" >
-        <item>My dad is the best</item>
-        <item>My mom olso</item>
-        <item>If u got a problem with that, go kill yourself</item>
-        <item>Jus testing</item>
-    </array>
-
-
-
 
 </resources>

@@ -44,6 +44,8 @@ import java.io.InputStream;
 
 public class SaveActivity extends AppCompatActivity {
 
+
+    private static final String BASE_URL = "http://insta-dl.appspot.com/dl?source=";
     private static final float TOOLBAR_BG_ALPHA = 0.49f;
     public static final String MIME_TYPE_VIDEO = "video/*";
     public static final String MIME_TYPE_IMAGE = "image/*";
@@ -56,14 +58,14 @@ public class SaveActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
 
-    private DopeTextView btnSave;
-    private DopeTextView btnRepost;
+    private DopeTextView btnSave, btnRepost;
     private boolean isImage;
-    private View containerActivitySave;
+    private View activity_view_container;
     private boolean share_after_download = false,
             repost_after_download = false;
 
-    private static final String BASE_URL = "http://insta-dl.appspot.com/dl?source=";
+    private  Handler handler = new Handler(Looper.getMainLooper());
+    private int percent = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +86,6 @@ public class SaveActivity extends AppCompatActivity {
 
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
-
-
         context = this;
         initViews();
         animateLoading();
@@ -97,9 +97,7 @@ public class SaveActivity extends AppCompatActivity {
     }
 
 
-
     private void proceed(String source_url) {
-
         final Request request = new Request.Builder()
                 .url(BASE_URL + source_url)
                 .build();
@@ -118,7 +116,8 @@ public class SaveActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onVideoResponse(InputStream stream, long size) throws IOException {}
+                    public void onVideoResponse(InputStream stream, long size) throws IOException {
+                    }
 
                 });
     }
@@ -129,16 +128,16 @@ public class SaveActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar_universal);
         textViewToolbar = (TextView) findViewById(R.id.tv_appname);
 
-        ButtonClicks sl = new ButtonClicks();
+        ButtonClicks buttonClicks = new ButtonClicks();
 
         btnSave = (DopeTextView) findViewById(R.id.btn_download);
-        btnSave.setOnClickListener(sl);
+        btnSave.setOnClickListener(buttonClicks);
 
         DopeTextView btnShare = (DopeTextView) findViewById(R.id.btn_share);
-        btnShare.setOnClickListener(sl);
+        btnShare.setOnClickListener(buttonClicks);
 
         btnRepost = (DopeTextView) findViewById(R.id.btn_repost);
-        btnRepost.setOnClickListener(sl);
+        btnRepost.setOnClickListener(buttonClicks);
 
         buttonsContainer = (LinearLayout) findViewById(R.id.buttons_container);
         buttonsContainer.setVisibility(View.GONE);
@@ -148,12 +147,11 @@ public class SaveActivity extends AppCompatActivity {
         final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings_home);
         btnMenu.setOnClickListener(new MenuClick(this));
 
-        containerActivitySave = findViewById(R.id.container_layout_activity_save);
+        activity_view_container = findViewById(R.id.container_layout_activity_save);
 
     }
 
     private void animateLoading() {
-        //TextView subiri = (TextView) findViewById(R.id.tv_subiri);
         Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
         findViewById(R.id.tv_subiri).startAnimation(rotateAnimation);
     }
@@ -172,7 +170,7 @@ public class SaveActivity extends AppCompatActivity {
                     share_after_download = true;
                     download();
                     Snackbar
-                            .make(containerActivitySave,
+                            .make(activity_view_container,
                                     "Wait while the video is being downloaded.\n" +
                                             "It will be shared thereafter",
                                     Snackbar.LENGTH_LONG)
@@ -183,7 +181,7 @@ public class SaveActivity extends AppCompatActivity {
                     repost_after_download = true;
                     download();
                     Snackbar
-                            .make(containerActivitySave,
+                            .make(activity_view_container,
                                     "Wait while the video is being downloaded.\n" +
                                             "It will be reposted thereafter",
                                     Snackbar.LENGTH_LONG)
@@ -200,29 +198,19 @@ public class SaveActivity extends AppCompatActivity {
     }
 
     private void download() {
-        //puts the last url to shared prefs..
-        Utils.setLastUrl(context, source_url);
-
         //sets the save path, so that it can be used in share intent...
         //ugly though
         String save_path;
         if (!isImage) {
-            save_path = InstagramApp.VIDEO_FOLDER_PATH + "/" + Utils.getTimeStamp() + getVidExtension();
+            save_path = InstagramApp.getAppFolder().getAbsolutePath()+File.separator+Utils.getTimeStamp() + getVidExtension();
             saveVideo(video_url, save_path);
         } else {
-            save_path = InstagramApp.PHOTO_FOLDER_PATH + "/" + Utils.getTimeStamp() + ".png";
+            save_path = InstagramApp.getAppFolder().getAbsolutePath()+File.separator+Utils.getTimeStamp() + ".png";
             Utils.saveImage(context, imageView, save_path);
-
-            if (repost_after_download) {
-                Sharer.repost(context, new File(save_path));
-                repost_after_download = false;
-            } else if (share_after_download) {
-                Sharer.share(context, new File(save_path));
-                share_after_download = false;
-            } else {
-                openFinisherActivity();
-            }
+            afterDownloading(save_path);
         }
+        //puts the last url to shared prefs..
+        Utils.setLastUrl(context, source_url);
     }
 
     private Target picasso_target = new Target() {
@@ -237,7 +225,8 @@ public class SaveActivity extends AppCompatActivity {
 
         @Override
         public void onBitmapFailed(Drawable errorDrawable) {
-
+            Snackbar.make(activity_view_container, "Tafadhali jaribu tena", Snackbar.LENGTH_INDEFINITE)
+                    .show();
         }
 
         @Override
@@ -257,7 +246,7 @@ public class SaveActivity extends AppCompatActivity {
                     int vtc = swatch.getTitleTextColor();
 
                     toolbar.setBackgroundColor(vbg);
-                    buttonsContainer.setBackgroundColor(Utils.addAlphaToColor(vbg, 0.41f));
+                    buttonsContainer.setBackgroundColor(Utils.addAlphaToColor(vbg, 0.425f));
                     textViewToolbar.setTextColor(vtc);
                 }
 
@@ -276,7 +265,7 @@ public class SaveActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onVideoResponse(InputStream stream, long size) throws IOException {
+            public void onVideoResponse(InputStream stream, final long size) throws IOException {
 
                 BufferedInputStream in = null;
                 FileOutputStream fout = null;
@@ -285,36 +274,27 @@ public class SaveActivity extends AppCompatActivity {
                     in = new BufferedInputStream(stream);
                     fout = new FileOutputStream(save_path);
 
-
-                    final byte data[] = new byte[1024];
+                    int buffer_size = 1024 * 64;
+                    final byte data[] = new byte[buffer_size];
                     int count;
-                    while ((count = in.read(data, 0, 1024)) != -1) {
+
+                    handler.post(progressRunnable);
+
+                    while ((count = in.read(data, 0, buffer_size)) != -1) {
                         downloaded += count;
                         fout.write(data, 0, count);
-                        publishProgress((int) (100.0 * downloaded / size));
+                        percent = (int) (100.0f * downloaded / size);
                     }
-
-                    InstagramApp.log("Video saved at: " + save_path);
 
                 } finally {
                     if (in != null) in.close();
                     if (fout != null) fout.close();
-
-                    Handler h = new Handler(Looper.getMainLooper());
-                    h.post(new Runnable() {
+                    handler.removeCallbacks(progressRunnable);
+                    handler.post(new Runnable() {
                         @Override
                         public void run() {
                             progressBar.setVisibility(View.GONE);
-                            if (share_after_download) {
-                                Sharer.share(context, new File(save_path));
-                                share_after_download = false;
-                            } else if (repost_after_download) {
-                                Sharer.repost(context, new File(save_path));
-                                repost_after_download = false;
-                            } else {
-                                openFinisherActivity();
-                            }
-                            Utils.addFileToMediaDatabase(context, save_path);
+                            afterDownloading(save_path);
                         }
                     });
                 }
@@ -324,25 +304,40 @@ public class SaveActivity extends AppCompatActivity {
         });
     }
 
-    private void openFinisherActivity() {
-        Intent intent = new Intent(context, DownloadedActivity.class);
-        startActivity(intent);
+    private Runnable progressRunnable = new Runnable() {
+        @Override
+        public void run() {
+            publishProgress(percent);
+        }
+    };
+
+    private void publishProgress(int percent) {
+        progressBar.setProgress(percent);
+        textViewToolbar.setText("" + percent + "%");
+        handler.postDelayed(progressRunnable, 600);
+    }
+
+    private void afterDownloading(String save_path) {
+        if (share_after_download) {
+            Sharer.share(context, new File(save_path));
+            share_after_download = false;
+        } else if (repost_after_download) {
+            Sharer.repost(context, new File(save_path));
+            repost_after_download = false;
+        } else {
+            //open downloaded activity....
+            Intent intent = new Intent(context, DownloadedActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        Utils.addFileToMediaDatabase(context, save_path);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
-
-
-    private void publishProgress(final int progress) {
-        //InstagramApp.log("Progress : "+v);
-        Handler h = new Handler(Looper.getMainLooper());
-        h.post(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setProgress(progress);
-                textViewToolbar.setText("" + progress + "%");
-            }
-        });
-    }
-
-
 
 }

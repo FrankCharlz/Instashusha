@@ -26,7 +26,7 @@ import java.util.List;
 public class DownloadedActivity extends AppCompatActivity {
 
 
-    private static final int MAX_DISPLAY_FILES = 20;
+    private static int MAX_DISPLAY_FILES = 20;
     private Toolbar toolbar;
 
     @Override
@@ -60,8 +60,9 @@ public class DownloadedActivity extends AppCompatActivity {
             }
         });
 
+        if (items.size() > MAX_DISPLAY_FILES) items = items.subList(0, MAX_DISPLAY_FILES);
 
-        FileListAdapter adapter = new FileListAdapter(this, items.subList(0, MAX_DISPLAY_FILES));
+        FileListAdapter adapter = new FileListAdapter(this, items);
 
         final RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_downloaded);
         mRecyclerView.setHasFixedSize(true);

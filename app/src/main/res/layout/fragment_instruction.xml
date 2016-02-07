@@ -18,6 +18,7 @@
         android:layout_margin="@dimen/padding.top.bottom"
         android:gravity="center"
         android:textSize="@dimen/text.size.toolbar"
+        android:textColor="@color/black97"
         />
 
     <com.mj.instashusha.utils.DopeTextView
