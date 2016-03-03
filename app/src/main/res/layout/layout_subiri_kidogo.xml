@@ -10,10 +10,10 @@
 
     <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/tv_subiri"
-        android:textSize="@dimen/text.size.large"
+        android:textSize="@dimen/text.size.xlarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="......."
+        android:text="....."
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="32dp"/>

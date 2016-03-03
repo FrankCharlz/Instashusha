@@ -17,5 +17,7 @@
 
     <dimen name="space.from.top">120dp</dimen>
 
+    <dimen name="text.size.xlarge">64dp</dimen>
+
 </resources>
 

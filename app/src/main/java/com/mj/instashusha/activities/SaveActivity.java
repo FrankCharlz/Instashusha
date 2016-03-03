@@ -225,7 +225,7 @@ public class SaveActivity extends AppCompatActivity {
 
         @Override
         public void onBitmapFailed(Drawable errorDrawable) {
-            Snackbar.make(activity_view_container, "Tafadhali jaribu tena", Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(activity_view_container, "Imegoma, tafadhali jaribu tena", Snackbar.LENGTH_INDEFINITE)
                     .show();
         }
 
@@ -337,6 +337,13 @@ public class SaveActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        /***
+         * since previous activity (MainActivity) checks last url if equals.. it goes to
+         * InstructionsFragment it wise to set this to last downloaded after a user clicks back
+         *
+         * OR just use the alternative below:
+         */
+        InstagramApp.BACK_FROM_SAVE_ACTIVITY = true;
         finish();
     }
 

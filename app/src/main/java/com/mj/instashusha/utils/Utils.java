@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.SystemClock;
 import android.widget.ImageView;
 
 import com.mj.instashusha.InstagramApp;
@@ -19,7 +20,8 @@ import java.util.Date;
 public class Utils {
 
     private static final String LAST_URL = "last_insta_url_loaded";
-    private static final String PREFS_FILE_NAME = "FhYmkF";
+    public static final String PREFS_FILE_NAME = "FhYmkF";
+    private static final String LAST_BOOT = "9n3k2n";
 
     public static  void saveImage(Context context, ImageView imageView, String save_path) {
         imageView.setDrawingCacheEnabled(true);
@@ -85,5 +87,12 @@ public class Utils {
         int green = Color.green(color);
         int blue = Color.blue(color);
         return Color.argb(alpha, red, green, blue);
+    }
+
+    public static void addLastBoot(Context context) {
+        context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+                .edit()
+                .putLong(LAST_BOOT, System.currentTimeMillis())
+                .apply();
     }
 }

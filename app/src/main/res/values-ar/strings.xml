@@ -1,0 +1,27 @@
+<resources>
+
+    <string name="btn.download">تحميل</string>
+    <string name="btn.share">شارك</string>
+    <string name="btn.repost">بعد ثانية</string>
+
+    <string name="instructions">تحميل الصور والفيديو من Instagram و\nتبادل غ ربوست</string>
+    <string name="view_downloaded">تحميل</string>
+    <string name="open_tutorial">كيفية الاستخدام</string>
+    <string name="open_instagram">بداية إينستاجرام</string>
+
+    <string name="maelezo_body_1">بدء إينستاجرام ثم اضغط على النقاط الثلاث \nكما هو مبين أعلاه</string>
+
+    <string name="maelezo_title_1">1 خطوة</string>
+    <string name="maelezo_title_2">2 خطوة</string>
+    <string name="maelezo_title_3">3 خطوة</string>
+
+
+    <string name="maelezo_body_2">انقر على \'copy share url\'</string>
+    <string name="maelezo_body_3">  وثيق في Instagram و\n مفتوحة Instashusha  </string>
+    <string name="message_when_loading">يرجى الانتظار ، مجرد ثانية</string>
+
+    <string name="save_finished">Created by @instashusha \n Playstore: https://play.google.com/?id=com.mj.pichazainsta</string>
+    <string name="share_to_string">Shared from @InstaShusha. Get it from play store:\nhttps://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
+    <string name="msg.subiri.kidogo">jأرجو الإنتظار...</string>
+
+</resources>

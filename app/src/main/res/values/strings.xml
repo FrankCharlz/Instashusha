@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">InstaShusha</string>
+    <string name="app_name" translatable="false">InstaShusha</string>
 
     <string name="btn.download">SAVE</string>
     <string name="btn.share">SHARE</string>
@@ -19,9 +19,9 @@
     <string name="message_when_loading">Subiri kidogo</string>
 
 
-    <string name="banner_ad_unit_id_home">ca-app-pub-8621518791154354/3031579423</string>
-    <string name="banner_ad_unit_id_save">ca-app-pub-8621518791154354/6124646624</string>
-    <string name="banner_ad_unit_id_finisher">ca-app-pub-8621518791154354/9078113020</string>
+    <string name="banner_ad_unit_id_home" translatable="false">ca-app-pub-8621518791154354/3031579423</string>
+    <string name="banner_ad_unit_id_save" translatable="false">ca-app-pub-8621518791154354/6124646624</string>
+    <string name="banner_ad_unit_id_finisher" translatable="false">ca-app-pub-8621518791154354/9078113020</string>
 
     <string name="save_finished">Created by @instashusha \n Playstore: https://play.google.com/?id=com.mj.pichazainsta</string>
     <string name="share_to_string">Shared from @InstaShusha. Get it from play store:\nhttps://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>

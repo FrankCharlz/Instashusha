@@ -1,5 +1,6 @@
 package com.mj.instashusha.activities;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import com.mj.instashusha.R;
 import com.mj.instashusha.fragments.InstructionFragment;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
+import com.mj.instashusha.services.PopService;
 import com.mj.instashusha.utils.Utils;
 import com.squareup.okhttp.Request;
 
@@ -23,7 +25,7 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String SRC_URL = "UJYJHjy";
+    public static final String SRC_URL = "0x00f12";
 
     private Context context;
     private boolean waking_from_pause = false;
@@ -39,36 +41,44 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         checkAppIntroduction();
 
-        Intent i = getIntent();
-        if (i.getBooleanExtra(InstagramApp.GO_TO_INSTRUCTIONS, false)) {
+        if (getIntent().getBooleanExtra(InstagramApp.GO_TO_INSTRUCTIONS, false)) {
             showInstructionFragment();
             return;
         }
 
         programFlow();
 
+        //check if service was started successfully, if not start it now...
+        boolean sup = isMyServiceRunning(PopService.class);
+        if (!sup) startService(new Intent(this, PopService.class));
+
     }
 
     private void programFlow() {
+        InstagramApp.log("from save activity : " + InstagramApp.BACK_FROM_SAVE_ACTIVITY);
+        if (InstagramApp.BACK_FROM_SAVE_ACTIVITY) {
+            InstagramApp.BACK_FROM_SAVE_ACTIVITY = false;
+            showInstructionFragment();
+            return;
+        }
+
         String url = InstagramApp.getLinkFromClipBoard(this);
         if (url.isEmpty()) {
             //no instagram link in clipboard
             //launch instruction fragment
             InstagramApp.log("No instagram url in clipboard");
             showInstructionFragment();
+            return;
 
+        }
+
+        //all conditions GOOD proceed to process instagram link
+        InstagramApp.log("URL is : " + url);
+        if(Utils.isTheLastUr(context, url)) {
+            //no need to download it again...
+            showInstructionFragment();
         } else {
-            //process instagram link
-            InstagramApp.log("URL is : " + url);
-
-            boolean isLastUrl = Utils.isTheLastUr(context, url);
-            if(isLastUrl) {
-                //no need to download it again...
-                showInstructionFragment();
-            } else {
-                proceedLoading(url);
-            }
-
+            proceedLoading(url);
         }
 
     }
@@ -127,6 +137,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         //finish();
 
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

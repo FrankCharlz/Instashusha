@@ -22,6 +22,7 @@ import java.io.File;
  */
 public class InstagramApp extends Application {
     private static final String APP_FOLDER_NAME = "Instashusha/";
+    public static  boolean BACK_FROM_SAVE_ACTIVITY = false;
     private Tracker mTracker;
 
     private static final long SIZE_OF_OKHTTP_CACHE = 20 * 1024 * 1024; //20MB

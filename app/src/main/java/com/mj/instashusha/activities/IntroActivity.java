@@ -10,6 +10,7 @@ import com.mj.instashusha.R;
 
 /**
  * Created by Frank on 12/22/2015.
+ * God is good
  */
 public class IntroActivity extends AppIntro2 {
 
@@ -20,27 +21,27 @@ public class IntroActivity extends AppIntro2 {
         addSlide(AppIntroFragment.newInstance(
                 getResources().getString(R.string.maelezo_title_1),
                 getResources().getString(R.string.maelezo_body_1),
-                R.drawable.ins_three_dots,
+                R.drawable.ins2,
                 Color.parseColor("#2196F3")
         ));
 
         addSlide(AppIntroFragment.newInstance(
                 getResources().getString(R.string.maelezo_title_2),
                 getResources().getString(R.string.maelezo_body_2),
-                R.drawable.ins_copy_url,
-                Color.parseColor("#f0e209")
+                R.drawable.ins1,
+                Color.parseColor("#145214")
         ));
 
         addSlide(AppIntroFragment.newInstance(
                 getResources().getString(R.string.maelezo_title_3),
                 getResources().getString(R.string.maelezo_body_3),
                 R.drawable.ins_icon,
-                Color.parseColor("#009900")
+                Color.parseColor("#020302")
         ));
 
         setFadeAnimation();
         //setZoomAnimation();
-        setDepthAnimation();
+        //setDepthAnimation();
 
     }
 
