@@ -15,8 +15,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
@@ -26,32 +24,35 @@ import com.mj.instashusha.activities.MainActivity;
 /**
  * Created by Frank on 3/2/2016.
  * After killing UE
+ *
+ * TODO: there are 3  here:
+ * 1. use clipboard manager primaryClipListener < already tried but does not seem to work />
+ * 2. use poller thread < very inefficient />
+ *  i. poll running activities to see if instagram is started, then poll clipboard
+ *  ii. poll clipboard
  */
 public class PopUpService extends Service {
     private Context context;
     private ClipboardManager cm;
     private NotificationManager nm;
-    private int NOTIFICATION = 0x0a;
+    private int NOTIFICATION_ID = 0x0a;
+
     private View popUpView;
     private WindowManager windowManager;
     private LayoutInflater inflater;
+    private WindowManager.LayoutParams params;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        context = this;
+        context = getApplicationContext();
         cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
         nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        showNotification("started");
+        showNotif("service started");
 
-        prepareView();
-
-
-
-        windowManager.addView(popUpView, params);
 
     }
 
@@ -62,7 +63,7 @@ public class PopUpService extends Service {
         popUpView  = inflater.inflate(R.layout.service_pop_up, null);
 
 
-        WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+        params = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.TYPE_PHONE,
@@ -75,18 +76,18 @@ public class PopUpService extends Service {
     }
 
 
-    private void showNotification(String msg) {
+    private void showNotif(String msg) {
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, MainActivity.class), 0);
 
         Notification notification = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_arrow_forward_white_24px)
-                .setContentTitle("Instashusha")
-                .setContentText("Service is running: \n"+msg)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("Notif: "+ NOTIFICATION_ID)
+                .setContentText(msg)
                 .setContentIntent(contentIntent)
                 .build();
 
-        nm.notify(NOTIFICATION++, notification);
+        nm.notify(NOTIFICATION_ID++, notification);
     }
 
     @Nullable
@@ -97,8 +98,7 @@ public class PopUpService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        InstagramApp.log("service start command");
-        cm.addPrimaryClipChangedListener(clipListener);
+        cm.addPrimaryClipChangedListener(clipListener); // I dont know for sure but I think this should stay here
         return START_STICKY; //to ensure we are not killed..
     }
 
@@ -120,21 +120,22 @@ public class PopUpService extends Service {
 
 
                     InstagramApp.log("clipboard changed..." + url);
-                    showNotification("got url : "+url);
+                    showNotif("got url : " + url);
+
                 }
             };
 
     @Override
     public void onDestroy() {
 
-        showNotification("service destroy...");
+        showNotif("service destroyed...");
 
         if (cm != null) {
             cm.removePrimaryClipChangedListener(clipListener);
         }
 
         InstagramApp.log("service destroyed..");
-        nm.cancel(NOTIFICATION);
+        nm.cancel(NOTIFICATION_ID);
 
         super.onDestroy();
     }

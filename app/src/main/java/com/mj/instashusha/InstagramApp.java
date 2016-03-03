@@ -54,21 +54,16 @@ public class InstagramApp extends Application {
     public static String getLinkFromClipBoard(Context context) {
         //should return link or empty string
         ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        String r = "";
+        String copied_text = null;
         if(cm.hasPrimaryClip()) {
-            ClipData data = cm.getPrimaryClip();
-            ClipData.Item item = data.getItemAt(0);
-            r = item.getText().toString();
-
-            if (!isValidInstaLink(r)) r = "";
+            ClipData.Item item = cm.getPrimaryClip().getItemAt(0);
+            copied_text = item.getText().toString();
         }
 
-        return r;
+        boolean condition = copied_text != null && copied_text.length() > 25 && copied_text.contains("instagram.com");
+        return condition ? copied_text : "";
     }
 
-    private static boolean isValidInstaLink(String url) {
-        return url.contains("instagram");
-    }
 
     public static File getAppFolder() {
         File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+APP_FOLDER_NAME);
