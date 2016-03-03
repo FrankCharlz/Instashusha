@@ -1,11 +1,13 @@
 package com.mj.instashusha.activities;
 
 import android.app.ActivityManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,8 @@ import android.view.View;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.fragments.InstructionFragment;
+import com.mj.instashusha.services.Adele;
+import com.mj.instashusha.services.BootReceiver;
 import com.mj.instashusha.services.PopUpService;
 import com.mj.instashusha.utils.Utils;
 
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         programFlow();
 
-        //check if service was started successfully, if not start it now...
+        /*/check if service was started successfully, if not start it now...
         boolean sup = isServiceRunning(PopUpService.class);
         if (!sup) {
             InstagramApp.log("service was not running, I gotta start it..");
@@ -50,8 +54,27 @@ public class MainActivity extends AppCompatActivity {
         } else {
             InstagramApp.log("service was still running");
         }
+        */
 
+        Intent serviceIntent = new Intent(context, Adele.class);
+
+        boolean alarmUp = (PendingIntent.getBroadcast(
+                context,
+                0,
+                serviceIntent,
+                PendingIntent.FLAG_NO_CREATE) != null);
+
+        if (alarmUp) {
+            InstagramApp.log("Alarm is aleard started");
+        } else {
+            InstagramApp.log("Alarm not started");
+            //start alarm
+            Intent i = new Intent(BootReceiver.CUSTOM_BROADCAST_ACTION_STRING);
+            sendBroadcast(i);
+        }
     }
+
+
 
     private void programFlow() {
         //if back from save activity, then just show instruction fragment then chill...
