@@ -47,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
         if (!sup) {
             InstagramApp.log("service was not running, I gotta start it..");
             startService(new Intent(this, PopUpService.class));
-        }
-        else {
+        } else {
             InstagramApp.log("service was still running");
         }
 

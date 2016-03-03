@@ -7,6 +7,7 @@ import android.app.Service;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -35,24 +36,18 @@ public class PopUpService extends Service {
     private Context context;
     private ClipboardManager cm;
     private NotificationManager nm;
-    private int NOTIFICATION_ID = 0x0a;
+    private int NOTIFICATION_ID = 0xfa;
 
     private View popUpView;
     private WindowManager windowManager;
     private LayoutInflater inflater;
     private WindowManager.LayoutParams params;
+    private ClipListener clipListener;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        context = getApplicationContext();
-        cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-
-        nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        showNotif("service started");
-
 
     }
 
@@ -98,32 +93,49 @@ public class PopUpService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        context = getApplicationContext();
+        cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+
+        nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        showNotif("service started");
+
+        clipListener = new ClipListener();
+
         cm.addPrimaryClipChangedListener(clipListener); // I dont know for sure but I think this should stay here
+
         return START_STICKY; //to ensure we are not killed..
     }
 
-    private ClipboardManager.OnPrimaryClipChangedListener clipListener =
-            new ClipboardManager.OnPrimaryClipChangedListener() {
-                @Override
-                public void onPrimaryClipChanged() {
+    class ClipListener implements ClipboardManager.OnPrimaryClipChangedListener {
+        @Override
+        public void onPrimaryClipChanged() {
 
-                    String url = InstagramApp.getLinkFromClipBoard(context);
+            String url = InstagramApp.getLinkFromClipBoard(context);
 
-                    if (url.isEmpty()) {
-                        InstagramApp.log("No instagram url in clipboard");
-                        url += "\nnon instagram url";
-                    }
+            if (url.isEmpty()) {
+                InstagramApp.log("No instagram url in clipboard");
+                url += "\nnon instagram url";
+            }
 
-                    if (url.contains("instagram")) {
-                        //context.startActivity(new Intent(context, MainActivity.class));
-                    }
+            if (url.contains("instagram")) {
+                //context.startActivity(new Intent(context, MainActivity.class));
+            }
 
 
-                    InstagramApp.log("clipboard changed..." + url);
-                    showNotif("got url : " + url);
+            InstagramApp.log("clipboard changed..." + url);
+            showNotif("got url : " + url);
 
-                }
-            };
+        }
+    }
+
+
+    @Override
+    public void onLowMemory() {
+        InstagramApp.log("memory low...");
+        showNotif("memory low..");
+        InstagramApp.log(cm.getPrimaryClip().getDescription().toString());
+        super.onLowMemory();
+    }
 
     @Override
     public void onDestroy() {
