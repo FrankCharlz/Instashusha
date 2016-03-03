@@ -6,12 +6,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.mj.instashusha.activities.MainActivity;
+
+import java.util.Calendar;
+
 /**
  * Created by Frank on 3/2/2016.
  * After drinking a glass of cold water... @23:16/tabata/segerea/chama
  */
 public class BootReceiver extends BroadcastReceiver{
-    private static final long REPEATING_INTERVAL = 30L * 1000;
+    private static final long REPEATING_INTERVAL = 20L * 1000;
     public static final String CUSTOM_BROADCAST_ACTION_STRING = "com.mj.instashusha.CUSTOM_BOOT_BROADCAST";
 
     @Override
@@ -22,20 +26,28 @@ public class BootReceiver extends BroadcastReceiver{
 
         if (received) {
             Intent serviceIntent = new Intent(context, Adele.class);
+            context.startService(serviceIntent);
+
+            /*
             PendingIntent pIntent = PendingIntent.getBroadcast(
                     context,
                     0,
-                    serviceIntent,
-                    0 //i dont know
+                    new Intent(context, MainActivity.class),
+                    0
             );
 
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Calendar cur_cal = Calendar.getInstance();
+            cur_cal.setTimeInMillis(System.currentTimeMillis());
+            cur_cal.add(Calendar.SECOND, 60);
+
+            AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
             alarmManager.setRepeating(
-                    AlarmManager.ELAPSED_REALTIME,
-                    5000L, //trigger after 0 seconds
+                    AlarmManager.RTC,
+                    cur_cal.getTimeInMillis(), //trigger after 60 seconds
                     REPEATING_INTERVAL,
                     pIntent
             );
+            */
         }
 
     }

@@ -55,7 +55,7 @@
 
         <activity android:name=".activities.IntroActivity" android:label="@string/app_name"/>
 
-        <service android:enabled="true" android:name=".services.PopUpService"/>
+        <service android:enabled="true" android:name=".services.Adele"/>
 
         <receiver
             android:name=".services.BootReceiver"
