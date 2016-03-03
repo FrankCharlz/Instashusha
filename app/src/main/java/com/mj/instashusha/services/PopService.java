@@ -41,6 +41,8 @@ public class PopService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        context = this;
+        
         InstagramApp.log("service started");
         Toast.makeText(this, "servicing...", Toast.LENGTH_SHORT).show();
 
