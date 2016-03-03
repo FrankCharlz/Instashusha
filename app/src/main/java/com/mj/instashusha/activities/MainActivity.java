@@ -43,13 +43,19 @@ public class MainActivity extends AppCompatActivity {
         programFlow();
 
         //check if service was started successfully, if not start it now...
-        boolean sup = isMyServiceRunning(PopUpService.class);
-        if (!sup) startService(new Intent(this, PopUpService.class));
-        else InstagramApp.log("service is up and running");
+        boolean sup = isServiceRunning(PopUpService.class);
+        if (!sup) {
+            InstagramApp.log("service was not running, I gotta start it..");
+            startService(new Intent(this, PopUpService.class));
+        }
+        else {
+            InstagramApp.log("service was still running");
+        }
 
     }
 
     private void programFlow() {
+        //if back from save activity, then just show instruction fragment then chill...
         InstagramApp.log("from save activity : " + InstagramApp.BACK_FROM_SAVE_ACTIVITY);
         if (InstagramApp.BACK_FROM_SAVE_ACTIVITY) {
             InstagramApp.BACK_FROM_SAVE_ACTIVITY = false;
@@ -134,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
+    private boolean isServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {

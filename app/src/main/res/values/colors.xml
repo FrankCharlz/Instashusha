@@ -9,6 +9,7 @@
     <color name="black.alpha">#63000000</color>
 
     <color name="transparent">#00ffffff</color>
+    <color name="grey.white.lighter">#f1f1f1</color>
     <color name="grey.white">#e2e2e2</color>
     <color name="grey">#908e8989</color>
 

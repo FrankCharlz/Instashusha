@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:minHeight="240dp"
+    android:id="@+id/popup_container"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin.popup"
+    android:background="@color/grey.white.lighter">
+
+    <!-- title -->
+    <TextView
+        android:id="@+id/popup_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/grey.white"
+
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/padding.top.bottom.toolbar"
+        android:textSize="@dimen/text.size.toolbar"
+
+        android:text="@string/app_name"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        android:id="@+id/button"
+        android:layout_margin="24dp"
+        android:layout_below="@id/popup_title"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SHARE"
+        android:id="@+id/button2"
+        android:layout_margin="24dp"
+        android:layout_below="@id/popup_title"
+        android:layout_alignParentRight="true" />
+
+
+</RelativeLayout>
+
