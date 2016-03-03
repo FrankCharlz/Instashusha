@@ -14,14 +14,8 @@ import android.view.View;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.fragments.InstructionFragment;
-import com.mj.instashusha.network.HttpCallback;
-import com.mj.instashusha.network.InstaResponse;
-import com.mj.instashusha.services.PopService;
+import com.mj.instashusha.services.PopUpService;
 import com.mj.instashusha.utils.Utils;
-import com.squareup.okhttp.Request;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,8 +43,9 @@ public class MainActivity extends AppCompatActivity {
         programFlow();
 
         //check if service was started successfully, if not start it now...
-        boolean sup = isMyServiceRunning(PopService.class);
-        if (!sup) startService(new Intent(this, PopService.class));
+        boolean sup = isMyServiceRunning(PopUpService.class);
+        if (!sup) startService(new Intent(this, PopUpService.class));
+        else InstagramApp.log("service is up and running");
 
     }
 
