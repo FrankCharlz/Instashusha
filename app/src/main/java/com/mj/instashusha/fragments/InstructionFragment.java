@@ -28,7 +28,7 @@ public class InstructionFragment extends Fragment {
 
     private Context context;
     private View rootContainer;
-    private DopeTextView instructionTv;
+    private View root;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,15 +44,10 @@ public class InstructionFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_instruction, container, false);
+        root = inflater.inflate(R.layout.fragment_instruction, container, false);
         context = getActivity();
 
-        //money baby...
-        final AdView mAdView = (AdView) root.findViewById(R.id.adView_fragment);
-        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
+        //loadAds();
 
         final DopeTextView btnViewDownloaded = (DopeTextView) root.findViewById(R.id.btn_view_downloaded);
         String s = context.getResources().getString(R.string.view_downloaded)+" ("
@@ -66,11 +61,18 @@ public class InstructionFragment extends Fragment {
         final DopeTextView btnOpenInsta = (DopeTextView) root.findViewById(R.id.btn_fungua_insta);
         btnOpenInsta.setOnClickListener(new ButtonClicks());
 
-        instructionTv = (DopeTextView) root.findViewById(R.id.tv_instructions);
+        final DopeTextView instructionTv = (DopeTextView) root.findViewById(R.id.tv_instructions);
         rootContainer = container;
 
         return root;
 
+    }
+
+    private void loadAds() {
+        final AdView mAdView = (AdView) root.findViewById(R.id.adView_fragment);
+        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
 

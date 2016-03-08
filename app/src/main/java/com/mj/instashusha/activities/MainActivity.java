@@ -15,6 +15,7 @@ import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.fragments.InstructionFragment;
 import com.mj.instashusha.services.Adele;
+import com.mj.instashusha.utils.Clip;
 import com.mj.instashusha.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        String url = InstagramApp.getLinkFromClipBoard(this);
+        String url = Clip.getInstagramUrl(this);
         if (url.isEmpty()) {
             //no instagram link in clipboard
             //launch instruction fragment

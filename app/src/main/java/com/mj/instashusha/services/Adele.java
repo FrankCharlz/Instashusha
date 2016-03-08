@@ -20,6 +20,7 @@ import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.activities.MainActivity;
 import com.mj.instashusha.activities.SaveActivity;
+import com.mj.instashusha.utils.Clip;
 import com.mj.instashusha.utils.Utils;
 
 import java.util.List;
@@ -31,30 +32,35 @@ import java.util.List;
 public class Adele extends Service {
 
     private static final String INSTAGRAM_PACKAGE_NAME = "com.instagram.android";
-    private static final long INTERVAL_INSTAGRAM_POLL = 22 * 1000L;
+    private static final long INTERVAL_INSTAGRAM_POLL = 10 * 1000L;
     private static final long INTERVAL_CLIPBOARD_POLL =  5 * 1000L;
-    private NotificationManager nm;
+    private static final int CLIP_POLL_FREQUENCY = 8;
     private int NOTIFICATION_ID = 0;
+    private NotificationManager nm;
     private Looper mServiceLooper;
     private ServiceHandler mServiceHandler;
     private Context context;
     private ActivityManager am;
     private List<ActivityManager.RunningAppProcessInfo> running_apps;
+    private String last_clip_url;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
         nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
         InstagramApp.log("service on-create");
 
-        am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
         HandlerThread instaPollThread = new HandlerThread("ServiceStartArguments", Process.THREAD_PRIORITY_BACKGROUND);
         instaPollThread.start();
 
         // Get the HandlerThread's Looper and use it for our Handler
         mServiceLooper = instaPollThread.getLooper();
         mServiceHandler = new ServiceHandler(mServiceLooper);
+
+        last_clip_url = Utils.getLastUrl(this);
 
 
     }
@@ -105,12 +111,14 @@ public class Adele extends Service {
         running_apps = am.getRunningAppProcesses();
         for (int i = 0; i < running_apps.size(); i++) {
             //// TODO: 3/4/2016 i think i should starts at the tail up i.e i--
-            if(running_apps.get(i).importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE &&
-                    running_apps.get(i).processName.equals(INSTAGRAM_PACKAGE_NAME)) {
-                InstagramApp.log("got instagram running at: " +i+"/"+running_apps.size()+": "
-                        +running_apps.get(i).processName);
-                InstagramApp.log("importance: "+running_apps.get(i).importance);
-                return true;
+            if(running_apps.get(i).processName.equals(INSTAGRAM_PACKAGE_NAME)) {
+                InstagramApp.log("got instagram running at: " +i+"/"+running_apps.size()+": "+running_apps.get(i).processName);
+                int imptnc = running_apps.get(i).importance;
+                InstagramApp.log("importance: "+imptnc);
+                if (imptnc == ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE ||
+                        imptnc == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                    return true;
+                }
             }
         }
         return false;
@@ -132,15 +140,15 @@ public class Adele extends Service {
 
                 if (insta_running) {
                     pollClips();
-                    polls_made--;
-                    if (polls_made == 0) {
+                    polls_made++;
+                    if (polls_made == CLIP_POLL_FREQUENCY) {
                         //guarantee than on the next loop, the else part shall be executed
                         //hence polling insta again
                         //resetting polls
                         insta_running = false;
-                        polls_made = 9;
+                        polls_made = 0;
                     }
-                    InstagramApp.log("polling clips "+(9-polls_made)+": "+System.currentTimeMillis());
+                    InstagramApp.log("polling clips "+(polls_made)+": "+System.currentTimeMillis());
                     sleep_time = INTERVAL_CLIPBOARD_POLL;
                 } else {
                     insta_running = isInstagramRunning();
@@ -159,15 +167,18 @@ public class Adele extends Service {
         }
     }
 
-    private String clip_text;
     private void pollClips() {
-        clip_text = InstagramApp.getLinkFromClipBoard(context);
-        if (!clip_text.isEmpty()) {
-            InstagramApp.log("Got url: " +clip_text);
-            if (!Utils.isTheLastUr(context, clip_text)) {
-                showNotif("Found url: \n"+clip_text);
-            }
-        }
+        String url = Clip.getInstagramUrl(context);
+        InstagramApp.log("Found: "+url);
+
+        if (url.isEmpty()) return; //return if not insta url
+
+        if (url.equals(last_clip_url)) return; //return if the same url
+
+        /* the found url is new */
+        showNotif("Found new url: "+url);
+        last_clip_url = url;
+
     }
 
     @Override

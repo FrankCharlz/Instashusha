@@ -7,9 +7,7 @@
     tools:context=".activities.DownloadedActivity">
 
     <include
-        android:id="@+id/included_in_finisher"
-        layout="@layout/toolbar_universal_layout">
-
+        android:id="@+id/included_in_finisher" layout="@layout/toolbar_universal_layout">
     </include>
 
     <android.support.v7.widget.RecyclerView

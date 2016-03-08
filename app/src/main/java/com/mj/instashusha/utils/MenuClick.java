@@ -1,10 +1,11 @@
-package com.mj.instashusha.activities;
+package com.mj.instashusha.utils;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
 import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.activities.MainActivity;
 
 /**
  * Created by Frank on 12/22/2015.

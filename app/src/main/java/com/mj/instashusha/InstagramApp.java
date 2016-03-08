@@ -52,19 +52,6 @@ public class InstagramApp extends Application {
         Log.e("instashusha", str);
     }
 
-    public static String getLinkFromClipBoard(Context context) {
-        //should return link or empty string
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        String copied_text = null;
-        if(cm.hasPrimaryClip()) {
-            ClipData.Item item = cm.getPrimaryClip().getItemAt(0);
-            copied_text = item.getText().toString();
-        }
-
-        boolean condition = copied_text != null && copied_text.length() > 25 && copied_text.contains("instagram.com");
-        return condition ? copied_text : "";
-    }
-
 
     public static File getAppFolder() {
         File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+APP_FOLDER_NAME);

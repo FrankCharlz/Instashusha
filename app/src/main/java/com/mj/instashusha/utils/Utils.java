@@ -8,9 +8,11 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.SystemClock;
+import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
 
 import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.services.Adele;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,7 +23,6 @@ public class Utils {
 
     private static final String LAST_URL = "last_insta_url_loaded";
     public static final String PREFS_FILE_NAME = "FhYmkF";
-    private static final String LAST_BOOT = "9n3k2n";
 
     public static  void saveImage(Context context, ImageView imageView, String save_path) {
         imageView.setDrawingCacheEnabled(true);
@@ -53,9 +54,7 @@ public class Utils {
 
 
     public static boolean isTheLastUr(Context context, String url) {
-        SharedPreferences getPrefs =
-                context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE);
-        String last_url = getPrefs.getString(LAST_URL, "");
+        String last_url = getLastUrl(context);
         InstagramApp.log("last url = " + last_url);
         InstagramApp.log("current url = " + url);
         return (url.equalsIgnoreCase(last_url));
@@ -76,7 +75,7 @@ public class Utils {
                 .replaceAll("\\.","_")
                 .replaceAll(":","")
                 .replaceAll("-","")
-                .replaceAll(" ","");
+                .replaceAll(" ", "");
 
 
     }
@@ -89,4 +88,12 @@ public class Utils {
         return Color.argb(alpha, red, green, blue);
     }
 
+
+    public static int getColor(Context context, int cid) {
+        return ContextCompat.getColor(context, cid);
+    }
+
+    public static String getLastUrl(Context context) {
+        return context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE).getString(LAST_URL, "x");
+    }
 }

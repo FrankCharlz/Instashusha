@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.activities.MainActivity;
+import com.mj.instashusha.utils.Clip;
 
 
 /**
@@ -110,7 +111,7 @@ public class PopUpService extends Service {
         @Override
         public void onPrimaryClipChanged() {
 
-            String url = InstagramApp.getLinkFromClipBoard(context);
+            String url = Clip.getInstagramUrl(context);
 
             if (url.isEmpty()) {
                 InstagramApp.log("No instagram url in clipboard");

@@ -3,11 +3,13 @@ package com.mj.instashusha.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +30,7 @@ import com.mj.instashusha.R;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
 import com.mj.instashusha.utils.DopeTextView;
+import com.mj.instashusha.utils.MenuClick;
 import com.mj.instashusha.utils.Sharer;
 import com.mj.instashusha.utils.Utils;
 import com.squareup.okhttp.Request;
@@ -43,6 +46,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class SaveActivity extends AppCompatActivity {
+
+    /**
+     * TODO: instagram aspect ratios are; up to 1.91:1 for landscape and 4:5 for portrait.
+     */
 
 
     private static final String BASE_URL = "http://insta-dl.appspot.com/dl?source=";
@@ -72,11 +79,7 @@ public class SaveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
 
-        //money baby...
-        AdView mAdView = (AdView) findViewById(R.id.adView_activity_save);
-        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //loadAds();
 
         AppRater.app_launched(this); //for ratings...
 
@@ -94,6 +97,13 @@ public class SaveActivity extends AppCompatActivity {
         source_url = intent.getStringExtra(MainActivity.SRC_URL);
         proceed(source_url);
 
+    }
+
+    private void loadAds() {
+        AdView mAdView = (AdView) findViewById(R.id.adView_activity_save);
+        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
 
@@ -248,6 +258,9 @@ public class SaveActivity extends AppCompatActivity {
                     toolbar.setBackgroundColor(vbg);
                     buttonsContainer.setBackgroundColor(Utils.addAlphaToColor(vbg, 0.425f));
                     textViewToolbar.setTextColor(vtc);
+                } else {
+                    toolbar.setBackgroundColor(Utils.addAlphaToColor(Color.DKGRAY, 0.220f));
+                    buttonsContainer.setBackgroundColor(Utils.addAlphaToColor(Color.DKGRAY, 0.084f));
                 }
 
             }
