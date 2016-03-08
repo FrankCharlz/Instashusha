@@ -1,5 +1,6 @@
 package com.mj.instashusha.services;
 
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -11,25 +12,34 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.widget.Toast;
 
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.activities.MainActivity;
+import com.mj.instashusha.activities.SaveActivity;
+import com.mj.instashusha.utils.Utils;
+
+import java.util.List;
 
 /**
  * Created by Frank on 3/4/2016.
- * After being ppissed off realy bad by PopUpService
+ * After being pissed off really bad by PopUpService
  */
 public class Adele extends Service {
 
+    private static final String INSTAGRAM_PACKAGE_NAME = "com.instagram.android";
+    private static final long INTERVAL_INSTAGRAM_POLL = 22 * 1000L;
+    private static final long INTERVAL_CLIPBOARD_POLL =  5 * 1000L;
     private NotificationManager nm;
     private int NOTIFICATION_ID = 0;
     private Looper mServiceLooper;
     private ServiceHandler mServiceHandler;
     private Context context;
+    private ActivityManager am;
+    private List<ActivityManager.RunningAppProcessInfo> running_apps;
 
     @Override
     public void onCreate() {
@@ -38,17 +48,14 @@ public class Adele extends Service {
         nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         showNotif("adele 1st time");
 
-        // Start up the thread running the service.  Note that we create a
-        // separate thread because the service normally runs in the process's
-        // main thread, which we don't want to block.  We also make it
-        // background priority so CPU-intensive work will not disrupt our UI.
-        HandlerThread thread = new HandlerThread("ServiceStartArguments",
-                android.os.Process.THREAD_PRIORITY_BACKGROUND);
-        thread.start();
+        am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+        HandlerThread instaPollThread = new HandlerThread("ServiceStartArguments", Process.THREAD_PRIORITY_BACKGROUND);
+        instaPollThread.start();
 
         // Get the HandlerThread's Looper and use it for our Handler
-        mServiceLooper = thread.getLooper();
+        mServiceLooper = instaPollThread.getLooper();
         mServiceHandler = new ServiceHandler(mServiceLooper);
+
 
     }
 
@@ -68,11 +75,16 @@ public class Adele extends Service {
 
 
     @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        InstagramApp.log("Memory Low, service can be terminated");
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         context = this;
         InstagramApp.log("service start command called...");
         showNotif("service start command.");
-        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
 
         // For each start request, send a message to start a job and deliver the
         // start ID so we know which request we're stopping when we finish the job
@@ -80,7 +92,7 @@ public class Adele extends Service {
         msg.arg1 = startId;
         mServiceHandler.sendMessage(msg);
 
-        // If we get killed, after returning from here, restart
+        //If we get killed, after returning from here, restart
         return START_STICKY;
     }
 
@@ -90,32 +102,80 @@ public class Adele extends Service {
         return null;
     }
 
+    public boolean isInstagramRunning() {
+        running_apps = am.getRunningAppProcesses();
+        for (int i = 0; i < running_apps.size(); i++) {
+            //// TODO: 3/4/2016 i think i should starts at the tail up i.e i--
+            if(running_apps.get(i).processName.equals(INSTAGRAM_PACKAGE_NAME)) {
+                InstagramApp.log("got instagram running at: "+i
+                        +"/"+running_apps.size()+": "
+                        +running_apps.get(i).processName);
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Handler that receives messages from the thread
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);
         }
+
         @Override
         public void handleMessage(Message msg) {
-            // Normally we would do some work here, like download a file.
-            // For our sample, we just sleep for 5 seconds.
+            boolean insta_running = isInstagramRunning();
+            long sleep_time;
+            int polls_made = 9; // + (int)(INTERVAL_INSTAGRAM_POLL/INTERVAL_CLIPBOARD_POLL);
+
             while (true) {
-                InstagramApp.log("pause ");
-                showNotif("pause.");
-                Toast.makeText(context, "pause kidogo", Toast.LENGTH_SHORT).show();
+
+                if (insta_running) {
+                    pollClips();
+                    polls_made--;
+                    if (polls_made <= 0) {
+                        //guarantee than on the next loop, the else part shall be executed
+                        //hence polling insta again
+                        //resetting polls
+                        insta_running = false;
+                        polls_made = 9;
+                    }
+                    InstagramApp.log("polling clips "+(9-polls_made)+": "+System.currentTimeMillis());
+                    sleep_time = INTERVAL_CLIPBOARD_POLL;
+                } else {
+                    insta_running = isInstagramRunning();
+                    InstagramApp.log("polling insta "+System.currentTimeMillis());
+                    sleep_time = insta_running ? INTERVAL_CLIPBOARD_POLL : INTERVAL_INSTAGRAM_POLL;
+                }
 
                 try {
-                    Thread.sleep(15000);
+                    Thread.sleep(sleep_time);
                 } catch (InterruptedException e) {
-                    // Restore interrupt status.
                     Thread.currentThread().interrupt();
                 }
 
-                // Stop the service using the startId, so that we don't stop
-                // the service in the middle of handling another job
-                stopSelf(msg.arg1);
+                //stopSelf(msg.arg1);
             }
         }
     }
 
+    private String clip_text;
+    private void pollClips() {
+        clip_text = InstagramApp.getLinkFromClipBoard(context);
+        if (!clip_text.isEmpty()) {
+            InstagramApp.log("Got url: " +clip_text);
+            if (!Utils.isTheLastUr(context, clip_text)) {
+                showNotif("Found: url-->"+clip_text);
+                //Intent intent = new Intent(context, SaveActivity.class);
+                //intent.putExtra(MainActivity.SRC_URL, clip_text);
+                //context.startActivity(intent);
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        InstagramApp.log("Service destroyed");
+        super.onDestroy();
+    }
 }

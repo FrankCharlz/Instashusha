@@ -21,33 +21,14 @@ public class BootReceiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         //starts pop up service when the phone boots..
-        boolean received = intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) ||
-                intent.getAction().toString().equalsIgnoreCase(CUSTOM_BROADCAST_ACTION_STRING);
+
+        String intent_action = intent.getAction().toString();
+        boolean received = intent_action.equals(Intent.ACTION_BOOT_COMPLETED) ||
+                intent_action.equalsIgnoreCase(CUSTOM_BROADCAST_ACTION_STRING);
 
         if (received) {
             Intent serviceIntent = new Intent(context, Adele.class);
             context.startService(serviceIntent);
-
-            /*
-            PendingIntent pIntent = PendingIntent.getBroadcast(
-                    context,
-                    0,
-                    new Intent(context, MainActivity.class),
-                    0
-            );
-
-            Calendar cur_cal = Calendar.getInstance();
-            cur_cal.setTimeInMillis(System.currentTimeMillis());
-            cur_cal.add(Calendar.SECOND, 60);
-
-            AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-            alarmManager.setRepeating(
-                    AlarmManager.RTC,
-                    cur_cal.getTimeInMillis(), //trigger after 60 seconds
-                    REPEATING_INTERVAL,
-                    pIntent
-            );
-            */
         }
 
     }
