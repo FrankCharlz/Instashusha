@@ -89,10 +89,4 @@ public class Utils {
         return Color.argb(alpha, red, green, blue);
     }
 
-    public static void addLastBoot(Context context) {
-        context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
-                .edit()
-                .putLong(LAST_BOOT, System.currentTimeMillis())
-                .apply();
-    }
 }

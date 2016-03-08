@@ -46,7 +46,7 @@ public class Adele extends Service {
         super.onCreate();
 
         nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        showNotif("adele 1st time");
+        InstagramApp.log("service on-create");
 
         am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
         HandlerThread instaPollThread = new HandlerThread("ServiceStartArguments", Process.THREAD_PRIORITY_BACKGROUND);
@@ -83,8 +83,7 @@ public class Adele extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         context = this;
-        InstagramApp.log("service start command called...");
-        showNotif("service start command.");
+        InstagramApp.log("service on-start-command");
 
         // For each start request, send a message to start a job and deliver the
         // start ID so we know which request we're stopping when we finish the job
@@ -106,10 +105,11 @@ public class Adele extends Service {
         running_apps = am.getRunningAppProcesses();
         for (int i = 0; i < running_apps.size(); i++) {
             //// TODO: 3/4/2016 i think i should starts at the tail up i.e i--
-            if(running_apps.get(i).processName.equals(INSTAGRAM_PACKAGE_NAME)) {
-                InstagramApp.log("got instagram running at: "+i
-                        +"/"+running_apps.size()+": "
+            if(running_apps.get(i).importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE &&
+                    running_apps.get(i).processName.equals(INSTAGRAM_PACKAGE_NAME)) {
+                InstagramApp.log("got instagram running at: " +i+"/"+running_apps.size()+": "
                         +running_apps.get(i).processName);
+                InstagramApp.log("importance: "+running_apps.get(i).importance);
                 return true;
             }
         }
@@ -126,14 +126,14 @@ public class Adele extends Service {
         public void handleMessage(Message msg) {
             boolean insta_running = isInstagramRunning();
             long sleep_time;
-            int polls_made = 9; // + (int)(INTERVAL_INSTAGRAM_POLL/INTERVAL_CLIPBOARD_POLL);
+            int polls_made = 9;
 
             while (true) {
 
                 if (insta_running) {
                     pollClips();
                     polls_made--;
-                    if (polls_made <= 0) {
+                    if (polls_made == 0) {
                         //guarantee than on the next loop, the else part shall be executed
                         //hence polling insta again
                         //resetting polls
@@ -165,10 +165,7 @@ public class Adele extends Service {
         if (!clip_text.isEmpty()) {
             InstagramApp.log("Got url: " +clip_text);
             if (!Utils.isTheLastUr(context, clip_text)) {
-                showNotif("Found: url-->"+clip_text);
-                //Intent intent = new Intent(context, SaveActivity.class);
-                //intent.putExtra(MainActivity.SRC_URL, clip_text);
-                //context.startActivity(intent);
+                showNotif("Found url: \n"+clip_text);
             }
         }
     }
@@ -176,6 +173,7 @@ public class Adele extends Service {
     @Override
     public void onDestroy() {
         InstagramApp.log("Service destroyed");
+        sendBroadcast(new Intent(BootReceiver.CUSTOM_BROADCAST_ACTION_STRING)); // not killable puta..
         super.onDestroy();
     }
 }

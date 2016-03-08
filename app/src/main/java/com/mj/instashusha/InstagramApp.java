@@ -47,8 +47,9 @@ public class InstagramApp extends Application {
     public  static OkHttpClient getOkHttpClient() {
         return okhttpClient;
     }
+
     public static void log(String str){
-        Log.e("insta-dl", str);
+        Log.e("instashusha", str);
     }
 
     public static String getLinkFromClipBoard(Context context) {
@@ -67,8 +68,8 @@ public class InstagramApp extends Application {
 
     public static File getAppFolder() {
         File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+APP_FOLDER_NAME);
-        if (!file.mkdirs()) {
-            InstagramApp.log("folder not created");
+        if (file.mkdirs()) {
+            InstagramApp.log("Folder created");
         }
         return file;
     }
@@ -77,7 +78,6 @@ public class InstagramApp extends Application {
     synchronized public Tracker getDefaultTracker() {
         if (mTracker == null) {
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
             mTracker = analytics.newTracker(R.xml.global_tracker);
         }
         return mTracker;
