@@ -14,7 +14,7 @@ import android.view.View;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.fragments.InstructionFragment;
-import com.mj.instashusha.services.Adele;
+import com.mj.instashusha.services.ClipService;
 import com.mj.instashusha.utils.Clip;
 import com.mj.instashusha.utils.Utils;
 
@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void startBackgroundService() {
         //check if service was started successfully, if not start it now...
-        Intent serviceIntent = new Intent(context, Adele.class);
-        boolean sup = isServiceRunning(Adele.class);
+        Intent serviceIntent = new Intent(getBaseContext()  , ClipService.class);
+        boolean sup = isServiceRunning(ClipService.class);
         if (!sup) {
             InstagramApp.log("service was not running, I gotta start it..");
             startService(serviceIntent);

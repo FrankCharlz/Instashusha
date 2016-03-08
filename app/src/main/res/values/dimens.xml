@@ -1,23 +1,6 @@
 <resources>
-    <dimen name="padding.top.bottom">5dp</dimen>
-    <dimen name="padding.left.right">12dp</dimen>
 
-    <dimen name="padding.top.bottom.toolbar">10dp</dimen>
-
-    <dimen name="radius.small">2dp</dimen>
-    <dimen name="radius.card">5dp</dimen>
-
-
-    <dimen name="margin.button">6dp</dimen>
-
-    <dimen name="progress.height">8dp</dimen>
-
-    <dimen name="text.size.button">15sp</dimen>
-    <dimen name="text.size.toolbar">20sp</dimen>
-    <dimen name="text.size.large">24sp</dimen>
-
-    <dimen name="space.from.top">96dp</dimen>
-
-    <dimen name="margin.popup">64dp</dimen>
-
+    <dimen name="text.size.xlarge">42dp</dimen>
 </resources>
+    
+

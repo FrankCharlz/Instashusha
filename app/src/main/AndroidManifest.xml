@@ -57,6 +57,10 @@
 
         <service android:enabled="true" android:name=".services.Adele"/>
 
+        <service android:name=".services.Adele2" android:enabled="true"/>
+
+        <service android:name=".services.ClipService" android:enabled="true"/>
+
         <receiver
             android:name=".services.BootReceiver"
             android:enabled="true">
