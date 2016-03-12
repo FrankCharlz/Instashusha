@@ -5,12 +5,11 @@ import android.graphics.PixelFormat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.mj.instashusha.R;
+import com.mj.instashusha.utils.DopeTextView;
 
 /**
  * Created by Frank on 3/12/2016.
@@ -22,6 +21,8 @@ public class PopUpView {
     private WindowManager windowManager;
     private View popUpView;
     private WindowManager.LayoutParams params;
+    private String url;
+    private DopeTextView share, save, content;
 
     public PopUpView(Context context) {
         this.context = context;
@@ -50,7 +51,15 @@ public class PopUpView {
 
 
         ImageView clear = (ImageView) popUpView.findViewById(R.id.imgv_popup_clear);
-        clear.setOnClickListener(clearClicked);
+        clear.setOnClickListener(clickListener);
+
+        save = (DopeTextView) popUpView.findViewById(R.id.btn_popup_save);
+        share = (DopeTextView) popUpView.findViewById(R.id.btn_popup_share);
+        content = (DopeTextView) popUpView.findViewById(R.id.popup_content);
+
+        save.setOnClickListener(clickListener);
+        share.setOnClickListener(clickListener);
+
 
     }
 
@@ -58,10 +67,33 @@ public class PopUpView {
         windowManager.addView(popUpView, params);
     }
 
-    private View.OnClickListener clearClicked = new View.OnClickListener() {
+    private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            windowManager.removeView(popUpView);
+
+            switch (view.getId()) {
+                case R.id.imgv_popup_clear : windowManager.removeView(popUpView); break;
+                case R.id.btn_popup_save: doSave(); break;
+                case R.id.btn_popup_share: doShare(); break;
+                default: break;
+            }
         }
     };
+
+    private void doSave() {
+
+    }
+
+    private void doShare() {
+
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setContent(String content_text) {
+        content_text = content_text + "\n" + url;
+        content.setText(content_text);
+    }
 }

@@ -1,105 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:minWidth="320dp"
-    android:id="@+id/popup_container"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin.popup"
-    android:background="@color/grey.white.lighter"
-    android:orientation="vertical"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ffffff"
+    android:orientation="vertical">
+    <!--  outer view is an hack to provide necessary padding/margin gotta look at it in the future  -->
 
-    <!-- title -->
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:minWidth="320dp"
+        android:id="@+id/popup_container"
         android:layout_height="wrap_content"
-        android:background="@color/grey.white"
-        android:orientation="horizontal">
-
-        <com.mj.instashusha.utils.DopeTextView
-            android:id="@+id/popup_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding.top.bottom.toolbar"
-            android:textSize="@dimen/text.size.toolbar"
-            android:text="@string/app_name"
-            />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-
-        <ImageView
-            android:id="@+id/imgv_popup_clear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_action_clear"
-            android:layout_gravity="right|center_vertical"
-            android:layout_margin="4dp"
-            />
-
-    </LinearLayout>
-
-
-    <com.mj.instashusha.utils.DopeTextView
-        android:id="@+id/popup_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding.top.bottom"
-        android:textSize="@dimen/text.size.button"
-        android:text="@string/sample_url"
-        android:layout_margin="12dp"
-        />
-
-
-    <!-- horizontal separator -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="2dp"
-        android:background="#22030303"
-        />
-
-    <!-- two buttons -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="12dp"
+        android:background="@color/grey.white.lighter"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin.popup"
         >
 
-        <com.mj.instashusha.utils.DopeTextView
-            android:id="@+id/btn_popup_share"
-            android:layout_width="0dip"
+        <!-- title -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="0.5"
-            android:text="@string/share"
-            android:layout_margin="4dp"/>
+            android:background="@color/grey.white"
+            android:orientation="horizontal">
 
-        <!-- vertical separator -->
+            <com.mj.instashusha.utils.DopeTextView
+                android:textColor="@color/black97"
+                android:id="@+id/popup_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding.top.bottom.toolbar"
+                android:textSize="@dimen/text.size.toolbar"
+                android:text="@string/app_name"
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <ImageView
+                android:id="@+id/imgv_popup_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_clear"
+                android:layout_gravity="right|center_vertical"
+                android:layout_margin="4dp"
+                />
+
+        </LinearLayout>
+
+
+        <com.mj.instashusha.utils.DopeTextView
+            android:textColor="@color/black97"
+            android:id="@+id/popup_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding.top.bottom"
+            android:textSize="@dimen/text.size.button"
+            android:text="@string/sample_url"
+            android:layout_margin="12dp"
+            />
+
+
+        <!-- horizontal separator -->
         <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="2dp"
             android:background="#22030303"
             />
 
-        <com.mj.instashusha.utils.DopeTextView
-            android:id="@+id/btn_popup_save"
-            android:gravity="center"
-            android:layout_width="0dip"
+        <!-- two buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/save"
-            android:layout_margin="4dp"
-            />
+            android:orientation="horizontal"
+            android:layout_margin="12dp"
+            >
+
+            <com.mj.instashusha.utils.DopeTextView
+                android:textColor="@color/black97"
+                android:id="@+id/btn_popup_share"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="0.5"
+                android:text="@string/share"
+                android:layout_margin="4dp"/>
+
+            <!-- vertical separator -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#22030303"
+                />
+
+            <com.mj.instashusha.utils.DopeTextView
+                android:textColor="@color/black97"
+                android:id="@+id/btn_popup_save"
+                android:gravity="center"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/save"
+                android:layout_margin="4dp"
+                />
+        </LinearLayout>
+
+
+
+
     </LinearLayout>
 
-
-
-
 </LinearLayout>
-

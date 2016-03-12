@@ -19,5 +19,8 @@
 
     <dimen name="text.size.xlarge">64dp</dimen>
 
+
+    <dimen name="margin.popup">64dp</dimen>
+
 </resources>
 

@@ -1,6 +1,9 @@
 <resources>
 
     <dimen name="text.size.xlarge">42dp</dimen>
+
+    <dimen name="margin.popup">32dp</dimen>
+    
 </resources>
     
 

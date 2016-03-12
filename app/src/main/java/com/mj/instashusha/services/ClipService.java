@@ -21,7 +21,6 @@ import java.util.concurrent.Executors;
 
 public class ClipService extends Service implements ClipboardManager.OnPrimaryClipChangedListener {
 
-    private ExecutorService threadPool = Executors.newSingleThreadExecutor();
     private ClipboardManager cm;
     private int NOTIFICATION_ID = 0;
     private NotificationManager nm;
@@ -92,27 +91,19 @@ public class ClipService extends Service implements ClipboardManager.OnPrimaryCl
         showNotif("Found new url: " + url); //should be the last line
 
         PopUpView view = new PopUpView(context);
+        view.setUrl(url);
+        view.setContent("");
         view.show();
 
         if (url.isEmpty()) return; //return if not insta url
 
         if (url.equals(last_clip_url)) return; //return if the same url
 
-            /* the found url is new */
-        showNotif("Found new url: "+url);
+        /* the found url is new */
         last_clip_url = url;
 
-        //threadPool.execute(new WorkerThread());
 
     }
-
-    private class WorkerThread implements Runnable {
-        @Override
-        public void run() {
-
-        }
-    }
-
 
 }
 
