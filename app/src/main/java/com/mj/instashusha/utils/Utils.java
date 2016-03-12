@@ -3,16 +3,13 @@ package com.mj.instashusha.utils;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.SystemClock;
 import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
 
 import com.mj.instashusha.InstagramApp;
-import com.mj.instashusha.services.Adele;
 
 import java.io.File;
 import java.io.FileOutputStream;
