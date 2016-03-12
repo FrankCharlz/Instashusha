@@ -20,7 +20,7 @@ public class BootReceiver extends BroadcastReceiver{
                 intent_action.equalsIgnoreCase(CUSTOM_BROADCAST_ACTION_STRING);
 
         if (received) {
-            Intent serviceIntent = new Intent(context, ClipService.class);
+            Intent serviceIntent = new Intent(context, PopUpService.class);
             context.startService(serviceIntent);
         }
 

@@ -2,7 +2,7 @@
 
     <dimen name="text.size.xlarge">42dp</dimen>
 
-    <dimen name="margin.popup">32dp</dimen>
+    <dimen name="margin.popup">28dp</dimen>
     
 </resources>
     

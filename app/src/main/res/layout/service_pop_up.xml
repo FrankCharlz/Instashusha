@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_weight="0.5"
-                android:text="@string/share"
+                android:text="@string/btn.share"
                 android:layout_margin="4dp"/>
 
             <!-- vertical separator -->
@@ -105,7 +105,7 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/save"
+                android:text="@string/btn.download"
                 android:layout_margin="4dp"
                 />
         </LinearLayout>

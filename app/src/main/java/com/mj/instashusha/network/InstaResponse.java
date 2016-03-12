@@ -10,7 +10,7 @@ public class InstaResponse implements Serializable {
     public int success;
     public String type, source_url;
     public String image_url;
-    public String video_url;
+    public String video_url; //empty if media is image..
 
     public String toString() {
         return "\n"

@@ -8,8 +8,17 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
+import com.mj.instashusha.activities.SaveActivity;
 import com.mj.instashusha.utils.DopeTextView;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Frank on 3/12/2016.
@@ -72,7 +81,7 @@ public class PopUpView {
         public void onClick(View view) {
 
             switch (view.getId()) {
-                case R.id.imgv_popup_clear : windowManager.removeView(popUpView); break;
+                case R.id.imgv_popup_clear :  removeView(); break;
                 case R.id.btn_popup_save: doSave(); break;
                 case R.id.btn_popup_share: doShare(); break;
                 default: break;
@@ -80,12 +89,19 @@ public class PopUpView {
         }
     };
 
+    private void removeView() {
+        windowManager.removeView(popUpView);
+    }
+
     private void doSave() {
+        InstagramApp.log("save clicked service");
+        removeView();
+        File saved = PopUpDownloader.save(context, url);
 
     }
 
     private void doShare() {
-
+        InstagramApp.log("share clicked service");
     }
 
     public void setUrl(String url) {

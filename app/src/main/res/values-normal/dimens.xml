@@ -18,6 +18,6 @@
 
     <dimen name="space.from.top">96dp</dimen>
 
-    <dimen name="margin.popup">32dp</dimen>
+    <dimen name="margin.popup">28dp</dimen>
 
 </resources>

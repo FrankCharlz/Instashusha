@@ -19,7 +19,7 @@ import com.mj.instashusha.utils.Utils;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ClipService extends Service implements ClipboardManager.OnPrimaryClipChangedListener {
+public class PopUpService extends Service implements ClipboardManager.OnPrimaryClipChangedListener {
 
     private ClipboardManager cm;
     private int NOTIFICATION_ID = 0;
@@ -86,21 +86,22 @@ public class ClipService extends Service implements ClipboardManager.OnPrimaryCl
     public void onPrimaryClipChanged() {
         InstagramApp.log("detected clip changed");
         String url = Clip.getInstagramUrl(context);
-        InstagramApp.log("Found: " + url);
 
+        if (url.isEmpty()) return; //return if not insta url
+        if (url.equals(last_clip_url)) return; //return if the same url
+
+        /* the found url is new */
+        //last_clip_url = url;
+
+        InstagramApp.log("Found: " + url);
         showNotif("Found new url: " + url); //should be the last line
+
+        last_clip_url = Utils.getLastUrl(context);
 
         PopUpView view = new PopUpView(context);
         view.setUrl(url);
         view.setContent("");
         view.show();
-
-        if (url.isEmpty()) return; //return if not insta url
-
-        if (url.equals(last_clip_url)) return; //return if the same url
-
-        /* the found url is new */
-        last_clip_url = url;
 
 
     }

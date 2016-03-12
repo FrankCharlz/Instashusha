@@ -25,9 +25,7 @@
 
     <string name="save_finished">Created by @instashusha \n Playstore: https://play.google.com/?id=com.mj.pichazainsta</string>
     <string name="share_to_string">Shared from @InstaShusha. Get it from play store:\nhttps://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
-    <string name="msg.subiri.kidogo">subiri kidogo...</string>
-    <string name="share">SAVE</string>
-    <string name="save">SHARE</string>
+    <string name="msg.subiri.kidogo">just a sec...</string>
     <string name="sample_url">https://www.instagram.com/p/_oJiUqFPdy/</string>
 
 </resources>
