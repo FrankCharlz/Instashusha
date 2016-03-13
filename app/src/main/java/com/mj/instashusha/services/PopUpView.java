@@ -8,17 +8,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
-import com.mj.instashusha.activities.SaveActivity;
 import com.mj.instashusha.utils.DopeTextView;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import com.mj.instashusha.utils.Sharer;
+import com.mj.instashusha.utils.Utils;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Frank on 3/12/2016.
@@ -94,14 +89,27 @@ public class PopUpView {
     }
 
     private void doSave() {
-        InstagramApp.log("save clicked service");
         removeView();
-        File saved = PopUpDownloader.save(context, url);
+        PopUpDownloader.save(context, url, new PopUpDownloader.DownloadCompleteListener() {
+            @Override
+            public void done(String anchor_url, String path) {
+                Utils.setLastUrl(context, anchor_url);
+                Utils.addFileToMediaDatabase(context, path);
+            }
+        });
 
     }
 
     private void doShare() {
-        InstagramApp.log("share clicked service");
+        removeView();
+        PopUpDownloader.save(context, url, new PopUpDownloader.DownloadCompleteListener() {
+            @Override
+            public void done(String anchor_url, String path) {
+                Utils.setLastUrl(context, anchor_url);
+                Utils.addFileToMediaDatabase(context, path);
+                Sharer.share(context, new File(path));
+            }
+        });
     }
 
     public void setUrl(String url) {
@@ -109,7 +117,7 @@ public class PopUpView {
     }
 
     public void setContent(String content_text) {
-        content_text = content_text + "\n" + url;
+        content_text = content_text + url;
         content.setText(content_text);
     }
 }

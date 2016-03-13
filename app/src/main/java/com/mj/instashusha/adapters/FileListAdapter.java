@@ -45,7 +45,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         File current_item = items.get(position);
         String fname = current_item.getName();
-        boolean isImage = fname.endsWith("png");
+        boolean isImage = fname.endsWith("png") || fname.endsWith("jpg") || fname.endsWith("gif");
 
         fname = fname.substring(fname.length()-10, fname.length()-5);
         if (!isImage) {

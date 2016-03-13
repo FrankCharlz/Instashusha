@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/padding.top.bottom.toolbar"
     android:paddingBottom="@dimen/padding.top.bottom.toolbar"
     android:layout_gravity="center_horizontal|top"
-    android:background="@color/grey.white">
+    android:background="@color/popup.title">
 
     <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/tv_appname"

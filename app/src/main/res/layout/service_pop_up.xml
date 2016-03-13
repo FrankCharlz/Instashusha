@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00ffffff"
+    android:background="@color/transparent"
     android:orientation="vertical">
     <!--  outer view is an hack to provide necessary padding/margin gotta look at it in the future  -->
 
@@ -13,7 +13,7 @@
         android:minWidth="320dp"
         android:id="@+id/popup_container"
         android:layout_height="wrap_content"
-        android:background="@color/grey.white.lighter"
+        android:background="@color/popup.body"
         android:orientation="vertical"
         android:layout_margin="@dimen/margin.popup"
         >
@@ -22,7 +22,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/grey.white"
+            android:background="@color/popup.title"
             android:orientation="horizontal">
 
             <com.mj.instashusha.utils.DopeTextView
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_action_clear"
                 android:layout_gravity="right|center_vertical"
-                android:layout_margin="4dp"
+                android:layout_margin="@dimen/radius.card"
                 />
 
         </LinearLayout>
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="2dp"
-            android:background="#22030303"
+            android:background="#19000000"
             />
 
         <!-- two buttons -->
@@ -88,14 +88,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_weight="0.5"
-                android:text="@string/btn.share"
-                android:layout_margin="4dp"/>
+                android:text="@string/btn.share"/>
 
             <!-- vertical separator -->
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#22030303"
+                android:background="#19000000"
                 />
 
             <com.mj.instashusha.utils.DopeTextView
@@ -106,7 +105,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="@string/btn.download"
-                android:layout_margin="4dp"
                 />
         </LinearLayout>
 

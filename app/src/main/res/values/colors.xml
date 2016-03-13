@@ -9,8 +9,10 @@
     <color name="black.alpha">#63000000</color>
 
     <color name="transparent">#00ffffff</color>
-    <color name="grey.white.lighter">#f1f1f1</color>
-    <color name="grey.white">#e2e2e2</color>
+
+    <color name="popup.body">#ccf4f5fd</color>
+    <color name="popup.title">#e0e0e0</color>
+
     <color name="grey">#908e8989</color>
 
     <color name="silver">#aea9ac</color>
