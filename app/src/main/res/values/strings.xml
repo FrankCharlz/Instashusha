@@ -10,7 +10,7 @@
     <string name="open_tutorial">Maelezo zaidi</string>
     <string name="open_instagram">     Fungua Instagram     </string>
 
-    <string name="maelezo_body_1">Fungua Instagram na bonyeza vidoti vitatu kama inavoonekana hapo juu</string>
+    <string name="maelezo_body_1">Fungua Instagram na bonyeza kimshale kama inavoonekana hapo juu</string>
     <string name="maelezo_title_1">Hatua ya 1</string>
     <string name="maelezo_title_2">Hatua ya 2</string>
     <string name="maelezo_body_2">Bonyeza \'copy share url\'</string>
@@ -27,5 +27,6 @@
     <string name="share_to_string">Shared from @InstaShusha. Get it from play store:\nhttps://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
     <string name="msg.subiri.kidogo">just a sec...</string>
     <string name="sample_url">https://www.instagram.com/p/_oJiUqFPdy/</string>
+    <string name="sample_tigo_ad">Rahisisha maisha na TigoPesaApp. \nBofya hapa</string>
 
 </resources>

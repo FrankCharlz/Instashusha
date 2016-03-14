@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 
 import com.mj.instashusha.R;
-import com.mj.instashusha.activities.SaveActivity;
 
 import java.io.File;
 
@@ -28,26 +27,24 @@ public class Sharer {
 
     private static void createShareIntent(Context context, File file, boolean repost) {
 
-        // Create the new Intent using the 'Send' action.
-        Intent share = new Intent(Intent.ACTION_SEND);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
 
-        share.putExtra(Intent.EXTRA_TEXT, context.getResources().getString(R.string.share_to_string));
-
-        // Set the MIME type
-        share.setType(Media.getMimeType(file));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, context.getResources().getString(R.string.share_to_string));
 
 
-        // Add the URI to the Intent.
-        share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+        shareIntent.setType(Media.getMimeType(file));
+
+        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
 
         if (repost) {
-            //set package
-            share.setPackage("com.instagram.android");
-            share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            shareIntent.setPackage("com.instagram.android"); //repost to instagram...
         }
 
-        // Broadcast the Intent.
-        context.startActivity(Intent.createChooser(share, "Share to: "));
+        Intent chooserIntent = Intent.createChooser(shareIntent, "Share to: ");
+
+        chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //needed when starting activity without activity context
+
+        context.startActivity(chooserIntent);
 
     }
 

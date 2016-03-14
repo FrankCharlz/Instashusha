@@ -51,7 +51,20 @@
         android:text="@string/open_instagram"
         />
 
+    <com.mj.instashusha.utils.DopeTextView
+        android:id="@+id/tigo_ad_instruction_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/text.color.popup.link"
+        android:text="@string/sample_tigo_ad"
+        android:textSize="16sp"
+        android:padding="@dimen/tigoad.padding"/>
+
+    <!-- google ad -->
+
     <com.google.android.gms.ads.AdView
+        android:visibility="gone"
         android:id="@+id/adView_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,6 +73,8 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id_home">
     </com.google.android.gms.ads.AdView>
+
+
 
 
 </RelativeLayout>

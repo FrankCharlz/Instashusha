@@ -17,7 +17,6 @@ import com.mj.instashusha.utils.VideoThumbnailCache;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.util.List;
 
 /**
  * Created by Frank on 1/9/2016.
@@ -28,9 +27,9 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
 
     private final Context context;
-    private List<File> items;
+    private File[] items;
 
-    public FileListAdapter(Context context, List<File> items) {
+    public FileListAdapter(Context context, File[] items) {
         this.context = context;
         this.items = items;
     }
@@ -44,7 +43,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        File currentItem = items.get(position);
+        File currentItem = items[position];
 
         if (!Media.isImage(currentItem.getName())) {
             holder.fpic.setImageBitmap(VideoThumbnailCache.getBitmap(currentItem.getAbsolutePath()));
@@ -58,7 +57,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return items.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -86,21 +85,13 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         public void onClick(View view) {
             //uses tag and position to determine right method to call
             if (view.getTag().equals(TAG_FPIC)) {
-                openItem(items.get(getAdapterPosition()));
+                Media.openItem(context, items[getAdapterPosition()]);
             }
             else if (view.getTag().equals(TAG_FSHARE)) {
-                Sharer.share(context, items.get(getAdapterPosition()));
+                Sharer.share(context, items[getAdapterPosition()]);
             }
         }
     }
 
 
-    private void openItem(File file) {
-        String mime = Media.getMimeType(file);
-
-        Intent intent = new Intent();
-        intent.setAction(android.content.Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(file), mime);
-        context.startActivity(intent);
-    }
 }

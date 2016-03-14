@@ -91,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //do not perform fragment transaction here..
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        //method is guaranteed to be called after the Activity has been restored to its original state
         if (waking_from_pause) {
             //onresume is called after oncreate at first..
             programFlow();

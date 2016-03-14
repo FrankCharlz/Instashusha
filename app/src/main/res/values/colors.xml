@@ -16,4 +16,11 @@
     <color name="grey">#908e8989</color>
 
     <color name="silver">#aea9ac</color>
+    <color name="text.color.popup.link">#2202ff</color>
+
+
+    <color name="yellow.t">#fbd115</color>
+    <color name="blue.t">#01003a</color>
+    <color name="green.t">#28a910</color>
+
 </resources>

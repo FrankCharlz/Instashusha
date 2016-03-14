@@ -2,6 +2,7 @@ package com.mj.instashusha.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.mj.instashusha.Constants;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.activities.DownloadedActivity;
@@ -64,13 +66,23 @@ public class InstructionFragment extends Fragment {
         final DopeTextView instructionTv = (DopeTextView) root.findViewById(R.id.tv_instructions);
         rootContainer = container;
 
+        DopeTextView ta = (DopeTextView)root.findViewById(R.id.tigo_ad_instruction_activity);
+        ta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open browser...
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(Constants.TIGO_URL));
+                context.startActivity(intent);
+            }
+        });
+
         return root;
 
     }
 
     private void loadAds() {
         final AdView mAdView = (AdView) root.findViewById(R.id.adView_fragment);
-        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("YOUR_DEVICE_HASH").build();
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }

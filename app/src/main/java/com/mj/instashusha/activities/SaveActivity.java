@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -24,6 +25,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.mj.instashusha.Constants;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.network.HttpCallback;
@@ -157,6 +159,16 @@ public class SaveActivity extends AppCompatActivity {
 
         activity_view_container = findViewById(R.id.container_layout_activity_save);
 
+        DopeTextView ta = (DopeTextView) findViewById(R.id.tigo_ad_save_activity);
+        ta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open browser...
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(Constants.TIGO_URL));
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void animateLoading() {

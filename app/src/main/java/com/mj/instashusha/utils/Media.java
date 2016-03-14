@@ -1,5 +1,9 @@
 package com.mj.instashusha.utils;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+
 import java.io.File;
 
 /**
@@ -15,7 +19,22 @@ public class Media {
         return fileName.endsWith("jpg") || fileName.endsWith("png") || fileName.endsWith("gif");
     }
 
+    public static void openItem(Context context, File file) {
+        String mime = Media.getMimeType(file);
+
+        Intent intent = new Intent();
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setDataAndType(Uri.fromFile(file), mime);
+        context.startActivity(intent);
+    }
+
+
     public static String getMimeType(File file) {
-        return isImage(file.getName()) ? MIME_TYPE_IMAGE : MIME_TYPE_VIDEO;
+        return getMimeType(file.getName());
+    }
+
+    public static String getMimeType(String path) {
+        return isImage(path) ? MIME_TYPE_IMAGE : MIME_TYPE_VIDEO;
     }
 }

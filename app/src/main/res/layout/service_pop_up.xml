@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="@color/transparent"
     android:orientation="vertical">
     <!--  outer view is an hack to provide necessary padding/margin gotta look at it in the future  -->
@@ -52,16 +52,33 @@
 
         </LinearLayout>
 
+        <com.mj.instashusha.utils.DopeTextView
+            android:id="@+id/popup_ad"
+            android:textColor="@color/text.color.popup.link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text.size.button"
+            android:text="More offers from Tigo"
+            android:paddingRight="@dimen/padding.popup.content"
+            android:paddingLeft="@dimen/padding.popup.content"
+            android:paddingTop="@dimen/padding.popup.content"
+            android:paddingBottom="0dip"
+            android:layout_margin="2dp"
+            />
+
 
         <com.mj.instashusha.utils.DopeTextView
             android:textColor="@color/black97"
             android:id="@+id/popup_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding.top.bottom"
-            android:textSize="@dimen/text.size.button"
             android:text="@string/sample_url"
-            android:layout_margin="12dp"
+            android:textSize="@dimen/text.size.button"
+            android:paddingRight="@dimen/padding.popup.content"
+            android:paddingLeft="@dimen/padding.popup.content"
+            android:paddingTop="0dip"
+            android:paddingBottom="@dimen/padding.popup.content"
+            android:layout_margin="2dp"
             />
 
 
