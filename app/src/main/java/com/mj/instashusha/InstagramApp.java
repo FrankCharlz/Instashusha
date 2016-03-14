@@ -26,13 +26,16 @@ public class InstagramApp extends Application {
     private static OkHttpClient okhttpClient;
     public static final String GO_TO_INSTRUCTIONS = "hgGHGy";
 
-    static {
-        Cache okCache= new Cache(getAppFolder(), SIZE_OF_OKHTTP_CACHE);
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Cache okCache= new Cache(getCacheDir(), SIZE_OF_OKHTTP_CACHE);
         okhttpClient = new OkHttpClient.Builder()
                 .cache(okCache)
                 .build();
-    }
 
+    }
 
     public static int mediaDownloaded() {
         return InstagramApp.getAppFolder().listFiles().length;

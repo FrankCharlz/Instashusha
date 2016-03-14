@@ -1,14 +1,14 @@
 package com.mj.instashusha.utils;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Typeface;
 import android.media.ThumbnailUtils;
 
 import java.util.HashMap;
 
 /**
  * Created by Frank on 1/11/2016.
+ *
+ *
  */
 public class VideoThumbnailCache {
 

@@ -55,14 +55,15 @@ public class DownloadedActivity extends AppCompatActivity {
         final RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_downloaded);
         mRecyclerView.setHasFixedSize(true);
 
-        StaggeredGridLayoutManager sl = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        final StaggeredGridLayoutManager sl = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(sl);
         mRecyclerView.setAdapter(adapter);
+
+        //add on scroll listener...
 
         Tracker mTracker = ((InstagramApp) getApplication()).getDefaultTracker();
         mTracker.enableAdvertisingIdCollection(true);
         mTracker.setScreenName("SCREEN_DOWNLOADED_ACTIVITY");
-
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
 

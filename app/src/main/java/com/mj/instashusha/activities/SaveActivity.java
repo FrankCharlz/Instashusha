@@ -54,8 +54,6 @@ public class SaveActivity extends AppCompatActivity {
 
     public static final String BASE_URL = "http://insta-dl.appspot.com/dl?source=";
     private static final float TOOLBAR_BG_ALPHA = 0.49f;
-    public static final String MIME_TYPE_VIDEO = "video/*";
-    public static final String MIME_TYPE_IMAGE = "image/*";
     private String image_url, video_url, source_url;
     private Context context;
     private ImageView imageView;

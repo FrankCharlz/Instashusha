@@ -94,7 +94,5 @@ public class Utils {
         return context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE).getString(LAST_URL, "x");
     }
 
-    public static boolean isImage(String fileName) {
-        return fileName.endsWith("jpg") || fileName.endsWith("png") || fileName.endsWith("gif");
-    }
+
 }

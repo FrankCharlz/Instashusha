@@ -11,13 +11,14 @@ import java.io.File;
 
 /**
  * Created by Frank on 1/9/2016.
+ *
+ *
  */
 
 public class Sharer {
 
     public static void share(Context context, File file) {
         createShareIntent(context, file, false);
-
     }
 
 
@@ -26,9 +27,6 @@ public class Sharer {
     }
 
     private static void createShareIntent(Context context, File file, boolean repost) {
-        String mime_type = Utils.isImage(file.getName())
-                ? SaveActivity.MIME_TYPE_IMAGE
-                : SaveActivity.MIME_TYPE_VIDEO;
 
         // Create the new Intent using the 'Send' action.
         Intent share = new Intent(Intent.ACTION_SEND);
@@ -36,12 +34,11 @@ public class Sharer {
         share.putExtra(Intent.EXTRA_TEXT, context.getResources().getString(R.string.share_to_string));
 
         // Set the MIME type
-        share.setType(mime_type);
+        share.setType(Media.getMimeType(file));
 
-        Uri uri = Uri.fromFile(file);
 
         // Add the URI to the Intent.
-        share.putExtra(Intent.EXTRA_STREAM, uri);
+        share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
 
         if (repost) {
             //set package
@@ -50,7 +47,7 @@ public class Sharer {
         }
 
         // Broadcast the Intent.
-        context.startActivity(Intent.createChooser(share, "Share to"));
+        context.startActivity(Intent.createChooser(share, "Share to: "));
 
     }
 

@@ -11,28 +11,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mj.instashusha.R;
+import com.mj.instashusha.utils.Media;
 import com.mj.instashusha.utils.Sharer;
 import com.mj.instashusha.utils.VideoThumbnailCache;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Frank on 1/9/2016.
+ *
+ *
  */
 public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHolder> {
 
 
     private final Context context;
-    private final LayoutInflater inflater;
     private List<File> items;
 
     public FileListAdapter(Context context, List<File> items) {
         this.context = context;
         this.items = items;
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -41,26 +41,19 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        File current_item = items.get(position);
-        String fname = current_item.getName();
-        boolean isImage = fname.endsWith("png") || fname.endsWith("jpg") || fname.endsWith("gif");
+        File currentItem = items.get(position);
 
-        fname = fname.substring(fname.length()-10, fname.length()-5);
-        if (!isImage) {
-            fname = "Video : "+fname;
-            holder.fpic.setImageBitmap(VideoThumbnailCache.getBitmap(current_item.getAbsolutePath()));
+        if (!Media.isImage(currentItem.getName())) {
+            holder.fpic.setImageBitmap(VideoThumbnailCache.getBitmap(currentItem.getAbsolutePath()));
         } else {
-            fname = "Picha : "+fname;
-            Picasso.with(context).load(Uri.fromFile(current_item)).into(holder.fpic);
+            Picasso.with(context).load(currentItem).into(holder.fpic);
         }
 
-        holder.name.setText(fname);
+        holder.name.setText(currentItem.getName());
 
-        Clix clix = new Clix(current_item);
-        holder.fshare.setOnClickListener(clix);
-        holder.fpic.setOnClickListener(clix);
     }
 
     @Override
@@ -68,43 +61,43 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private static final int TAG_FPIC = 0x0023;
+        private static final int TAG_FSHARE = 0xf9;
         private final TextView name;
         private final ImageView fpic, fshare;
+
 
         public ViewHolder(View view) {
             super(view);
             name = (TextView)view.findViewById(R.id.item_filename);
             fpic = (ImageView) view.findViewById(R.id.item_picha);
             fshare = (ImageView) view.findViewById(R.id.item_share);
-        }
-    }
 
-    class Clix implements View.OnClickListener {
+            fpic.setOnClickListener(this);
+            fshare.setOnClickListener(this);
 
-        private final File file;
+            fpic.setTag(TAG_FPIC);
+            fshare.setTag(TAG_FSHARE);
 
-        public Clix(File file) {
-            this.file = file;
         }
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.item_share) {
-                Sharer.share(context, file);
-            } else {
-                openItem(file);
+            //uses tag and position to determine right method to call
+            if (view.getTag().equals(TAG_FPIC)) {
+                openItem(items.get(getAdapterPosition()));
             }
-
+            else if (view.getTag().equals(TAG_FSHARE)) {
+                Sharer.share(context, items.get(getAdapterPosition()));
+            }
         }
     }
 
+
     private void openItem(File file) {
-        String mime;
-        if (file.getName().endsWith("png"))
-            mime = "image/*";
-        else
-            mime = "video/*";
+        String mime = Media.getMimeType(file);
+
         Intent intent = new Intent();
         intent.setAction(android.content.Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(file), mime);
