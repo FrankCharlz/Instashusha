@@ -1,20 +1,19 @@
 package com.mj.instashusha.services;
 
-import android.content.Context;
 
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.activities.SaveActivity;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
 import com.mj.instashusha.utils.Utils;
-import com.squareup.okhttp.Request;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+
+import okhttp3.Request;
 
 /**
  * Created by Frank on 3/12/2016.
@@ -27,12 +26,10 @@ import java.net.URL;
 public class PopUpDownloader {
 
 
-    private static Context context;
     private static String anchor_url;
     private static DownloadCompleteListener listener;
 
-    public static File save(Context context_, String url, DownloadCompleteListener listener_) {
-        context = context_;
+    public static void save(String url, DownloadCompleteListener listener_) {
         anchor_url = url;
         listener = listener_;
 
@@ -63,8 +60,6 @@ public class PopUpDownloader {
             }
         });
 
-
-        return null;
     }
 
     private static void saveMedia(String url) {
@@ -117,8 +112,6 @@ public class PopUpDownloader {
                             e.printStackTrace();
 
                         } finally {
-                            //if (in != null) in.close();
-                            //if (fout != null) fout.close();
                         }
                     }
                 }, "Service downloading thread"

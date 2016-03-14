@@ -1,19 +1,16 @@
 package com.mj.instashusha;
 
 import android.app.Application;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
-import com.google.android.gms.analytics.Tracker;
-import com.squareup.okhttp.Cache;
-import com.squareup.okhttp.OkHttpClient;
-
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 
 import java.io.File;
+
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by Frank on 12/18/2015.
@@ -26,20 +23,17 @@ public class InstagramApp extends Application {
     private Tracker mTracker;
 
     private static final long SIZE_OF_OKHTTP_CACHE = 20 * 1024 * 1024; //20MB
-    private final static OkHttpClient okhttpClient = new OkHttpClient();
+    private static OkHttpClient okhttpClient;
     public static final String GO_TO_INSTRUCTIONS = "hgGHGy";
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        try {
-            Cache responseCache = new Cache(getApplicationContext().getCacheDir(), SIZE_OF_OKHTTP_CACHE);
-            okhttpClient.setCache(responseCache);
-        } catch (Exception e) {
-            log("Unable to set http cache"+ e);
-        }
-
+    static {
+        Cache okCache= new Cache(getAppFolder(), SIZE_OF_OKHTTP_CACHE);
+        okhttpClient = new OkHttpClient.Builder()
+                .cache(okCache)
+                .build();
     }
+
+
     public static int mediaDownloaded() {
         return InstagramApp.getAppFolder().listFiles().length;
     }

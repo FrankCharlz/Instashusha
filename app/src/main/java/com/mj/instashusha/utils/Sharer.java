@@ -16,54 +16,42 @@ import java.io.File;
 public class Sharer {
 
     public static void share(Context context, File file) {
-        String mime_type = (file.getName().endsWith("png"))
-                ? SaveActivity.MIME_TYPE_IMAGE
-                : SaveActivity.MIME_TYPE_VIDEO;
-        createShareIntent(context, mime_type, file);
+        createShareIntent(context, file, false);
 
     }
 
-    private static void createShareIntent(Context context, String type, File file) {
+
+    public static void repost(Context context, File file) {
+        createShareIntent(context, file, true);
+    }
+
+    private static void createShareIntent(Context context, File file, boolean repost) {
+        String mime_type = Utils.isImage(file.getName())
+                ? SaveActivity.MIME_TYPE_IMAGE
+                : SaveActivity.MIME_TYPE_VIDEO;
+
         // Create the new Intent using the 'Send' action.
         Intent share = new Intent(Intent.ACTION_SEND);
 
         share.putExtra(Intent.EXTRA_TEXT, context.getResources().getString(R.string.share_to_string));
 
         // Set the MIME type
-        share.setType(type);
+        share.setType(mime_type);
 
         Uri uri = Uri.fromFile(file);
 
         // Add the URI to the Intent.
         share.putExtra(Intent.EXTRA_STREAM, uri);
+
+        if (repost) {
+            //set package
+            share.setPackage("com.instagram.android");
+            share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
 
         // Broadcast the Intent.
         context.startActivity(Intent.createChooser(share, "Share to"));
-    }
-
-    public static void repost(Context context, File file) {
-        // Create the new Intent using the 'Send' action.
-        Intent share = new Intent(Intent.ACTION_SEND);
-
-        //set package
-        share.setPackage("com.instagram.android");
-        share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        //mime ish
-        String mime_type = (file.getName().endsWith("png"))
-                ? SaveActivity.MIME_TYPE_IMAGE
-                : SaveActivity.MIME_TYPE_VIDEO;
-
-        share.setType(mime_type);
-
-        // Create the URI from the media
-        Uri uri = Uri.fromFile(file);
-
-        // Add the URI to the Intent.
-        share.putExtra(Intent.EXTRA_STREAM, uri);
-
-        // Broadcast the Intent.
-        context.startActivity(share);
 
     }
+
 }

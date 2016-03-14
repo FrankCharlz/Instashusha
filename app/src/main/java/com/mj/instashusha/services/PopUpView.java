@@ -90,7 +90,7 @@ public class PopUpView {
 
     private void doSave() {
         removeView();
-        PopUpDownloader.save(context, url, new PopUpDownloader.DownloadCompleteListener() {
+        PopUpDownloader.save(url, new PopUpDownloader.DownloadCompleteListener() {
             @Override
             public void done(String anchor_url, String path) {
                 Utils.setLastUrl(context, anchor_url);
@@ -102,7 +102,7 @@ public class PopUpView {
 
     private void doShare() {
         removeView();
-        PopUpDownloader.save(context, url, new PopUpDownloader.DownloadCompleteListener() {
+        PopUpDownloader.save(url, new PopUpDownloader.DownloadCompleteListener() {
             @Override
             public void done(String anchor_url, String path) {
                 Utils.setLastUrl(context, anchor_url);

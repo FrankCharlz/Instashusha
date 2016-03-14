@@ -10,7 +10,7 @@
 
     <color name="transparent">#00ffffff</color>
 
-    <color name="popup.body">#ccf4f5fd</color>
+    <color name="popup.body">#f2f4f5fd</color>
     <color name="popup.title">#e0e0e0</color>
 
     <color name="grey">#908e8989</color>

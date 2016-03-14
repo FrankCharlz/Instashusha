@@ -6,13 +6,14 @@ import android.os.Looper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mj.instashusha.InstagramApp;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.Response;
 
 public abstract class HttpCallback implements Callback, Instagrammable {
 
@@ -20,12 +21,13 @@ public abstract class HttpCallback implements Callback, Instagrammable {
     private Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
-    public void onFailure(Request request, IOException e) {
+    public void onFailure(Call call, IOException e) {
         InstagramApp.log("okhttp request failed : "+e.getLocalizedMessage());
     }
 
+
     @Override
-    public void onResponse(Response response) throws IOException {
+    public void onResponse(Call call, Response response) throws IOException {
         if (response.isSuccessful()) {
             processResponse(response);
         } else {
@@ -33,6 +35,7 @@ public abstract class HttpCallback implements Callback, Instagrammable {
             InstagramApp.log("okhttp response code not 200");
         }
     }
+
 
     private void processResponse(Response response) throws IOException {
         final MediaType responseType = response.body().contentType();

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +18,7 @@ import com.mj.instashusha.R;
 import com.mj.instashusha.fragments.InstructionFragment;
 import com.mj.instashusha.services.PopUpService;
 import com.mj.instashusha.utils.Clip;
+import com.mj.instashusha.utils.OneTimeOps;
 import com.mj.instashusha.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,32 +33,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //hide home icon.. Because it not used here in this activity..
-        findViewById(R.id.toolbar_action_settings_home).setVisibility(View.GONE);
-
         context = this;
-        checkAppIntroduction();
+
+        //hide home icon.. Because it not used here in this activity..
+        findViewById(R.id.toolbar_action_settings_home).setVisibility(View.INVISIBLE);
+
 
         if (getIntent().getBooleanExtra(InstagramApp.GO_TO_INSTRUCTIONS, false)) {
             showInstructionFragment();
-            return;
+        } else {
+            programFlow();
         }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OneTimeOps.checkAppIntroduction(context);
+                OneTimeOps.getUserEmail(context);
+            }
+        }).start();
 
         startBackgroundService();
-        programFlow();
 
-    }
-
-    private void startBackgroundService() {
-        //check if service was started successfully, if not start it now...
-        Intent serviceIntent = new Intent(getBaseContext()  , PopUpService.class);
-        boolean sup = isServiceRunning(PopUpService.class);
-        if (!sup) {
-            InstagramApp.log("service was not running, I gotta start it..");
-            startService(serviceIntent);
-        } else {
-            InstagramApp.log("service was still running");
-        }
     }
 
 
@@ -115,28 +114,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void checkAppIntroduction() {
-        //using thread to read prefs...
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SharedPreferences getPrefs = PreferenceManager
-                        .getDefaultSharedPreferences(getBaseContext());
-
-                boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
-                if (isFirstStart) {
-
-                    Intent i = new Intent(MainActivity.this, IntroActivity.class);
-                    startActivity(i);
-
-                    getPrefs.edit().putBoolean("firstStart", false).apply();
-                }
-            }
-        });
-        t.start();
-
-    }
-
     public void proceedLoading(final String url) {
         Intent intent = new Intent(context, SaveActivity.class);
         intent.putExtra(SRC_URL, url);
@@ -154,5 +131,18 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    private void startBackgroundService() {
+        //check if service was started successfully, if not start it now...
+        Intent serviceIntent = new Intent(getBaseContext()  , PopUpService.class);
+        boolean sup = isServiceRunning(PopUpService.class);
+        if (!sup) {
+            InstagramApp.log("service was not running, I gotta start it..");
+            startService(serviceIntent);
+        } else {
+            InstagramApp.log("service was still running");
+        }
+    }
+
 
 }
