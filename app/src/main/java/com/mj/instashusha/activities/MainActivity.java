@@ -23,8 +23,6 @@ import com.mj.instashusha.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String SRC_URL = "0x00f12";
-
     private Context context;
     private boolean waking_from_pause = false;
 
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         context = this;
 
         //hide home icon.. Because it not used here in this activity..
-        findViewById(R.id.toolbar_action_settings_home).setVisibility(View.INVISIBLE);
+        //findViewById(R.id.toolbar_action_settings_home).setVisibility(View.INVISIBLE);
 
 
         if (getIntent().getBooleanExtra(InstagramApp.GO_TO_INSTRUCTIONS, false)) {
@@ -123,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void proceedLoading(final String url) {
         Intent intent = new Intent(context, SaveActivity.class);
-        intent.putExtra(SRC_URL, url);
+        intent.putExtra(SaveActivity.SRC_URL, url);
         startActivity(intent);
         //finish();
 

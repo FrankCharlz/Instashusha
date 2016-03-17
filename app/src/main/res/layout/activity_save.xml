@@ -14,15 +14,16 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">
 
-        <include layout="@layout/layout_subiri_kidogo"></include>
+        <include layout="@layout/layout_subiri_kidogo" />
 
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:visibility="gone"
-            android:layout_gravity="center_horizontal|top" />
+            android:layout_gravity="center_horizontal|top"
+            android:src="@drawable/adele"/>
 
         <include layout="@layout/toolbar_universal_layout"/>
 
@@ -38,20 +39,28 @@
         android:max="100"
         android:progress="0"
         android:visibility="gone"
-        android:progressTint="@color/silver"
         />
 
-    <include layout="@layout/layout_buttons"/>
+    <ViewStub android:id="@+id/stub"
+        android:inflatedId="@+id/stub_buttons"
+        android:layout="@layout/layout_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progress_dl"
+        />
 
     <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/tigo_ad_save_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+
+        style="@style/TigoAdTextView"
         android:layout_alignParentBottom="true"
-        android:textColor="@color/text.color.popup.link"
         android:text="@string/sample_tigo_ad"
-        android:textSize="16sp"
-        android:padding="@dimen/tigoad.padding"/>
+
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:singleLine="true"
+        />
+
 
     <!-- google ad -->
 

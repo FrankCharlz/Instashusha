@@ -8,7 +8,9 @@
 
     <dimen name="progress.height">12dp</dimen>
 
+
     <dimen name="margin.button">16dp</dimen>
+    <dimen name="margin.button.side">32dp</dimen>
 
     <dimen name="text.size.button">24sp</dimen>
     <dimen name="text.size.toolbar">22sp</dimen>
@@ -21,6 +23,9 @@
 
 
     <dimen name="margin.popup">64dp</dimen>
+
+
+    <dimen name="tigoad.text.size">16dp</dimen>
 
 </resources>
 

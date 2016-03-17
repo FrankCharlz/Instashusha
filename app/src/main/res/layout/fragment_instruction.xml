@@ -5,20 +5,32 @@
     android:id="@+id/download_view_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/space.from.top"
     tools:context=".activities.MainActivity">
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:paddingLeft="72dp"
+        android:paddingRight="72dp"
+        android:layout_marginTop="32dp"
+        android:layout_centerHorizontal="true"
+        />
 
     <com.mj.instashusha.utils.DopeTextView
-        android:id="@+id/tv_instructions"
+        android:id="@+id/logo_words"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding.left.right"
-        android:text="@string/instructions"
-        android:layout_margin="@dimen/padding.top.bottom"
+        android:text="@string/tigo_ish"
+        android:textSize="18sp"
+        android:textColor="@color/black"
         android:gravity="center"
-        android:textSize="@dimen/text.size.toolbar"
-        android:textColor="@color/black97"
+        android:layout_below="@id/logo"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:paddingTop="0dip"
+        android:paddingBottom="32dp"
         />
 
     <com.mj.instashusha.utils.DopeTextView
@@ -27,7 +39,7 @@
         android:textSize="@dimen/text.size.button"
         android:layout_margin="@dimen/margin.button"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/tv_instructions"
+        android:layout_below="@id/logo_words"
         android:text="@string/open_tutorial"
         />
 
@@ -51,15 +63,19 @@
         android:text="@string/open_instagram"
         />
 
+
     <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/tigo_ad_instruction_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+
+        style="@style/TigoAdTextView"
         android:layout_alignParentBottom="true"
-        android:textColor="@color/text.color.popup.link"
         android:text="@string/sample_tigo_ad"
-        android:textSize="16sp"
-        android:padding="@dimen/tigoad.padding"/>
+
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:singleLine="true"
+         />
+
 
     <!-- google ad -->
 

@@ -28,5 +28,7 @@
     <string name="msg.subiri.kidogo">just a sec...</string>
     <string name="sample_url">https://www.instagram.com/p/_oJiUqFPdy/</string>
     <string name="sample_tigo_ad">Rahisisha maisha na TigoPesaApp. \nBofya hapa</string>
+    <string name="tigo_ish">download photos and videos and share them with Whatsapp for free with Tigo</string>
+    <string name="btn.share.whatsapp">SHARE TO </string>
 
 </resources>

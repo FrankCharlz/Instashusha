@@ -18,9 +18,21 @@
         android:layout_below="@id/included_in_finisher"
         android:layout_above="@+id/adView_activity_finisher"/>
 
+    <com.mj.instashusha.utils.DopeTextView
+        android:id="@+id/tigo_ad_downloaded_activity"
+
+        style="@style/TigoAdTextView"
+        android:layout_alignParentBottom="true"
+        android:text="@string/sample_tigo_ad"
+
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:singleLine="true"
+        />
 
 
     <com.google.android.gms.ads.AdView
+        android:visibility="gone"
         android:id="@+id/adView_activity_finisher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

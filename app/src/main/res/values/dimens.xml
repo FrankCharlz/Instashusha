@@ -5,7 +5,14 @@
     <dimen name="margin.popup">28dp</dimen>
     <dimen name="padding.popup.content">12dp</dimen>
 
-    <dimen name="tigoad.padding">18dp</dimen>
+    <dimen name="tigoad.padding">12dp</dimen>
+
+    <dimen name="button.dope.min.width">180dp</dimen>
+    <dimen name="tigoad.height.max">60dp</dimen>
+    <dimen name="zero_dip">0dip</dimen>
+
+
+    <dimen name="tigoad.text.size">14dp</dimen>
 
 </resources>
     

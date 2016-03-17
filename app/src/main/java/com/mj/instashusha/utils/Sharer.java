@@ -16,16 +16,27 @@ import java.io.File;
 
 public class Sharer {
 
-    public static void share(Context context, File file) {
-        createShareIntent(context, file, false);
+
+    private static final String PACKAGE_NONE = "";
+    private static final String PACKAGE_WHATSAPP = "com.whatsapp";
+    private static final String PACKAGE_INSTAGRAM = "com.instagram.android";
+
+
+    public static void share(Context context, File file, boolean share_to_whatsapp) {
+
+        if (share_to_whatsapp) {
+            createShareIntent(context, file, PACKAGE_WHATSAPP);
+        } else  {
+            createShareIntent(context, file, PACKAGE_NONE);
+        }
     }
 
 
     public static void repost(Context context, File file) {
-        createShareIntent(context, file, true);
+        createShareIntent(context, file, PACKAGE_INSTAGRAM  );
     }
 
-    private static void createShareIntent(Context context, File file, boolean repost) {
+    private static void createShareIntent(Context context, File file, String app_package) {
 
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
 
@@ -36,8 +47,11 @@ public class Sharer {
 
         shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
 
-        if (repost) {
-            shareIntent.setPackage("com.instagram.android"); //repost to instagram...
+        if (app_package.equals(PACKAGE_INSTAGRAM)) {
+            shareIntent.setPackage(PACKAGE_INSTAGRAM);
+        }
+        else if (app_package.equals(PACKAGE_WHATSAPP)) {
+            shareIntent.setPackage(PACKAGE_WHATSAPP);
         }
 
         Intent chooserIntent = Intent.createChooser(shareIntent, "Share to: ");

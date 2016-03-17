@@ -9,6 +9,7 @@
 
 
     <dimen name="margin.button">6dp</dimen>
+    <dimen name="margin.button.side">12dp</dimen>
 
     <dimen name="progress.height">8dp</dimen>
 

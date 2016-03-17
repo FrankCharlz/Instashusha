@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -54,6 +55,7 @@ public class InstructionFragment extends Fragment {
         final DopeTextView btnViewDownloaded = (DopeTextView) root.findViewById(R.id.btn_view_downloaded);
         String s = context.getResources().getString(R.string.view_downloaded)+" ("
                 +InstagramApp.mediaDownloaded()+")";
+        btnViewDownloaded.setText("");
         btnViewDownloaded.setText(s);
         btnViewDownloaded.setOnClickListener(new ButtonClicks());
 
@@ -63,10 +65,14 @@ public class InstructionFragment extends Fragment {
         final DopeTextView btnOpenInsta = (DopeTextView) root.findViewById(R.id.btn_fungua_insta);
         btnOpenInsta.setOnClickListener(new ButtonClicks());
 
-        final DopeTextView instructionTv = (DopeTextView) root.findViewById(R.id.tv_instructions);
+        //make all buttons equal width...
+        int goodWidth = btnViewDownloaded.getWidth();
+        //btnOpenInsta.setWidth(goodWidth);
+        //btnOpenTutorial.setWidth(goodWidth);
+
         rootContainer = container;
 
-        DopeTextView ta = (DopeTextView)root.findViewById(R.id.tigo_ad_instruction_activity);
+       View ta = root.findViewById(R.id.tigo_ad_instruction_activity);
         ta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

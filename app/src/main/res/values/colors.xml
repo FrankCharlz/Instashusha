@@ -20,7 +20,9 @@
 
 
     <color name="yellow.t">#fbd115</color>
-    <color name="blue.t">#01003a</color>
-    <color name="green.t">#28a910</color>
+    <color name="blue.t">#9301003a</color>
+    <color name="green.t">#28a91a</color>
+
+    <color name="green.whatsapp">#29B540</color>
 
 </resources>

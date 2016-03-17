@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import com.mj.instashusha.Constants;
 import com.mj.instashusha.R;
 import com.mj.instashusha.activities.MainActivity;
+import com.mj.instashusha.activities.SaveActivity;
 import com.mj.instashusha.utils.DopeTextView;
 import com.mj.instashusha.utils.Media;
 import com.mj.instashusha.utils.Utils;
@@ -134,8 +135,9 @@ public class PopUpView {
 
     private void doShare() {
         removeView();
-        ////TODO: for now just use mainactivity for this...
-        Intent intent = new Intent(context, MainActivity.class);
+        ////TODO: for now just use saveactivity for this...
+        Intent intent = new Intent(context, SaveActivity.class);
+        intent.putExtra(SaveActivity.FROM_SERVICE, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
 
@@ -181,6 +183,7 @@ public class PopUpView {
     private class AdTvClicked implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            removeView();
             //open browser...
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(Constants.TIGO_URL));

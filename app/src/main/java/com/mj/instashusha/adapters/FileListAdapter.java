@@ -1,8 +1,6 @@
 package com.mj.instashusha.adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +45,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
         if (!Media.isImage(currentItem.getName())) {
             holder.fpic.setImageBitmap(VideoThumbnailCache.getBitmap(currentItem.getAbsolutePath()));
+            holder.fPlayButton.setVisibility(View.VISIBLE);
         } else {
             Picasso.with(context).load(currentItem).into(holder.fpic);
         }
@@ -64,7 +63,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         private static final int TAG_FPIC = 0x0023;
         private static final int TAG_FSHARE = 0xf9;
         private final TextView name;
-        private final ImageView fpic, fshare;
+        private final ImageView fpic, fshare, fPlayButton;
 
 
         public ViewHolder(View view) {
@@ -72,6 +71,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
             name = (TextView)view.findViewById(R.id.item_filename);
             fpic = (ImageView) view.findViewById(R.id.item_picha);
             fshare = (ImageView) view.findViewById(R.id.item_share);
+            fPlayButton = (ImageView) view.findViewById(R.id.item_play_button);
 
             fpic.setOnClickListener(this);
             fshare.setOnClickListener(this);
@@ -88,7 +88,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                 Media.openItem(context, items[getAdapterPosition()]);
             }
             else if (view.getTag().equals(TAG_FSHARE)) {
-                Sharer.share(context, items[getAdapterPosition()]);
+                Sharer.share(context, items[getAdapterPosition()], false);
             }
         }
     }
