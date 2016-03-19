@@ -54,11 +54,11 @@
 
         <com.mj.instashusha.utils.DopeTextView
             android:id="@+id/popup_ad"
-            android:textColor="@color/text.color.popup.link"
+            android:textColor="@color/black97"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text.size.button"
-            android:text="More offers from Tigo"
+            android:text="@string/popup_ad"
             android:paddingRight="@dimen/padding.popup.content"
             android:paddingLeft="@dimen/padding.popup.content"
             android:paddingTop="@dimen/padding.popup.content"
@@ -68,11 +68,11 @@
 
 
         <com.mj.instashusha.utils.DopeTextView
-            android:textColor="@color/black97"
+            android:textColor="@color/text.color.popup.link"
             android:id="@+id/popup_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sample_url"
+            android:text="Read more"
             android:textSize="@dimen/text.size.button"
             android:paddingRight="@dimen/padding.popup.content"
             android:paddingLeft="@dimen/padding.popup.content"

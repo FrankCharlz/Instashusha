@@ -98,6 +98,7 @@ public class SaveActivity extends AppCompatActivity {
         from_service = intent.getBooleanExtra(FROM_SERVICE, false);
 
         //from_service = new Random().nextBoolean(); //for testing purpose...
+        //from_service = true;
 
         initViews();
         proceed(source_url);

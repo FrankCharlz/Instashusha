@@ -4,17 +4,17 @@
     <string name="btn.share">SHARE</string>
     <string name="btn.repost">REPOST</string>
 
+    <string name="view_downloaded">DOWNLOADED</string>
+    <string name="open_tutorial">HOW TO USE</string>
+    <string name="open_instagram">OPEN INSTAGRAM</string>
+
     <string name="instructions">Download photos and videos from Instagram, share na repost</string>
-    <string name="view_downloaded">Downloaded</string>
-    <string name="open_tutorial">How to use</string>
-    <string name="open_instagram">Open Instagram</string>
 
     <string name="maelezo_body_1">Start Instagram then tap on the three dots as shown above</string>
 
     <string name="maelezo_title_1">Step 1</string>
     <string name="maelezo_title_2">Step 2</string>
     <string name="maelezo_title_3">Step 3</string>
-
 
     <string name="maelezo_body_2">Tap on \'copy share url\'</string>
     <string name="maelezo_body_3">  Close Instagram and open InstaShusha  </string>

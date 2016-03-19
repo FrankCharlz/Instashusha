@@ -62,7 +62,6 @@ public class InstructionFragment extends Fragment {
 
         final DopeTextView btnOpenTutorial = (DopeTextView) root.findViewById(R.id.btn_maelezo_zaidi);
         btnOpenTutorial.setOnClickListener(new ButtonClicks());
-        Utils.setBackgroundColor(btnOpenTutorial, Utils.getColor(context, R.color.blue_t));
 
         final DopeTextView btnOpenInsta = (DopeTextView) root.findViewById(R.id.btn_fungua_insta);
         btnOpenInsta.setOnClickListener(new ButtonClicks());

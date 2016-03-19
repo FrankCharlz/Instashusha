@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/green.t"
+        android:layout_margin="@dimen/margin.button">
+
+        <com.mj.instashusha.utils.DopeTextView
+            android:id="@+id/btn_maelezo_zaidi"
+            android:text="@string/open_tutorial"
+
+            style="@style/DopeButton"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/blue.t"
+        android:layout_margin="@dimen/margin.button">
+
+        <com.mj.instashusha.utils.DopeTextView
+            android:id="@+id/btn_view_downloaded"
+            android:text="@string/view_downloaded"
+
+            style="@style/DopeButton"
+            android:textColor="@color/white"
+
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin.button"
+        android:background="@color/black97"
+        >
+
+        <com.mj.instashusha.utils.DopeTextView
+            android:id="@+id/btn_fungua_insta"
+            android:text="@string/open_instagram"
+
+            style="@style/DopeButton"
+            android:textColor="@color/white"
+
+            />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

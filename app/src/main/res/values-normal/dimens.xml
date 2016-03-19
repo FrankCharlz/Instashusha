@@ -8,12 +8,6 @@
 
     <dimen name="tigoad.padding">12dp</dimen>
 
-    <dimen name="button.dope.min.width">192dp</dimen>
-    <dimen name="tigoad.height.max">60dp</dimen>
-    <dimen name="zero_dip">0dip</dimen>
-
-
-
     <dimen name="padding.top.bottom">5dp</dimen>
     <dimen name="padding.left.right">12dp</dimen>
 
@@ -40,5 +34,10 @@
 
 
     <dimen name="tigoad.text.size">14.4dp</dimen>
+
+    <dimen name="button.dope.min.width">200dp</dimen>
+    <dimen name="tigoad.height.max">60dp</dimen>
+    <dimen name="zero_dip">0dip</dimen>
+
 
 </resources>

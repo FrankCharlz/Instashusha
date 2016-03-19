@@ -5,11 +5,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -43,7 +46,7 @@ public class PopUpView {
     private WindowManager.LayoutParams params;
     private String url;
     private DopeTextView share, save, content, adTv;
-    private CharSequence adWords = "More offers from Tigo";
+    //private CharSequence adWords = "More offers from Tigo";
     private CharSequence adUrl = "www.google.com";
     private int NOTIFICATION_ID = 0x00c;
 
@@ -80,15 +83,17 @@ public class PopUpView {
         save = (DopeTextView) popView.findViewById(R.id.btn_popup_save);
         share = (DopeTextView) popView.findViewById(R.id.btn_popup_share);
         content = (DopeTextView) popView.findViewById(R.id.popup_content);
-        adTv = (DopeTextView) popView.findViewById(R.id.popup_ad);
+        adTv = (DopeTextView) popView.findViewById(R.id.popup_content);
 
         save.setOnClickListener(clickListener);
         share.setOnClickListener(clickListener);
 
+        /*
         //decorating ads in popup..
         Spannable spannableAd = new SpannableString(adWords);
         spannableAd.setSpan(new UnderlineSpan(), 0, adWords.length(), 0);
         adTv.setText(spannableAd);
+        */
 
         adTv.setOnClickListener(new AdTvClicked());
 
@@ -148,8 +153,7 @@ public class PopUpView {
     }
 
     public void setContent(String content_text) {
-        content_text = content_text + url;
-        content.setText(content_text);
+        //does nothing for now...
     }
 
     private void showNotif(int notification_id, String title, String content) {

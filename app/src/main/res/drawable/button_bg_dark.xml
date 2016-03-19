@@ -6,14 +6,9 @@
         android:width="1dp"
         />
 
-    <solid android:color="@color/grey" />
+    <solid android:color="@color/black.overlay" />
 
-    <padding
-        android:top="@dimen/padding.top.bottom"
-        android:bottom="@dimen/padding.top.bottom"
-        android:left="@dimen/padding.left.right"
-        android:right="@dimen/padding.left.right"
-        />
+
     <corners android:radius="@dimen/radius.small"/>
 
 </shape>

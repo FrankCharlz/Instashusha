@@ -33,40 +33,14 @@
         android:paddingBottom="32dp"
         />
 
-    <com.mj.instashusha.utils.DopeTextView
-        android:id="@+id/btn_maelezo_zaidi"
-        style="@style/DopeButton"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text.size.button"
-        android:layout_margin="@dimen/margin.button"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/logo_words"
-        android:text="@string/open_tutorial"
-        />
 
-    <com.mj.instashusha.utils.DopeTextView
-        android:id="@+id/btn_view_downloaded"
-        style="@style/DopeButton"
-        android:background="@color/blue.t"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text.size.button"
-        android:layout_margin="@dimen/margin.button"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/btn_maelezo_zaidi"
-        android:text="@string/view_downloaded"
-        />
-
-    <com.mj.instashusha.utils.DopeTextView
-        android:id="@+id/btn_fungua_insta"
-        style="@style/DopeButton"
-        android:background="@color/black97"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text.size.button"
-        android:layout_margin="@dimen/margin.button"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/btn_view_downloaded"
-        android:text="@string/open_instagram"
-        />
+    <include
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/layout_buttons_vertical"
+        android:layout_below="@+id/logo_words"
+        android:layout_toRightOf="@+id/adView_fragment"
+        android:layout_toEndOf="@+id/adView_fragment" />
 
 
     <com.mj.instashusha.utils.DopeTextView
@@ -79,7 +53,7 @@
         android:scrollHorizontally="true"
         android:ellipsize="end"
         android:singleLine="true"
-         />
+        />
 
 
     <!-- google ad -->

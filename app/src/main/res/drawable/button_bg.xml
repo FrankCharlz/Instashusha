@@ -8,12 +8,6 @@
 
     <solid android:color="@color/transparent" />
 
-    <padding
-        android:top="@dimen/padding.top.bottom"
-        android:bottom="@dimen/padding.top.bottom"
-        android:left="@dimen/padding.left.right"
-        android:right="@dimen/padding.left.right"
-        />
     <corners android:radius="@dimen/radius.small"/>
 
 </shape>
