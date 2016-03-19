@@ -35,7 +35,7 @@ public class PopUpDownloader {
 
 
 
-        InstagramApp.log("service download procedure  started");
+        InstagramApp.log("service saveStream procedure  started");
 
         final Request request = new Request.Builder()
                 .url(SaveActivity.BASE_URL + url)
@@ -103,7 +103,7 @@ public class PopUpDownloader {
 
                             listener.done(anchor_url, path);
 
-                            InstagramApp.log("service download completed successfully");
+                            InstagramApp.log("service saveStream completed successfully");
                             InstagramApp.log("from : "+url);
                             InstagramApp.log("to : " +path+"\n");
 

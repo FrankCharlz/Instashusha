@@ -27,5 +27,7 @@
 
     <dimen name="tigoad.text.size">16dp</dimen>
 
+    <dimen name="distance.logo.top">144dp</dimen>
+
 </resources>
 

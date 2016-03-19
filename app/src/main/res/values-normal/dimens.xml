@@ -1,4 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
+    <dimen name="text.size.xlarge">42dp</dimen>
+
+    <dimen name="padding.popup.content">12dp</dimen>
+
+    <dimen name="tigoad.padding">12dp</dimen>
+
+    <dimen name="button.dope.min.width">192dp</dimen>
+    <dimen name="tigoad.height.max">60dp</dimen>
+    <dimen name="zero_dip">0dip</dimen>
+
+
+
     <dimen name="padding.top.bottom">5dp</dimen>
     <dimen name="padding.left.right">12dp</dimen>
 
@@ -17,8 +32,13 @@
     <dimen name="text.size.toolbar">20sp</dimen>
     <dimen name="text.size.large">24sp</dimen>
 
-    <dimen name="space.from.top">96dp</dimen>
 
     <dimen name="margin.popup">28dp</dimen>
+
+
+    <dimen name="distance.logo.top">36dp</dimen>
+
+
+    <dimen name="tigoad.text.size">14.4dp</dimen>
 
 </resources>

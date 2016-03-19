@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         //all conditions GOOD proceed to process instagram link
         InstagramApp.log("URL is : " + url);
         if(Utils.isTheLastUr(context, url)) {
-            //no need to download it again...
+            //no need to saveStream it again...
             showInstructionFragment();
         } else {
             proceedLoading(url);

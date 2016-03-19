@@ -14,4 +14,7 @@
 
     <dimen name="margin.popup">16dp</dimen>
 
+
+    <dimen name="distance.logo.top">24dp</dimen>
+
 </resources>

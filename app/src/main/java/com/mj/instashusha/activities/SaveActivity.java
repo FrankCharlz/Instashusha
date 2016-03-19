@@ -43,7 +43,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Random;
 
 import okhttp3.Request;
 
@@ -98,7 +97,7 @@ public class SaveActivity extends AppCompatActivity {
         source_url = intent.getStringExtra(SRC_URL);
         from_service = intent.getBooleanExtra(FROM_SERVICE, false);
 
-        from_service = new Random().nextBoolean();
+        //from_service = new Random().nextBoolean(); //for testing purpose...
 
         initViews();
         proceed(source_url);
@@ -159,7 +158,7 @@ public class SaveActivity extends AppCompatActivity {
 
         activity_view_container = findViewById(R.id.container_layout_activity_save);
 
-       View ta = findViewById(R.id.tigo_ad_save_activity);
+        View ta = findViewById(R.id.tigo_ad_save_activity);
         ta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -215,35 +214,19 @@ public class SaveActivity extends AppCompatActivity {
                 case R.id.btn_share:
                     share_after_download = true;
                     download();
-                    Snackbar
-                            .make(activity_view_container,
-                                    "Wait while the video is being downloaded.\n" +
-                                            "It will be shared thereafter",
-                                    Snackbar.LENGTH_LONG)
-                            .show();
-                    break;
+                    showDownloadingWarnSnackBar();
 
                 case R.id.btn_share_2:
                     share_after_download = true;
                     share_to_whatsapp = true;
                     download();
-                    Snackbar
-                            .make(activity_view_container,
-                                    "Wait while the video is being downloaded.\n" +
-                                            "It will be shared thereafter",
-                                    Snackbar.LENGTH_LONG)
-                            .show();
+                    showDownloadingWarnSnackBar();
                     break;
 
                 case R.id.btn_repost:
                     repost_after_download = true;
                     download();
-                    Snackbar
-                            .make(activity_view_container,
-                                    "Wait while the video is being downloaded.\n" +
-                                            "It will be reposted thereafter",
-                                    Snackbar.LENGTH_LONG)
-                            .show();
+                    showDownloadingWarnSnackBar();
                     break;
 
                 case R.id.btn_download:
@@ -251,11 +234,22 @@ public class SaveActivity extends AppCompatActivity {
                     InstagramApp.log("clicked : "+view.toString());
                     download();
                     break;
-                default: break;
+                default:
+                    break;
             }
 
         }
     }
+
+    private void showDownloadingWarnSnackBar() {
+        Snackbar
+                .make(activity_view_container,
+                        "Wait while the video is being downloaded.\n" +
+                                "It will be reposted thereafter",
+                        Snackbar.LENGTH_LONG)
+                .show();
+    }
+
 
     private void download() {
         //sets the save path, so that it can be used in share intent...
@@ -285,7 +279,7 @@ public class SaveActivity extends AppCompatActivity {
 
         @Override
         public void onBitmapFailed(Drawable errorDrawable) {
-            Snackbar.make(activity_view_container, "Imegoma, tafadhali jaribu tena", Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(activity_view_container, "Sorry, try again later...", Snackbar.LENGTH_INDEFINITE)
                     .show();
         }
 

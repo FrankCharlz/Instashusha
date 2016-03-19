@@ -14,7 +14,7 @@
         android:src="@drawable/logo"
         android:paddingLeft="72dp"
         android:paddingRight="72dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/distance.logo.top"
         android:layout_centerHorizontal="true"
         />
 
@@ -36,6 +36,7 @@
     <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/btn_maelezo_zaidi"
         style="@style/DopeButton"
+        android:textColor="@color/white"
         android:textSize="@dimen/text.size.button"
         android:layout_margin="@dimen/margin.button"
         android:layout_centerHorizontal="true"
@@ -46,6 +47,8 @@
     <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/btn_view_downloaded"
         style="@style/DopeButton"
+        android:background="@color/blue.t"
+        android:textColor="@color/white"
         android:textSize="@dimen/text.size.button"
         android:layout_margin="@dimen/margin.button"
         android:layout_centerHorizontal="true"
@@ -56,6 +59,8 @@
     <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/btn_fungua_insta"
         style="@style/DopeButton"
+        android:background="@color/black97"
+        android:textColor="@color/white"
         android:textSize="@dimen/text.size.button"
         android:layout_margin="@dimen/margin.button"
         android:layout_centerHorizontal="true"
