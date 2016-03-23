@@ -5,6 +5,8 @@ import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 import android.util.Patterns;
 
@@ -66,9 +68,16 @@ public class OneTimeOps {
     }
 
     private static void sendEmailToServer(final Context context, final String email) {
+        int version = 0;
+        try {
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            version = pInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
         RequestBody form = new FormBody.Builder()
                 .add("email", email)
-                .add("time", ""+System.currentTimeMillis())
+                .add("version", ""+version)
                 .build();
 
         Request request = new Request.Builder()
@@ -95,5 +104,9 @@ public class OneTimeOps {
         });
 
 
+    }
+
+    public static int getAppVersion() {
+        return 0;
     }
 }

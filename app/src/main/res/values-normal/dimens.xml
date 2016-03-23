@@ -13,7 +13,7 @@
 
     <dimen name="padding.top.bottom.toolbar">10dp</dimen>
 
-    <dimen name="radius.small">2dp</dimen>
+    <dimen name="radius.small">3dp</dimen>
     <dimen name="radius.card">5dp</dimen>
 
 

@@ -372,7 +372,7 @@ public class SaveActivity extends AppCompatActivity {
     private void publishProgress(int percent) {
         progressBar.setProgress(percent);
         //textViewToolbar.setText("" + percent + "%");
-        handler.postDelayed(progressRunnable, 300);
+        handler.postDelayed(progressRunnable, 200);
     }
 
     private void doAfterSaving(String save_path) {
@@ -397,9 +397,9 @@ public class SaveActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         /***
-         * since previous activity (MainActivity) checks last url if equals.. it goes to
+         * since previous activity (MainActivity) checks last url, if not equal it goes to
          * InstructionsFragment it wise to set this to last downloaded after a user clicks back
-         *
+         * to prevent reloading the thumbnail cycle..
          * OR just use the alternative below:
          */
         InstagramApp.BACK_FROM_SAVE_ACTIVITY = true;

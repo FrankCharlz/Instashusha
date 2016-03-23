@@ -36,7 +36,7 @@
         style="@style/NumberProgressBar_Default"
         android:layout_margin="@dimen/radius.small"
         app:progress_text_size="@dimen/text.size.progress"
-        android:visibility="invisible"
+        android:visibility="gone"
         />
 
     <ViewStub android:id="@+id/stub"

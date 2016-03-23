@@ -2,7 +2,7 @@
     <dimen name="padding.top.bottom">22dp</dimen>
     <dimen name="padding.left.right">44dp</dimen>
 
-    <dimen name="radius.small">4dp</dimen>
+    <dimen name="radius.small">5dp</dimen>
     <dimen name="radius.card">9dp</dimen>
 
 

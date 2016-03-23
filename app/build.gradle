@@ -8,8 +8,8 @@ android {
         applicationId "com.mj.pichazainsta"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 8
-        versionName "3.0.0"
+        versionCode 9
+        versionName "3.0.1"
     }
     buildTypes {
         release {
@@ -39,7 +39,7 @@ dependencies {
     compile 'com.github.codechimp-org.apprater:library:1.0.+'
     compile 'com.github.paolorotolo:appintro:3.3.0'
 
-   compile 'com.daimajia.numberprogressbar:library:1.2@aar'
+    compile 'com.daimajia.numberprogressbar:library:1.2@aar'
 
 
 
