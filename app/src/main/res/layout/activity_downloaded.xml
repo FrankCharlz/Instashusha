@@ -28,11 +28,11 @@
         android:scrollHorizontally="true"
         android:ellipsize="end"
         android:singleLine="true"
-        />
+        android:visibility="gone" />
 
 
     <com.google.android.gms.ads.AdView
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/adView_activity_finisher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

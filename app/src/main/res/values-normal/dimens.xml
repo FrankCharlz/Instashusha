@@ -39,5 +39,5 @@
     <dimen name="tigoad.height.max">60dp</dimen>
     <dimen name="zero_dip">0dip</dimen>
 
-
+    <dimen name="text.size.progress">12.6sp</dimen>
 </resources>

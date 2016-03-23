@@ -17,4 +17,5 @@
 
     <dimen name="distance.logo.top">24dp</dimen>
 
+    <item name="text.size.progress" type="dimen" format="float">13.2</item>
 </resources>

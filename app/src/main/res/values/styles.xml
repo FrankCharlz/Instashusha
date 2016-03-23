@@ -19,6 +19,7 @@
         <item name="android:background">@drawable/button_bg_selector</item>
 
         <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text.size.button</item>
 
         <item name="android:paddingTop">@dimen/padding.top.bottom</item>
         <item name="android:paddingBottom">@dimen/padding.top.bottom</item>

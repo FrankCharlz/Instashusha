@@ -29,5 +29,6 @@
 
     <dimen name="distance.logo.top">144dp</dimen>
 
+    <dimen name="text.size.progress">14.6sp</dimen>
 </resources>
 

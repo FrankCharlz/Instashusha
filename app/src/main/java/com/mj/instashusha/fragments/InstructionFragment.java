@@ -51,7 +51,7 @@ public class InstructionFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_instruction, container, false);
         context = getActivity();
 
-        //loadAds();
+        loadAds();
 
         final DopeTextView btnViewDownloaded = (DopeTextView) root.findViewById(R.id.btn_view_downloaded);
         String s = context.getResources().getString(R.string.view_downloaded)+" ("
@@ -65,11 +65,6 @@ public class InstructionFragment extends Fragment {
 
         final DopeTextView btnOpenInsta = (DopeTextView) root.findViewById(R.id.btn_fungua_insta);
         btnOpenInsta.setOnClickListener(new ButtonClicks());
-
-        //make all buttons equal width...
-        int goodWidth = btnViewDownloaded.getWidth();
-        //btnOpenInsta.setWidth(goodWidth);
-        //btnOpenTutorial.setWidth(goodWidth);
 
         rootContainer = container;
 
@@ -122,7 +117,7 @@ public class InstructionFragment extends Fragment {
                     } else {
                         Snackbar
                                 .make(rootContainer,
-                                        "No media downloaded",
+                                        "No media downloaded yet",
                                         Snackbar.LENGTH_SHORT)
                                 .show();
                     }

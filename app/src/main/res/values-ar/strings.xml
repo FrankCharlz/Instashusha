@@ -20,8 +20,9 @@
     <string name="maelezo_body_3">  وثيق في Instagram و\n مفتوحة Instashusha  </string>
     <string name="message_when_loading">يرجى الانتظار ، مجرد ثانية</string>
 
-    <string name="save_finished">Created by @instashusha \n Playstore: https://play.google.com/?id=com.mj.pichazainsta</string>
-    <string name="share_to_string">Shared from @InstaShusha. Get it from play store:\nhttps://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
+    <string name="save_finished">متاحة بحرية في  https://play.google.com/?id=com.mj.pichazainsta</string>
+    <string name="share_to_string">متاحة بحرية في
+        https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
     <string name="msg.subiri.kidogo">jأرجو الإنتظار...</string>
 
 </resources>

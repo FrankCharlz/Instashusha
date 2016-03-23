@@ -10,7 +10,7 @@
 
     <string name="instructions">Download photos and videos from Instagram, share na repost</string>
 
-    <string name="maelezo_body_1">Start Instagram then tap on the three dots as shown above</string>
+    <string name="maelezo_body_1">On Instagram navigate to a photo then tap on the arrow as shown above</string>
 
     <string name="maelezo_title_1">Step 1</string>
     <string name="maelezo_title_2">Step 2</string>
@@ -20,8 +20,8 @@
     <string name="maelezo_body_3">  Close Instagram and open InstaShusha  </string>
     <string name="message_when_loading">please wait, just a sec...</string>
 
-    <string name="save_finished">Created by @instashusha \n Playstore: https://play.google.com/?id=com.mj.pichazainsta</string>
-    <string name="share_to_string">Downloaded by @InstaShusha. Get it from playstore:\nhttps://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
+    <string name="save_finished">Freely available at: https://play.google.com/?id=com.mj.pichazainsta</string>
+    <string name="share_to_string">Freely available at: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
     <string name="msg.subiri.kidogo">just a sec...</string>
 
 </resources>

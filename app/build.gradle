@@ -39,6 +39,9 @@ dependencies {
     compile 'com.github.codechimp-org.apprater:library:1.0.+'
     compile 'com.github.paolorotolo:appintro:3.3.0'
 
+   compile 'com.daimajia.numberprogressbar:library:1.2@aar'
+
+
 
 }
 

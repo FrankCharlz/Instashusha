@@ -18,9 +18,9 @@ import android.view.ViewStub;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
@@ -64,7 +64,7 @@ public class SaveActivity extends AppCompatActivity {
     private TextView textViewToolbar;
     private View buttonsContainer;
 
-    private ProgressBar progressBar;
+    private NumberProgressBar progressBar;
 
     private View btnSave, btnRepost, btnShare;
     private boolean isImage;
@@ -85,7 +85,7 @@ public class SaveActivity extends AppCompatActivity {
         context = this;
         AppRater.app_launched(this); //for ratings...
 
-        //loadAds();
+        loadAds();
 
         Tracker mTracker = ((InstagramApp) getApplication()).getDefaultTracker();
         mTracker.enableAdvertisingIdCollection(true);
@@ -95,7 +95,7 @@ public class SaveActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         source_url = intent.getStringExtra(SRC_URL);
-        from_service = intent.getBooleanExtra(FROM_SERVICE, false);
+        //from_service = intent.getBooleanExtra(FROM_SERVICE, false);
 
         //from_service = new Random().nextBoolean(); //for testing purpose...
         //from_service = true;
@@ -152,7 +152,7 @@ public class SaveActivity extends AppCompatActivity {
 
         buttonsContainer.setVisibility(View.GONE);
 
-        progressBar = (ProgressBar) findViewById(R.id.progress_dl);
+        progressBar = (NumberProgressBar) findViewById(R.id.number_progress_bar);
 
         final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings_home);
         btnMenu.setOnClickListener(new MenuClick(this));
@@ -280,7 +280,7 @@ public class SaveActivity extends AppCompatActivity {
 
         @Override
         public void onBitmapFailed(Drawable errorDrawable) {
-            Snackbar.make(activity_view_container, "Sorry, try again later...", Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(activity_view_container, "Sorry, try again...", Snackbar.LENGTH_INDEFINITE)
                     .show();
         }
 
@@ -371,8 +371,8 @@ public class SaveActivity extends AppCompatActivity {
 
     private void publishProgress(int percent) {
         progressBar.setProgress(percent);
-        textViewToolbar.setText("" + percent + "%");
-        handler.postDelayed(progressRunnable, 600);
+        //textViewToolbar.setText("" + percent + "%");
+        handler.postDelayed(progressRunnable, 300);
     }
 
     private void doAfterSaving(String save_path) {

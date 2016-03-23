@@ -1,0 +1,27 @@
+<resources>
+
+    <string name="btn.download">SAUVER</string>
+    <string name="btn.share">PARTAGER</string>
+    <string name="btn.repost">RE-POSTER</string>
+
+    <string name="view_downloaded">SAUVÉ</string>
+    <string name="open_tutorial">COMMENT UTILISER</string>
+    <string name="open_instagram">OUVERT INSTAGRAM</string>
+
+    <string name="instructions">Télécharger des photos et des vidéos provenant d\'Instagram , partager na repost</string>
+
+    <string name="maelezo_body_1">Sur Instagram naviguer à une photo puis appuyez sur la flèche comme illustré ci-dessus</string>
+
+    <string name="maelezo_title_1">Étape 1</string>
+    <string name="maelezo_title_2">Étape 2</string>
+    <string name="maelezo_title_3">Étape 3</string>
+
+    <string name="maelezo_body_2">Appuyez sur \'copie part url\'</string>
+    <string name="maelezo_body_3"> Fermer Instagram et InstaShusha ouverte </string>
+    <string name="message_when_loading">please wait, just a sec...</string>
+
+    <string name="save_finished">Librement disponible à : https://play.google.com/?id=com.mj.pichazainsta</string>
+    <string name="share_to_string">Librement disponible à: https://play.google.com/?id=com.mj.pichazainsta</string>
+    <string name="msg.subiri.kidogo">juste une seconde...</string>
+
+</resources>

@@ -42,8 +42,7 @@
     <!-- should be removed-->
     <dimen name="space.from.top">120dp</dimen>
 
-
-
+    <dimen name="text.size.progress">13sp</dimen>
 </resources>
     
 

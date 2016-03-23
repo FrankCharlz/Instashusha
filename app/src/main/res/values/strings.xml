@@ -1,39 +1,41 @@
 <resources>
     <string name="app_name" translatable="false">InstaShusha</string>
 
-    <string name="btn.download">SAVE</string>
-    <string name="btn.share">SHARE</string>
-    <string name="btn.repost">REPOST</string>
-
-    <string name="instructions">Download picha kutoka Instagram, share na repost</string>
-    <string name="view_downloaded">Zilizoshushwa</string>
-    <string name="open_tutorial">Maelezo zaidi</string>
-    <string name="open_instagram">     Fungua Instagram     </string>
-
-    <string name="maelezo_body_1">Fungua Instagram na bonyeza kimshale kama inavoonekana hapo juu</string>
-    <string name="maelezo_title_1">Hatua ya 1</string>
-    <string name="maelezo_title_2">Hatua ya 2</string>
-    <string name="maelezo_body_2">Bonyeza \'copy share url\'</string>
-    <string name="maelezo_title_3">Hatua ya 3</string>
-    <string name="maelezo_body_3">  Funga Instagram kisha fungua InstaShusha App  </string>
-    <string name="message_when_loading">Subiri kidogo</string>
-
-
     <string name="banner_ad_unit_id_home" translatable="false">ca-app-pub-8621518791154354/3031579423</string>
     <string name="banner_ad_unit_id_save" translatable="false">ca-app-pub-8621518791154354/6124646624</string>
     <string name="banner_ad_unit_id_finisher" translatable="false">ca-app-pub-8621518791154354/9078113020</string>
 
-    <string name="save_finished">Created by @instashusha \n Playstore: https://play.google.com/?id=com.mj.pichazainsta</string>
-    <string name="share_to_string">Shared from @InstaShusha. Get it from play store:\nhttps://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
+    <string translatable="false" name="sample_url">https://www.instagram.com/p/_oJiUqFPdy/</string>
+    <string translatable="false" name="sample_tigo_ad">Rahisisha maisha na TigoPesaApp. \nBofya hapa</string>
+    <string translatable="false" name="tigo_ish">download photos and videos and share them with Whatsapp for free with Tigo</string>
+    <string translatable="false" name="btn.share.whatsapp">SHARE TO </string>
+
+    <string translatable="false" name="popup_ad">Furahia whatsapp ya BURE ukinunua bando lolote la wiki au laini mpya.</string>
+
+
+    <string name="btn.download">SAVE</string>
+    <string name="btn.share">SHARE</string>
+    <string name="btn.repost">REPOST</string>
+
+    <string name="view_downloaded">DOWNLOADED</string>
+    <string name="open_tutorial">HOW TO USE</string>
+    <string name="open_instagram">OPEN INSTAGRAM</string>
+
+    <string name="instructions">Download photos and videos from Instagram, share na repost</string>
+
+    <string name="maelezo_body_1">On Instagram navigate to a photo then tap on the arrow as shown above</string>
+
+    <string name="maelezo_title_1">Step 1</string>
+    <string name="maelezo_title_2">Step 2</string>
+    <string name="maelezo_title_3">Step 3</string>
+
+    <string name="maelezo_body_2">Tap on \'copy share url\'</string>
+    <string name="maelezo_body_3">  Close Instagram and open InstaShusha  </string>
+    <string name="message_when_loading">please wait, just a sec...</string>
+
+    <string name="save_finished">Freely available at: https://play.google.com/?id=com.mj.pichazainsta</string>
+    <string name="share_to_string">Freely available at: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
     <string name="msg.subiri.kidogo">just a sec...</string>
-    <string name="sample_url">https://www.instagram.com/p/_oJiUqFPdy/</string>
-    <string name="sample_tigo_ad">Rahisisha maisha na TigoPesaApp. \nBofya hapa</string>
-    <string name="tigo_ish">download photos and videos and share them with Whatsapp for free with Tigo</string>
-    <string name="btn.share.whatsapp">SHARE TO </string>
-
-    <string name="popup_ad">Furahia whatsapp ya BURE ukinunua bando lolote la wiki au laini mpya.</string>
-
-
 
 
 </resources>

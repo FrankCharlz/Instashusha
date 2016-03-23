@@ -34,7 +34,7 @@ public class DownloadedActivity extends AppCompatActivity {
 
         initViews();
 
-        //loadAds();
+        loadAds();
 
         File items[] = InstagramApp.getAppFolder().listFiles();
 
