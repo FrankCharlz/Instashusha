@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
-        android:paddingLeft="72dp"
-        android:paddingRight="72dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="72dp"
         android:layout_marginTop="@dimen/distance.logo.top"
         android:layout_centerHorizontal="true" />
 
@@ -21,9 +21,9 @@
         android:id="@+id/logo_words"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/instructions"
-        android:textSize="18sp"
-        android:textColor="@color/black"
+        android:text="@string/tigo_ish"
+        android:textSize="16sp"
+        android:textColor="#77000000"
         android:gravity="center"
         android:layout_below="@id/logo"
         android:paddingLeft="32dp"
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        layout="@layout/layout_buttons_vertical_saad"
+        layout="@layout/layout_buttons_vertical"
         android:layout_below="@+id/logo_words"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

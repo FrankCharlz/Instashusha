@@ -7,7 +7,8 @@
 
     <string translatable="false" name="sample_url">https://www.instagram.com/p/_oJiUqFPdy/</string>
     <string translatable="false" name="sample_tigo_ad">Rahisisha maisha na TigoPesaApp. \nBofya hapa</string>
-    <string translatable="false" name="tigo_ish">download photos and videos and share them with Whatsapp for free with Tigo</string>
+
+    <string translatable="false" name="tigo_ish">Download friends\' Instagram photos and videos and share to Whatsapp for free with Tigo </string>
     <string translatable="false" name="btn.share.whatsapp">SHARE TO </string>
 
     <string translatable="false" name="popup_ad">Furahia whatsapp ya BURE ukinunua bando lolote la wiki au laini mpya.</string>

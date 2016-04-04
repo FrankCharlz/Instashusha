@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -22,9 +21,6 @@ import com.mj.instashusha.R;
 import com.mj.instashusha.activities.DownloadedActivity;
 import com.mj.instashusha.activities.IntroActivity;
 import com.mj.instashusha.utils.DopeTextView;
-import com.mj.instashusha.utils.Utils;
-
-import info.hoang8f.widget.FButton;
 
 /**
  * Created by Frank on 12/19/2015.
@@ -55,17 +51,17 @@ public class InstructionFragment extends Fragment {
 
         loadAds();
 
-        final FButton btnViewDownloaded = (FButton) root.findViewById(R.id.btn_view_downloaded);
+        final DopeTextView btnViewDownloaded = (DopeTextView) root.findViewById(R.id.btn_view_downloaded);
         String s = context.getResources().getString(R.string.view_downloaded)+" ("
                 +InstagramApp.mediaDownloaded()+")";
         btnViewDownloaded.setText("");
         btnViewDownloaded.setText(s);
         btnViewDownloaded.setOnClickListener(new ButtonClicks());
 
-        final FButton btnOpenTutorial = (FButton) root.findViewById(R.id.btn_maelezo_zaidi);
+        final DopeTextView btnOpenTutorial = (DopeTextView) root.findViewById(R.id.btn_maelezo_zaidi);
         btnOpenTutorial.setOnClickListener(new ButtonClicks());
 
-        final FButton btnOpenInsta = (FButton) root.findViewById(R.id.btn_fungua_insta);
+        final DopeTextView btnOpenInsta = (DopeTextView) root.findViewById(R.id.btn_fungua_insta);
         btnOpenInsta.setOnClickListener(new ButtonClicks());
 
         rootContainer = container;
