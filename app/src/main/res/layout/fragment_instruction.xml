@@ -36,7 +36,9 @@
     <include
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        layout="@layout/layout_buttons_vertical"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        layout="@layout/layout_buttons_vertical_saad"
         android:layout_below="@+id/logo_words"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

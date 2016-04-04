@@ -1,61 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/green.t"
-        android:layout_margin="@dimen/margin.button">
+        android:layout_margin="8dp"
+        fbutton:buttonColor="@color/blue.t"
+        fbutton:shadowColor="@color/blue.t.0"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
 
-        <com.mj.instashusha.utils.DopeTextView
-            android:id="@+id/btn_maelezo_zaidi"
-            android:text="@string/open_tutorial"
+        android:id="@+id/btn_maelezo_zaidi"
+        android:text="@string/open_tutorial"
 
-            style="@style/DopeButton"
-            android:textColor="@color/white"
-            />
-    </LinearLayout>
+        />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blue.t"
-        android:layout_margin="@dimen/margin.button">
+        android:layout_margin="8dp"
+        fbutton:buttonColor="@color/blue.t"
+        fbutton:shadowColor="@color/blue.t.0"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
 
-        <com.mj.instashusha.utils.DopeTextView
-            android:id="@+id/btn_view_downloaded"
-            android:text="@string/view_downloaded"
-
-            style="@style/DopeButton"
-            android:textColor="@color/white"
+        android:id="@+id/btn_view_downloaded"
+        android:text="@string/view_downloaded"
+        />
 
 
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin.button"
-        android:background="@color/black97"
-        >
+        android:layout_margin="8dp"
+        fbutton:buttonColor="@color/blue.t"
+        fbutton:shadowColor="@color/blue.t.0"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
 
-        <com.mj.instashusha.utils.DopeTextView
-            android:id="@+id/btn_fungua_insta"
-            android:text="@string/open_instagram"
-
-            style="@style/DopeButton"
-            android:textColor="@color/white"
-
-            />
-    </LinearLayout>
-
-
-
+        android:id="@+id/btn_fungua_insta"
+        android:text="@string/open_instagram"
+        />
 
 </LinearLayout>

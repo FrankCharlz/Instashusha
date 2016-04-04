@@ -24,6 +24,8 @@ import com.mj.instashusha.activities.IntroActivity;
 import com.mj.instashusha.utils.DopeTextView;
 import com.mj.instashusha.utils.Utils;
 
+import info.hoang8f.widget.FButton;
+
 /**
  * Created by Frank on 12/19/2015.
  * God bless
@@ -53,17 +55,17 @@ public class InstructionFragment extends Fragment {
 
         loadAds();
 
-        final DopeTextView btnViewDownloaded = (DopeTextView) root.findViewById(R.id.btn_view_downloaded);
+        final FButton btnViewDownloaded = (FButton) root.findViewById(R.id.btn_view_downloaded);
         String s = context.getResources().getString(R.string.view_downloaded)+" ("
                 +InstagramApp.mediaDownloaded()+")";
         btnViewDownloaded.setText("");
         btnViewDownloaded.setText(s);
         btnViewDownloaded.setOnClickListener(new ButtonClicks());
 
-        final DopeTextView btnOpenTutorial = (DopeTextView) root.findViewById(R.id.btn_maelezo_zaidi);
+        final FButton btnOpenTutorial = (FButton) root.findViewById(R.id.btn_maelezo_zaidi);
         btnOpenTutorial.setOnClickListener(new ButtonClicks());
 
-        final DopeTextView btnOpenInsta = (DopeTextView) root.findViewById(R.id.btn_fungua_insta);
+        final FButton btnOpenInsta = (FButton) root.findViewById(R.id.btn_fungua_insta);
         btnOpenInsta.setOnClickListener(new ButtonClicks());
 
         rootContainer = container;
