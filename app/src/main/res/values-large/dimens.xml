@@ -25,7 +25,9 @@
     <dimen name="margin.popup">64dp</dimen>
 
 
-    <dimen name="tigoad.text.size">16dp</dimen>
+    <dimen name="tigoad.text.size">28sp</dimen>
+
+    <dimen name="tigoad.height.max">120dp</dimen>
 
     <dimen name="distance.logo.top">144dp</dimen>
 

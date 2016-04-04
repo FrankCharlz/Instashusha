@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
 
-        //startBackgroundService();
+        checkAndStartBackgroundService();
 
     }
 
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    private void startBackgroundService() {
+    private void checkAndStartBackgroundService() {
         //check if service was started successfully, if not start it now...
         Intent serviceIntent = new Intent(getBaseContext()  , PopUpService.class);
         boolean sup = isServiceRunning(PopUpService.class);
