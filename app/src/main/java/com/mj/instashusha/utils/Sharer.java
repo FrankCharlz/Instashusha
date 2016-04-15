@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 
 import java.io.File;
@@ -22,18 +25,32 @@ public class Sharer {
     private static final String PACKAGE_INSTAGRAM = "com.instagram.android";
 
 
-    public static void share(Context context, File file, boolean share_to_whatsapp) {
+    public static void share(Context context, File file, boolean share_to_whatsapp, Tracker mTracker) {
 
         if (share_to_whatsapp) {
             createShareIntent(context, file, PACKAGE_WHATSAPP);
         } else  {
             createShareIntent(context, file, PACKAGE_NONE);
         }
+
+      track(mTracker);
+    }
+
+    private static void track(Tracker mTracker) {
+
+        if (mTracker == null) return;
+
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("BUTTON CLICKS")
+                .setAction("SHARE CLICKED")
+                .setLabel("SHARE")
+                .build());
     }
 
 
-    public static void repost(Context context, File file) {
+    public static void repost(Context context, File file, Tracker mTracker) {
         createShareIntent(context, file, PACKAGE_INSTAGRAM  );
+        track(mTracker);
     }
 
     private static void createShareIntent(Context context, File file, String app_package) {

@@ -3,6 +3,7 @@ package com.mj.instashusha.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -11,14 +12,21 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.mj.instashusha.Constants;
 import com.mj.instashusha.InstagramApp;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -26,6 +34,7 @@ public class Utils {
 
     private static final String LAST_URL = "last_insta_url_loaded";
     public static final String PREFS_FILE_NAME = "FhYmkF";
+    private static final String DOWNLOADED_MEDIA_COUNT = "bj73m";
 
     public static  void saveImage(Context context, ImageView imageView, String save_path) {
         imageView.setDrawingCacheEnabled(true);
@@ -48,11 +57,49 @@ public class Utils {
         }
     }
 
-    public static void addFileToMediaDatabase(Context context, String file_path) {
-        Uri contentUri = Uri.fromFile(new File(file_path));
+    public static void addFileToMediaDatabase(Context context, String path) {
+        /***
+         * store the total number of downloaded media..
+         * +
+         * add the file path to database
+         * +
+         * add the media to gallery
+         */
+        addPathToDB(context, path);
+        incrementDownloadedMedia(context);
+
+        Uri contentUri = Uri.fromFile(new File(path));
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         mediaScanIntent.setData(contentUri);
         context.sendBroadcast(mediaScanIntent);
+    }
+
+    private static void addPathToDB(Context context, String path) {
+        try {
+            FileOutputStream dbOutStream = context.openFileOutput(Constants.DB_NAME, Context.MODE_APPEND);
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(dbOutStream));
+            writer.write(path.trim());
+            writer.newLine();
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            InstagramApp.log("Failed to add path to db");
+        }
+    }
+
+    private static void incrementDownloadedMedia(Context context) {
+        int current_number = getDownloadedMediaCount(context);
+        context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+                .edit()
+                .putInt(DOWNLOADED_MEDIA_COUNT, current_number + 1)
+                .apply();
+    }
+
+    public static int getDownloadedMediaCount(Context context) {
+        return context
+                .getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+                .getInt(DOWNLOADED_MEDIA_COUNT, 0);
     }
 
 
@@ -98,21 +145,6 @@ public class Utils {
 
     public static String getLastUrl(Context context) {
         return context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE).getString(LAST_URL, "x");
-    }
-
-
-    public static void setBackgroundColor(View view, int color) {
-        Drawable background = view.getBackground();
-        if (background instanceof ShapeDrawable) {
-            ((ShapeDrawable)background).getPaint().setColor(color);
-        } else if (background instanceof GradientDrawable) {
-            ((GradientDrawable)background).setColor(color);
-        } else if (background instanceof ColorDrawable) {
-            ((ColorDrawable)background).setColor(color);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            view.setBackground(background);
-        }
     }
 
 

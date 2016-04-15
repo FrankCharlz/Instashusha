@@ -76,6 +76,7 @@ public class SaveActivity extends AppCompatActivity {
     private boolean from_service;
     private ButtonClicks buttonClicks;
     private boolean share_to_whatsapp = false;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +86,9 @@ public class SaveActivity extends AppCompatActivity {
         context = this;
         AppRater.app_launched(this); //for ratings...
 
-        loadAds();
+        //loadAds();
 
-        Tracker mTracker = ((InstagramApp) getApplication()).getDefaultTracker();
+        mTracker = ((InstagramApp) getApplication()).getDefaultTracker();
         mTracker.enableAdvertisingIdCollection(true);
         mTracker.setScreenName("SCREEN_SAVE_ACTIVITY");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
@@ -95,7 +96,7 @@ public class SaveActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         source_url = intent.getStringExtra(SRC_URL);
-        //from_service = intent.getBooleanExtra(FROM_SERVICE, false);
+        from_service = intent.getBooleanExtra(FROM_SERVICE, false);
 
         //from_service = new Random().nextBoolean(); //for testing purpose...
         //from_service = true;
@@ -377,11 +378,11 @@ public class SaveActivity extends AppCompatActivity {
 
     private void doAfterSaving(String save_path) {
         if (share_after_download) {
-            Sharer.share(context, new File(save_path), share_to_whatsapp);
+            Sharer.share(context, new File(save_path), share_to_whatsapp, mTracker);
             share_after_download = false;
             share_to_whatsapp  = false;
         } else if (repost_after_download) {
-            Sharer.repost(context, new File(save_path));
+            Sharer.repost(context, new File(save_path), mTracker);
             repost_after_download = false;
         } else {
             //open downloaded activity....

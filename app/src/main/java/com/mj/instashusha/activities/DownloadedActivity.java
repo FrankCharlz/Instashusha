@@ -12,15 +12,23 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.mj.instashusha.Constants;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.adapters.FileListAdapter;
 import com.mj.instashusha.utils.DopeTextView;
 import com.mj.instashusha.utils.MenuClick;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public class DownloadedActivity extends AppCompatActivity {
 
@@ -34,8 +42,26 @@ public class DownloadedActivity extends AppCompatActivity {
 
         initViews();
 
-        loadAds();
+        //loadAds();
 
+        ArrayList<String> items = new ArrayList<>(15);
+
+        try {
+            FileInputStream dbInStream = openFileInput(Constants.DB_NAME);
+            BufferedReader rd = new BufferedReader(new InputStreamReader(dbInStream));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                items.add(line.trim());
+                InstagramApp.log("read : " + line);
+            }
+
+            rd.close();
+            dbInStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*
         File items[] = InstagramApp.getAppFolder().listFiles();
 
         Arrays.sort(items, new Comparator<File>() {
@@ -44,11 +70,14 @@ public class DownloadedActivity extends AppCompatActivity {
                 return Long.valueOf(b.lastModified()).compareTo(a.lastModified());
             }
         });
+        */
 
 
-        if (items.length > MAX_DISPLAY_FILES) items = Arrays.copyOfRange(items, 0, MAX_DISPLAY_FILES);
+        List<String> items_short;
+        if (items.size() > MAX_DISPLAY_FILES) items_short = items.subList(0, MAX_DISPLAY_FILES);
+        else items_short = items;
 
-        FileListAdapter adapter = new FileListAdapter(this, items);
+        FileListAdapter adapter = new FileListAdapter(this, items_short);
 
         final RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_downloaded);
         mRecyclerView.setHasFixedSize(true);

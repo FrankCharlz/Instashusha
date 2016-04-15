@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.utils.Media;
 import com.mj.instashusha.utils.Sharer;
@@ -15,6 +16,7 @@ import com.mj.instashusha.utils.VideoThumbnailCache;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Created by Frank on 1/9/2016.
@@ -25,9 +27,9 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
 
     private final Context context;
-    private File[] items;
+    private List<String> items;
 
-    public FileListAdapter(Context context, File[] items) {
+    public FileListAdapter(Context context, List<String> items) {
         this.context = context;
         this.items = items;
     }
@@ -41,22 +43,24 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        File currentItem = items[position];
+        String currentItem = items.get(position);
 
-        if (!Media.isImage(currentItem.getName())) {
-            holder.fpic.setImageBitmap(VideoThumbnailCache.getBitmap(currentItem.getAbsolutePath()));
+        if (!Media.isImage(currentItem)) {
+            holder.fpic.setImageBitmap(VideoThumbnailCache.getBitmap(currentItem));
             holder.fPlayButton.setVisibility(View.VISIBLE);
         } else {
             Picasso.with(context).load(currentItem).into(holder.fpic);
         }
 
-        holder.name.setText(currentItem.getName());
+        int pl = currentItem.length();
+
+        holder.name.setText(currentItem.substring(pl/2, pl-4));
 
     }
 
     @Override
     public int getItemCount() {
-        return items.length;
+        return items.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -85,10 +89,10 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         public void onClick(View view) {
             //uses tag and position to determine right method to call
             if (view.getTag().equals(TAG_FPIC)) {
-                Media.openItem(context, items[getAdapterPosition()]);
+                Media.openItem(context, new File(items.get(getAdapterPosition())));
             }
             else if (view.getTag().equals(TAG_FSHARE)) {
-                Sharer.share(context, items[getAdapterPosition()], false);
+                Sharer.share(context, new File(items.get(getAdapterPosition())), false, null);
             }
         }
     }

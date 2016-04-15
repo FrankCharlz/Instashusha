@@ -57,12 +57,12 @@
         android:scrollHorizontally="true"
         android:ellipsize="end"
         android:singleLine="true"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 
     <!-- google ad -->
     <com.google.android.gms.ads.AdView
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/adView_activity_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

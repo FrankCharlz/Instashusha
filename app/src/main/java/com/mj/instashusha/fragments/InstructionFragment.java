@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import com.mj.instashusha.R;
 import com.mj.instashusha.activities.DownloadedActivity;
 import com.mj.instashusha.activities.IntroActivity;
 import com.mj.instashusha.utils.DopeTextView;
+import com.mj.instashusha.utils.Utils;
 
 /**
  * Created by Frank on 12/19/2015.
@@ -36,6 +38,8 @@ public class InstructionFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //loadAds();
+
         Tracker mTracker = ((InstagramApp) getActivity().getApplication()).getDefaultTracker();
         mTracker.enableAdvertisingIdCollection(true);
         mTracker.setScreenName("SCREEN_INSTRUCTION_FRAGMENT");
@@ -49,12 +53,10 @@ public class InstructionFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_instruction, container, false);
         context = getActivity();
 
-        loadAds();
-
         final DopeTextView btnViewDownloaded = (DopeTextView) root.findViewById(R.id.btn_view_downloaded);
-        String s = context.getResources().getString(R.string.view_downloaded)+" ("
-                +InstagramApp.mediaDownloaded()+")";
-        btnViewDownloaded.setText("");
+
+        int idadi = Utils.getDownloadedMediaCount(context);
+        String s = context.getResources().getString(R.string.view_downloaded)+" ("+idadi+")";
         btnViewDownloaded.setText(s);
         btnViewDownloaded.setOnClickListener(new ButtonClicks());
 
@@ -80,6 +82,8 @@ public class InstructionFragment extends Fragment {
         return root;
 
     }
+
+
 
     private void loadAds() {
         final AdView mAdView = (AdView) root.findViewById(R.id.adView_fragment);

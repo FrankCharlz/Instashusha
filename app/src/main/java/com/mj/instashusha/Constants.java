@@ -6,4 +6,5 @@ package com.mj.instashusha;
  */
 public class Constants {
     public static final String TIGO_URL = "http://www.tigo.co.tz/";
+    public static final String DB_NAME = "db";
 }

@@ -144,6 +144,7 @@ public class PopUpView {
         Intent intent = new Intent(context, SaveActivity.class);
         intent.putExtra(SaveActivity.FROM_SERVICE, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(SaveActivity.SRC_URL, url);
         context.startActivity(intent);
 
     }
