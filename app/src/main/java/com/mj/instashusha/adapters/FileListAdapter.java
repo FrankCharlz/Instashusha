@@ -1,6 +1,8 @@
 package com.mj.instashusha.adapters;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +23,6 @@ import java.util.List;
 /**
  * Created by Frank on 1/9/2016.
  *
- *
  */
 public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHolder> {
 
@@ -37,6 +38,18 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_downloaded, parent, false);
+
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+
+            ((CardView)view).setRadius(0f);
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            params.leftMargin = 0;
+            params.rightMargin = 0;
+            params.bottomMargin = 0;
+            params.topMargin = 0;
+            //view.setLayoutParams(params);
+        }
+
         return new ViewHolder(view);
     }
 
@@ -49,12 +62,12 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
             holder.fpic.setImageBitmap(VideoThumbnailCache.getBitmap(currentItem));
             holder.fPlayButton.setVisibility(View.VISIBLE);
         } else {
-            Picasso.with(context).load(currentItem).into(holder.fpic);
+            Picasso.with(context).load(new File(currentItem)).into(holder.fpic);
         }
 
         int pl = currentItem.length();
 
-        holder.name.setText(currentItem.substring(pl/2, pl-4));
+        holder.name.setText(currentItem.substring(pl/2 + 5, pl-4));
 
     }
 

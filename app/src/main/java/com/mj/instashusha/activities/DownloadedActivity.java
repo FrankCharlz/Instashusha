@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class DownloadedActivity extends AppCompatActivity {
 
         initViews();
 
-        //loadAds();
+        loadAds();
 
         ArrayList<String> items = new ArrayList<>(15);
 
@@ -61,17 +62,7 @@ public class DownloadedActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        /*
-        File items[] = InstagramApp.getAppFolder().listFiles();
-
-        Arrays.sort(items, new Comparator<File>() {
-            @Override
-            public int compare(File a, File b) {
-                return Long.valueOf(b.lastModified()).compareTo(a.lastModified());
-            }
-        });
-        */
-
+        Collections.reverse(items); //sort by date...
 
         List<String> items_short;
         if (items.size() > MAX_DISPLAY_FILES) items_short = items.subList(0, MAX_DISPLAY_FILES);

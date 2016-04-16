@@ -1,5 +1,7 @@
 package com.mj.instashusha.network;
 
+import com.mj.instashusha.InstagramApp;
+
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,19 +13,6 @@ import java.net.URL;
  *
  */
 public class Downloader {
-
-    public static void saveStream(String url, String to, ProgressListener listener) {
-        try {
-            URL _url = new URL(url);
-            InputStream in = _url.openStream();
-            long size = 3 * 1024 * 1024 / 2;
-            saveStream(in, size, to, listener);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
     public static void saveStream(InputStream stream, long size, String save_path, ProgressListener progressListener) {
 
@@ -50,8 +39,12 @@ public class Downloader {
                 progressListener.onProgress(percent);
             }
 
+            //ething good
+            progressListener.onCompleted(save_path);
+
         } catch (Exception e) {
             e.printStackTrace();
+            InstagramApp.log("Failed to download : " + e.getLocalizedMessage());
         } finally {
             try {
                 if (in != null) in.close();
@@ -59,7 +52,6 @@ public class Downloader {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            progressListener.onCompleted();
 
         }
 

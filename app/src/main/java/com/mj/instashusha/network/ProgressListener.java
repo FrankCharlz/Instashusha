@@ -10,5 +10,5 @@ public interface ProgressListener {
 
     void onStart();
 
-    void onCompleted();
+    void onCompleted(String save_path);
 }

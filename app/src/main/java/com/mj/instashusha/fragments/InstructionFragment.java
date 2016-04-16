@@ -38,7 +38,7 @@ public class InstructionFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //loadAds();
+        loadAds();
 
         Tracker mTracker = ((InstagramApp) getActivity().getApplication()).getDefaultTracker();
         mTracker.enableAdvertisingIdCollection(true);

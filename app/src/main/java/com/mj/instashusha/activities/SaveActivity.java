@@ -28,8 +28,10 @@ import com.google.android.gms.analytics.Tracker;
 import com.mj.instashusha.Constants;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.R;
+import com.mj.instashusha.network.Downloader;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
+import com.mj.instashusha.network.ProgressListener;
 import com.mj.instashusha.utils.MenuClick;
 import com.mj.instashusha.utils.Sharer;
 import com.mj.instashusha.utils.Utils;
@@ -38,9 +40,7 @@ import com.squareup.picasso.Target;
 
 import org.codechimp.apprater.AppRater;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -72,11 +72,11 @@ public class SaveActivity extends AppCompatActivity {
     private boolean share_after_download = false, repost_after_download = false;
 
     private  Handler handler = new Handler(Looper.getMainLooper());
-    private int percent = 0;
     private boolean from_service;
     private ButtonClicks buttonClicks;
     private boolean share_to_whatsapp = false;
     private Tracker mTracker;
+    private boolean downloadInProgress = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,14 +85,6 @@ public class SaveActivity extends AppCompatActivity {
 
         context = this;
         AppRater.app_launched(this); //for ratings...
-
-        //loadAds();
-
-        mTracker = ((InstagramApp) getApplication()).getDefaultTracker();
-        mTracker.enableAdvertisingIdCollection(true);
-        mTracker.setScreenName("SCREEN_SAVE_ACTIVITY");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-
 
         Intent intent = getIntent();
         source_url = intent.getStringExtra(SRC_URL);
@@ -104,8 +96,17 @@ public class SaveActivity extends AppCompatActivity {
         initViews();
         proceed(source_url);
 
+        loadAds();
+        track();
+
     }
 
+    private void track() {
+        mTracker = ((InstagramApp) getApplication()).getDefaultTracker();
+        mTracker.enableAdvertisingIdCollection(true);
+        mTracker.setScreenName("SCREEN_SAVE_ACTIVITY");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 
 
     private void loadAds() {
@@ -314,6 +315,7 @@ public class SaveActivity extends AppCompatActivity {
     }
 
     private void saveVideo(String video_url, final String save_path) {
+        downloadInProgress = true;
         progressBar.setVisibility(View.VISIBLE);
         InstagramApp.getOkHttpClient()
                 .newCall(new Request.Builder()
@@ -326,57 +328,57 @@ public class SaveActivity extends AppCompatActivity {
             @Override
             public void onVideoResponse(InputStream stream, final long size) throws IOException {
 
-                BufferedInputStream in = null;
-                FileOutputStream fout = null;
-                long downloaded = 0;
-                try {
-                    in = new BufferedInputStream(stream);
-                    fout = new FileOutputStream(save_path);
-
-                    int buffer_size = 1024 * 64;
-                    final byte data[] = new byte[buffer_size];
-                    int count;
-
-                    handler.post(progressRunnable);
-
-                    while ((count = in.read(data, 0, buffer_size)) != -1) {
-                        downloaded += count;
-                        fout.write(data, 0, count);
-                        percent = (int) (100.0f * downloaded / size);
-                    }
-
-                } finally {
-                    if (in != null) in.close();
-                    if (fout != null) fout.close();
-                    handler.removeCallbacks(progressRunnable);
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressBar.setVisibility(View.GONE);
-                            doAfterSaving(save_path);
-                        }
-                    });
-                }
+                Downloader.saveStream(stream, size, save_path, new DlProgressListener());
 
             }
 
         });
     }
 
-    private Runnable progressRunnable = new Runnable() {
-        @Override
-        public void run() {
-            publishProgress(percent);
-        }
-    };
+    private class DlProgressListener implements ProgressListener {
 
-    private void publishProgress(int percent) {
-        progressBar.setProgress(percent);
-        //textViewToolbar.setText("" + percent + "%");
-        handler.postDelayed(progressRunnable, 200);
+        @Override
+        public void onStart() {
+            downloadInProgress = true;
+        }
+
+        @Override
+        public void onProgress(final int progress) {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setProgress(progress);
+                }
+            });
+        }
+
+        @Override
+        public void onCompleted(final String save_path) {
+            downloadInProgress = false;
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setVisibility(View.GONE);
+                    doAfterSaving(save_path);
+                }
+            });
+        }
     }
 
     private void doAfterSaving(String save_path) {
+        downloadInProgress = false;
+        /***
+         * share if is it
+         * +
+         * store the total number of downloaded media..
+         * +
+         * add the file path to database
+         * +
+         * add the media to gallery
+         */
+        Utils.addPathToDB(context, save_path);
+        Utils.incrementDownloadedMedia(context);
+        Utils.addFileToMediaDatabase(context, save_path);
         if (share_after_download) {
             Sharer.share(context, new File(save_path), share_to_whatsapp, mTracker);
             share_after_download = false;
@@ -390,21 +392,22 @@ public class SaveActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        Utils.addFileToMediaDatabase(context, save_path);
+
     }
 
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         /***
          * since previous activity (MainActivity) checks last url, if not equal it goes to
          * InstructionsFragment it wise to set this to last downloaded after a user clicks back
          * to prevent reloading the thumbnail cycle..
          * OR just use the alternative below:
          */
+        super.onBackPressed();
         InstagramApp.BACK_FROM_SAVE_ACTIVITY = true;
         finish();
     }
+
 
 }

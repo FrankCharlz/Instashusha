@@ -58,23 +58,13 @@ public class Utils {
     }
 
     public static void addFileToMediaDatabase(Context context, String path) {
-        /***
-         * store the total number of downloaded media..
-         * +
-         * add the file path to database
-         * +
-         * add the media to gallery
-         */
-        addPathToDB(context, path);
-        incrementDownloadedMedia(context);
-
         Uri contentUri = Uri.fromFile(new File(path));
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         mediaScanIntent.setData(contentUri);
         context.sendBroadcast(mediaScanIntent);
     }
 
-    private static void addPathToDB(Context context, String path) {
+    public static void addPathToDB(Context context, String path) {
         try {
             FileOutputStream dbOutStream = context.openFileOutput(Constants.DB_NAME, Context.MODE_APPEND);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(dbOutStream));
@@ -88,7 +78,7 @@ public class Utils {
         }
     }
 
-    private static void incrementDownloadedMedia(Context context) {
+    public static void incrementDownloadedMedia(Context context) {
         int current_number = getDownloadedMediaCount(context);
         context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
                 .edit()
