@@ -8,8 +8,8 @@ android {
         applicationId "com.mj.pichazainsta"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 9
-        versionName "3.0.1"
+        versionCode 12
+        versionName "5.0.0"
     }
     buildTypes {
         release {
@@ -36,7 +36,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile 'com.google.android.gms:play-services-analytics:8.4.0'
 
-    compile 'com.github.codechimp-org.apprater:library:1.0.+'
+    compile 'com.github.codechimp-org.apprater:library:1.0.30'
     compile 'com.github.paolorotolo:appintro:3.3.0'
 
     compile 'com.daimajia.numberprogressbar:library:1.2@aar'

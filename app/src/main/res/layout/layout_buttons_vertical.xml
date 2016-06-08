@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -8,34 +7,29 @@
 
     <!--  width match parent to override dopebtn styles-->
 
-    <com.mj.instashusha.utils.DopeTextView
+    <com.mj.instashusha_tigo.utils.DopeTextView
         android:id="@+id/btn_maelezo_zaidi"
-        android:text="@string/open_tutorial"
-
         style="@style/DopeButton"
-        android:layout_margin="@dimen/margin.button"
-        android:layout_width="match_parent"
-        />
 
-    <com.mj.instashusha.utils.DopeTextView
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/margin.button"
+        android:text="@string/open_tutorial" />
+
+    <com.mj.instashusha_tigo.utils.DopeTextView
         android:id="@+id/btn_view_downloaded"
-        android:text="@string/view_downloaded"
-
         style="@style/DopeButton"
-        android:layout_margin="@dimen/margin.button"
-        android:layout_width="match_parent"
-        />
 
-    <com.mj.instashusha.utils.DopeTextView
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/margin.button"
+        android:text="@string/view_downloaded" />
+
+    <com.mj.instashusha_tigo.utils.DopeTextView
         android:id="@+id/btn_fungua_insta"
-        android:text="@string/open_instagram"
-
         style="@style/DopeButton"
-        android:layout_margin="@dimen/margin.button"
+
         android:layout_width="match_parent"
-        />
-
-
+        android:layout_margin="@dimen/margin.button"
+        android:text="@string/open_instagram" />
 
 
 </LinearLayout>

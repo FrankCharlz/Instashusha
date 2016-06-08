@@ -1,50 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <!-- added width to support weight, and override styles in DopeButton -->
 
-    <com.mj.instashusha.utils.DopeTextView
-        style="@style/DopeButton"
+    <com.mj.instashusha_tigo.utils.DopeTextView
         android:id="@+id/btn_download_2"
-        android:text="@string/btn.download"
-        android:textSize="@dimen/text.size.button"
-        android:layout_margin="@dimen/margin.button"
+        style="@style/DopeButton"
         android:layout_width="@dimen/zero_dip"
-        android:layout_weight="0.34" />
+        android:layout_margin="@dimen/margin.button"
+        android:layout_weight="0.34"
+        android:text="@string/btn.download"
+        android:textSize="@dimen/text.size.button" />
 
 
     <LinearLayout
         android:id="@+id/btn_share_2"
-        android:background="@drawable/button_bg_selector"
-        android:layout_margin="@dimen/margin.button"
         android:layout_width="@dimen/zero_dip"
-        android:layout_weight="0.66"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin.button"
+        android:layout_weight="0.66"
+        android:background="@drawable/button_bg_selector"
         android:gravity="center">
 
-        <com.mj.instashusha.utils.DopeTextView
-            android:textSize="@dimen/text.size.button"
-            android:textColor="@color/black"
+        <com.mj.instashusha_tigo.utils.DopeTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn.share.whatsapp"
-            />
+            android:textColor="@color/black"
+            android:textSize="@dimen/text.size.button" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@drawable/whatsapp2"
+            android:maxHeight="24dp"
             android:paddingLeft="6dp"
-            android:maxHeight="24dp"/>
+            android:src="@drawable/whatsapp2" />
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

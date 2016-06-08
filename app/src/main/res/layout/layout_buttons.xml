@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <com.mj.instashusha.utils.DopeTextView
-        style="@style/DopeButton"
+    <com.mj.instashusha_tigo.utils.DopeTextView
         android:id="@+id/btn_download"
-        android:text="@string/btn.download"
+        style="@style/DopeButton"
+        android:layout_margin="@dimen/margin.button"
         android:layout_weight="0.33"
-        android:textSize="@dimen/text.size.button"
-        android:layout_margin="@dimen/margin.button"/>
+        android:text="@string/btn.download"
+        android:textSize="@dimen/text.size.button" />
 
 
-    <com.mj.instashusha.utils.DopeTextView
+    <com.mj.instashusha_tigo.utils.DopeTextView
         android:id="@+id/btn_share"
         style="@style/DopeButton"
+        android:layout_margin="@dimen/margin.button"
         android:layout_weight="0.33"
         android:text="@string/btn.share"
-        android:textSize="@dimen/text.size.button"
-        android:layout_margin="@dimen/margin.button"
-        />
+        android:textSize="@dimen/text.size.button" />
 
-    <com.mj.instashusha.utils.DopeTextView
+    <com.mj.instashusha_tigo.utils.DopeTextView
         android:id="@+id/btn_repost"
         style="@style/DopeButton"
-        android:text="@string/btn.repost"
-        android:layout_weight="0.33"
-        android:textSize="@dimen/text.size.button"
         android:layout_margin="@dimen/margin.button"
-        />
+        android:layout_weight="0.33"
+        android:text="@string/btn.repost"
+        android:textSize="@dimen/text.size.button" />
 
 </LinearLayout>

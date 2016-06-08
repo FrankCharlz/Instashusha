@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<set
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<set xmlns:android="http://schemas.android.com/apk/res/android"
     android:ordering="sequentially"
     android:repeatCount="infinite"
-    android:repeatMode="restart"
-    >
+    android:repeatMode="restart">
 
 
     <translate
@@ -16,9 +14,8 @@
     <translate
         android:duration="800"
         android:fromXDelta="0%"
-        android:toXDelta="-100%"
         android:startOffset="500"
-        />
+        android:toXDelta="-100%" />
 
 
 </set>

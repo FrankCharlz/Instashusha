@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/lyt_subiri_kidogo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minHeight="320dp"
-    android:paddingTop="@dimen/space.from.top"
-    android:id="@+id/lyt_subiri_kidogo">
+    android:orientation="vertical"
+    android:paddingTop="@dimen/space.from.top">
 
 
-    <com.mj.instashusha.utils.DopeTextView
+    <com.mj.instashusha_tigo.utils.DopeTextView
         android:id="@+id/tv_subiri"
-        android:textSize="@dimen/text.size.xlarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="....."
         android:layout_gravity="center"
         android:gravity="center"
-        android:padding="32dp"/>
+        android:padding="32dp"
+        android:text="....."
+        android:textSize="@dimen/text.size.xlarge" />
 
-    <com.mj.instashusha.utils.DopeTextView
-        android:textSize="@dimen/text.size.toolbar"
+    <com.mj.instashusha_tigo.utils.DopeTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/msg.subiri.kidogo"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/margin.button"/>
+        android:layout_margin="@dimen/margin.button"
+        android:text="@string/msg.subiri.kidogo"
+        android:textSize="@dimen/text.size.toolbar" />
 
 </LinearLayout>

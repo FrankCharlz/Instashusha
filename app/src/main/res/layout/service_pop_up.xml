@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/transparent"
@@ -9,14 +8,13 @@
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:minWidth="320dp"
         android:id="@+id/popup_container"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/popup.body"
-        android:orientation="vertical"
         android:layout_margin="@dimen/margin.popup"
-        >
+        android:background="@color/popup.body"
+        android:minWidth="320dp"
+        android:orientation="vertical">
 
         <!-- title -->
         <LinearLayout
@@ -25,61 +23,56 @@
             android:background="@color/popup.title"
             android:orientation="horizontal">
 
-            <com.mj.instashusha.utils.DopeTextView
-                android:textColor="@color/black97"
+            <com.mj.instashusha_tigo.utils.DopeTextView
                 android:id="@+id/popup_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding.top.bottom.toolbar"
-                android:textSize="@dimen/text.size.toolbar"
                 android:text="@string/app_name"
-                />
+                android:textColor="@color/black97"
+                android:textSize="@dimen/text.size.toolbar" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/imgv_popup_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_action_clear"
                 android:layout_gravity="right|center_vertical"
                 android:layout_margin="@dimen/radius.card"
-                />
+                android:src="@drawable/ic_action_clear" />
 
         </LinearLayout>
 
-        <com.mj.instashusha.utils.DopeTextView
+        <com.mj.instashusha_tigo.utils.DopeTextView
             android:id="@+id/popup_ad"
-            android:textColor="@color/black97"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text.size.button"
-            android:text="@string/popup_ad"
-            android:paddingRight="@dimen/padding.popup.content"
-            android:paddingLeft="@dimen/padding.popup.content"
-            android:paddingTop="@dimen/padding.popup.content"
-            android:paddingBottom="0dip"
             android:layout_margin="2dp"
-            />
+            android:paddingBottom="0dip"
+            android:paddingLeft="@dimen/padding.popup.content"
+            android:paddingRight="@dimen/padding.popup.content"
+            android:paddingTop="@dimen/padding.popup.content"
+            android:text="@string/popup_ad"
+            android:textColor="@color/black97"
+            android:textSize="@dimen/text.size.button" />
 
 
-        <com.mj.instashusha.utils.DopeTextView
-            android:textColor="@color/text.color.popup.link"
+        <com.mj.instashusha_tigo.utils.DopeTextView
             android:id="@+id/popup_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Read more"
-            android:textSize="@dimen/text.size.button"
-            android:paddingRight="@dimen/padding.popup.content"
-            android:paddingLeft="@dimen/padding.popup.content"
-            android:paddingTop="0dip"
-            android:paddingBottom="@dimen/padding.popup.content"
             android:layout_margin="2dp"
-            />
+            android:paddingBottom="@dimen/padding.popup.content"
+            android:paddingLeft="@dimen/padding.popup.content"
+            android:paddingRight="@dimen/padding.popup.content"
+            android:paddingTop="0dip"
+            android:text="Read more"
+            android:textColor="@color/text.color.popup.link"
+            android:textSize="@dimen/text.size.button" />
 
 
         <!-- horizontal separator -->
@@ -87,45 +80,39 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="2dp"
-            android:background="#19000000"
-            />
+            android:background="#19000000" />
 
         <!-- two buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_margin="12dp"
-            >
+            android:orientation="horizontal">
 
-            <com.mj.instashusha.utils.DopeTextView
-                android:textColor="@color/black97"
+            <com.mj.instashusha_tigo.utils.DopeTextView
                 android:id="@+id/btn_popup_share"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_weight="0.5"
-                android:text="@string/btn.share"/>
+                android:gravity="center"
+                android:text="@string/btn.share"
+                android:textColor="@color/black97" />
 
             <!-- vertical separator -->
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#19000000"
-                />
+                android:background="#19000000" />
 
-            <com.mj.instashusha.utils.DopeTextView
-                android:textColor="@color/black97"
+            <com.mj.instashusha_tigo.utils.DopeTextView
                 android:id="@+id/btn_popup_save"
-                android:gravity="center"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:gravity="center"
                 android:text="@string/btn.download"
-                />
+                android:textColor="@color/black97" />
         </LinearLayout>
-
-
 
 
     </LinearLayout>

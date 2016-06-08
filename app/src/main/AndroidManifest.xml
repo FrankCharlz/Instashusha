@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mj.instashusha">
+    package="com.mj.instashusha_tigo">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <application
-        android:name=".InstagramApp"
+        android:name="com.mj.instashusha_tigo.InstagramApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,54 +24,59 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.mj.instashusha_tigo.activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".activities.SaveActivity"
+            android:name="com.mj.instashusha_tigo.activities.SaveActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DopeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
         </activity>
         <activity
-            android:name=".activities.DownloadedActivity"
+            android:name="com.mj.instashusha_tigo.activities.DownloadedActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DopeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
 
         </activity>
 
-        <activity android:name=".activities.IntroActivity" android:label="@string/app_name"/>
+        <activity
+            android:name="com.mj.instashusha_tigo.activities.IntroActivity"
+            android:label="@string/app_name" />
 
-        <service android:enabled="true" android:name=".services.Adele"/>
-
-        <service android:name=".services.Adele2" android:enabled="true"/>
-
-        <service android:name=".services.PopUpService" android:enabled="true"/>
+        <service
+            android:name="com.mj.instashusha_tigo.services.PopUpService"
+            android:enabled="true" />
 
         <receiver
-            android:name=".services.BootReceiver"
+            android:name="com.mj.instashusha_tigo.services.BootReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
 
             <intent-filter>
-                <action android:name="com.mj.instashusha.CUSTOM_BOOT_BROADCAST"/>
+                <action android:name="com.mj.instashusha.CUSTOM_BOOT_BROADCAST" />
             </intent-filter>
         </receiver>
 

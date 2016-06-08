@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activities.SaveActivity"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_layout_activity_save"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/white"
-    android:id="@+id/container_layout_activity_save">
+    tools:context=".activities.SaveActivity">
 
     <FrameLayout
         android:id="@+id/frame_layout_container"
@@ -21,55 +21,53 @@
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|top"
             android:adjustViewBounds="true"
-            android:visibility="gone"
-            android:layout_gravity="center_horizontal|top"/>
+            android:visibility="gone" />
 
-        <include layout="@layout/toolbar_universal_layout"/>
+        <include layout="@layout/toolbar_universal_layout" />
 
     </FrameLayout>
 
     <com.daimajia.numberprogressbar.NumberProgressBar
         android:id="@+id/number_progress_bar"
-        android:layout_below="@id/frame_layout_container"
         style="@style/NumberProgressBar_Default"
+        android:layout_below="@id/frame_layout_container"
         android:layout_margin="@dimen/radius.small"
-        app:progress_text_size="@dimen/text.size.progress"
         android:visibility="gone"
-        />
+        app:progress_text_size="@dimen/text.size.progress" />
 
-    <ViewStub android:id="@+id/stub"
-        android:inflatedId="@+id/stub_buttons"
-        android:layout="@layout/layout_buttons"
+    <ViewStub
+        android:id="@+id/stub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/number_progress_bar"
-        />
+        android:inflatedId="@+id/stub_buttons"
+        android:layout="@layout/layout_buttons" />
 
-    <com.mj.instashusha.utils.DopeTextView
+    <com.mj.instashusha_tigo.utils.DopeTextView
         android:id="@+id/tigo_ad_save_activity"
 
         style="@style/TigoAdTextView"
         android:layout_alignParentBottom="true"
-        android:text="@string/sample_tigo_ad"
+        android:ellipsize="end"
 
         android:scrollHorizontally="true"
-        android:ellipsize="end"
         android:singleLine="true"
-        android:visibility="gone" />
+        android:text="@string/sample_tigo_ad"
+        android:visibility="visible" />
 
 
     <!-- google ad -->
     <com.google.android.gms.ads.AdView
-        android:visibility="visible"
         android:id="@+id/adView_activity_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id_save">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/banner_ad_unit_id_save"></com.google.android.gms.ads.AdView>
 
 
 </RelativeLayout>

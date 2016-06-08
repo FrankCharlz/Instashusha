@@ -8,7 +8,6 @@
         android:pivotY="50%"
         android:repeatCount="infinite"
         android:repeatMode="reverse"
-        android:toDegrees="300"
-        />
+        android:toDegrees="300" />
 
 </set>
