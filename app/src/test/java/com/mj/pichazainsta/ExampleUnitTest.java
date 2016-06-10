@@ -1,4 +1,4 @@
-package com.mj.instashusha_tigo;
+package com.mj.instashusha;
 
 import org.junit.Test;
 

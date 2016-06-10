@@ -1,19 +1,11 @@
 <resources>
     <string name="app_name" translatable="false">InstaShusha</string>
 
+    <string name="banner_ad_unit_id_home" translatable="false">ca-app-pub-8621518791154354/3031579423</string>
+    <string name="banner_ad_unit_id_save" translatable="false">ca-app-pub-8621518791154354/6124646624</string>
+    <string name="banner_ad_unit_id_finisher" translatable="false">ca-app-pub-8621518791154354/9078113020</string>
 
-    <string name="banner_ad_unit_id_home" translatable="false">ca-app-pub-8621518791154354/3031579423::removed</string>
-    <string name="banner_ad_unit_id_save" translatable="false">ca-app-pub-8621518791154354/6124646624::removed</string>
-    <string name="banner_ad_unit_id_finisher" translatable="false">ca-app-pub-8621518791154354/9078113020::removed</string>
-
-
-    <string name="sample_url" translatable="false">https://www.instagram.com/p/_oJiUqFPdy/</string>
-    <string name="sample_tigo_ad" translatable="false">Rahisisha maisha na TigoPesaApp. \nBofya hapa</string>
-
-    <string name="tigo_ish" translatable="false">Download friends\' Instagram photos and videos and share to Whatsapp for free with Tigo </string>
-    <string name="btn.share.whatsapp" translatable="false">SHARE TO </string>
-
-    <string name="popup_ad" translatable="false">Furahia whatsapp ya BURE ukinunua bando lolote la wiki au laini mpya ya Tigo.</string>
+    <string name="sample_url" translatable="false">https://www.instagram.com/p/_oJiUqFPdy/</string><string name="btn.share.whatsapp" translatable="false">SHARE TO </string>
 
 
     <string name="btn.download">SAVE</string>
@@ -24,11 +16,9 @@
     <string name="open_tutorial">HOW TO USE</string>
     <string name="open_instagram">OPEN INSTAGRAM</string>
 
-    <!--string name="instructions">Download photos and videos from Instagram, share na repost</string-->
+    <string name="instructions">Download photos and videos from Instagram, share na repost</string>
 
     <string name="share_to_string2">Freely available at: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
-
-    <string name="instructions">Download friends\' Instagram photos and videos and share to Whatsapp for free with Tigo</string>
 
     <string name="maelezo_body_1">On Instagram navigate to a photo then tap on the arrow as shown above</string>
 
@@ -43,6 +33,9 @@
     <string name="save_finished">Freely available at: https://play.google.com/?id=com.mj.pichazainsta</string>
     <string name="share_to_string">Freely available at: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
     <string name="msg.subiri.kidogo">just a sec...</string>
+
+    <string name="downloaded_activity_title" translatable="false">Downloaded Photos</string>
+    <string name="photo_menu_item_delete" translatable="false">DELETE</string>
 
 
 </resources>

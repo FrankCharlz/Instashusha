@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mj.instashusha_tigo">
+    package="com.mj.instashusha">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <application
-        android:name="com.mj.instashusha_tigo.InstagramApp"
+        android:name="com.mj.instashusha.InstagramApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,7 +24,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.mj.instashusha_tigo.activities.MainActivity"
+            android:name="com.mj.instashusha.activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-            android:name="com.mj.instashusha_tigo.activities.SaveActivity"
+            android:name="com.mj.instashusha.activities.SaveActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DopeTheme">
             <intent-filter>
@@ -49,7 +49,7 @@
 
         </activity>
         <activity
-            android:name="com.mj.instashusha_tigo.activities.DownloadedActivity"
+            android:name="com.mj.instashusha.activities.DownloadedActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DopeTheme">
             <intent-filter>
@@ -61,15 +61,15 @@
         </activity>
 
         <activity
-            android:name="com.mj.instashusha_tigo.activities.IntroActivity"
+            android:name="com.mj.instashusha.activities.IntroActivity"
             android:label="@string/app_name" />
 
         <service
-            android:name="com.mj.instashusha_tigo.services.PopUpService"
+            android:name="com.mj.instashusha.services.PopUpService"
             android:enabled="true" />
 
         <receiver
-            android:name="com.mj.instashusha_tigo.services.BootReceiver"
+            android:name="com.mj.instashusha.services.BootReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

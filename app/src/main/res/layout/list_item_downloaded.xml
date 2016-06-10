@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/radius.small"
     android:orientation="horizontal"
-    app:cardCornerRadius="@dimen/radius.card"
-    app:cardElevation="1dp"
+    android:layout_margin="0dip"
+    app:cardCornerRadius="0dip"
+    app:cardElevation="0dip"
     app:cardPreventCornerOverlap="false">
 
     <ImageView
@@ -17,7 +17,7 @@
 
     <ImageView
         android:id="@+id/item_play_button"
-        android:layout_width="40dp"
+        android:layout_width="36dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
@@ -41,7 +41,7 @@
             android:paddingRight="@dimen/padding.left.right"
             android:src="@drawable/ic_action_share" />
 
-        <com.mj.instashusha_tigo.utils.DopeTextView
+        <com.mj.instashusha.utils.DopeTextView
             android:id="@+id/item_filename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -45,18 +45,6 @@
         android:inflatedId="@+id/stub_buttons"
         android:layout="@layout/layout_buttons" />
 
-    <com.mj.instashusha_tigo.utils.DopeTextView
-        android:id="@+id/tigo_ad_save_activity"
-
-        style="@style/TigoAdTextView"
-        android:layout_alignParentBottom="true"
-        android:ellipsize="end"
-
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:text="@string/sample_tigo_ad"
-        android:visibility="visible" />
-
 
     <!-- google ad -->
     <com.google.android.gms.ads.AdView
@@ -65,9 +53,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:visibility="gone"
+        android:visibility="visible"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id_save"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/banner_ad_unit_id_save"/>
 
 
 </RelativeLayout>

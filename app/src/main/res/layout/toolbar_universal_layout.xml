@@ -8,7 +8,7 @@
     android:paddingBottom="@dimen/padding.top.bottom.toolbar"
     android:paddingTop="@dimen/padding.top.bottom.toolbar">
 
-    <com.mj.instashusha_tigo.utils.DopeTextView
+    <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/tv_appname"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

@@ -7,7 +7,7 @@
 
     <!--  width match parent to override dopebtn styles-->
 
-    <com.mj.instashusha_tigo.utils.DopeTextView
+    <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/btn_maelezo_zaidi"
         style="@style/DopeButton"
 
@@ -15,7 +15,7 @@
         android:layout_margin="@dimen/margin.button"
         android:text="@string/open_tutorial" />
 
-    <com.mj.instashusha_tigo.utils.DopeTextView
+    <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/btn_view_downloaded"
         style="@style/DopeButton"
 
@@ -23,7 +23,7 @@
         android:layout_margin="@dimen/margin.button"
         android:text="@string/view_downloaded" />
 
-    <com.mj.instashusha_tigo.utils.DopeTextView
+    <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/btn_fungua_insta"
         style="@style/DopeButton"
 

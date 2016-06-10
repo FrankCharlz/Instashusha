@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/space.from.top">
 
 
-    <com.mj.instashusha_tigo.utils.DopeTextView
+    <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/tv_subiri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:text="....."
         android:textSize="@dimen/text.size.xlarge" />
 
-    <com.mj.instashusha_tigo.utils.DopeTextView
+    <com.mj.instashusha.utils.DopeTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

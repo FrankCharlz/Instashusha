@@ -6,7 +6,6 @@
     android:orientation="vertical">
     <!--  outer view is an hack to provide necessary padding/margin gotta look at it in the future  -->
 
-
     <LinearLayout
         android:id="@+id/popup_container"
         android:layout_width="wrap_content"
@@ -23,7 +22,7 @@
             android:background="@color/popup.title"
             android:orientation="horizontal">
 
-            <com.mj.instashusha_tigo.utils.DopeTextView
+            <com.mj.instashusha.utils.DopeTextView
                 android:id="@+id/popup_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,31 +46,14 @@
 
         </LinearLayout>
 
-        <com.mj.instashusha_tigo.utils.DopeTextView
-            android:id="@+id/popup_ad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:paddingBottom="0dip"
-            android:paddingLeft="@dimen/padding.popup.content"
-            android:paddingRight="@dimen/padding.popup.content"
-            android:paddingTop="@dimen/padding.popup.content"
-            android:text="@string/popup_ad"
-            android:textColor="@color/black97"
-            android:textSize="@dimen/text.size.button" />
-
-
-        <com.mj.instashusha_tigo.utils.DopeTextView
+        <com.mj.instashusha.utils.DopeTextView
             android:id="@+id/popup_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            android:paddingBottom="@dimen/padding.popup.content"
-            android:paddingLeft="@dimen/padding.popup.content"
-            android:paddingRight="@dimen/padding.popup.content"
-            android:paddingTop="0dip"
-            android:text="Read more"
-            android:textColor="@color/text.color.popup.link"
+            android:padding="@dimen/padding.popup.content"
+            android:text="Test test testing"
+            android:textColor="@color/black97"
             android:textSize="@dimen/text.size.button" />
 
 
@@ -89,7 +71,7 @@
             android:layout_margin="12dp"
             android:orientation="horizontal">
 
-            <com.mj.instashusha_tigo.utils.DopeTextView
+            <com.mj.instashusha.utils.DopeTextView
                 android:id="@+id/btn_popup_share"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -104,7 +86,7 @@
                 android:layout_height="match_parent"
                 android:background="#19000000" />
 
-            <com.mj.instashusha_tigo.utils.DopeTextView
+            <com.mj.instashusha.utils.DopeTextView
                 android:id="@+id/btn_popup_save"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
