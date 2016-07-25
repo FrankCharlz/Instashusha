@@ -21,11 +21,10 @@
 
     <string name="share_to_string2">Freely available at: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
 
-    <string name="share_to_string">Furahia Whatsapp ya bure ukinunua bando lolote la wiki au laini mpya ya Tigo</string>
-
+    <string name="share_to_string">Freely available at: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
 
     <string name="msg.subiri.kidogo">just a sec...</string>
     <string name="save_finished">Freely available at: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
-    <string name="instructions">Download photos and videos from Instagram, share na repost</string>
+    <string name="instructions">download photos and videos from Instagram, share na repost</string>
 
 </resources>

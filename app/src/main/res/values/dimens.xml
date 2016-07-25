@@ -19,7 +19,7 @@
 
     <dimen name="padding.top.bottom.toolbar">10dp</dimen>
 
-    <dimen name="radius.small">3dp</dimen>
+    <dimen name="radius.small">24dp</dimen>
     <dimen name="radius.card">5dp</dimen>
 
 
@@ -28,10 +28,10 @@
 
     <dimen name="progress.height">8dp</dimen>
 
-    <dimen name="text.size.button">15sp</dimen>
-    <dimen name="text.size.toolbar">20sp</dimen>
-    <dimen name="text.size.large">24sp</dimen>
 
+    <dimen name="text.size.button">19.1sp</dimen>
+    <dimen name="text.size.toolbar">25.4sp</dimen>
+    <dimen name="text.size.large">30.5sp</dimen>
 
     <dimen name="margin.popup">28dp</dimen>
 
@@ -42,7 +42,7 @@
     <!-- should be removed-->
     <dimen name="space.from.top">120dp</dimen>
 
-    <dimen name="text.size.progress">13sp</dimen>
+    <dimen name="text.size.progress">16.5sp</dimen>
 </resources>
     
 

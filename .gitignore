@@ -32,3 +32,8 @@ proguard/
 captures/
 
 .idea/
+
+
+# vitu vyangu
+*.trace
+app/src/main/java/com/mj/instashusha/utils/Constants.java

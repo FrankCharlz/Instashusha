@@ -1,6 +1,7 @@
 package com.mj.instashusha.services;
 
 
+import com.mj.instashusha.Constants;
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.activities.SaveActivity;
 import com.mj.instashusha.network.HttpCallback;
@@ -37,7 +38,7 @@ public class PopUpDownloader {
         InstagramApp.log("service saveStream procedure  started");
 
         final Request request = new Request.Builder()
-                .url(SaveActivity.BASE_URL + url)
+                .url(Constants.BASE_URL + url)
                 .build();
 
         InstagramApp.getOkHttpClient().newCall(request).enqueue(new HttpCallback() {

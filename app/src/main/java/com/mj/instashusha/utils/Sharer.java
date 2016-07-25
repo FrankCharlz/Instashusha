@@ -12,6 +12,7 @@ import java.io.File;
 
 /**
  * Created by Frank on 1/9/2016.
+ *
  */
 
 public class Sharer {

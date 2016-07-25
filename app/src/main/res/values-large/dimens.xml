@@ -2,7 +2,7 @@
     <dimen name="padding.top.bottom">22dp</dimen>
     <dimen name="padding.left.right">44dp</dimen>
 
-    <dimen name="radius.small">5dp</dimen>
+    <dimen name="radius.small">32dp</dimen>
     <dimen name="radius.card">9dp</dimen>
 
 
@@ -12,9 +12,9 @@
     <dimen name="margin.button">16dp</dimen>
     <dimen name="margin.button.side">32dp</dimen>
 
-    <dimen name="text.size.button">24sp</dimen>
-    <dimen name="text.size.toolbar">22sp</dimen>
-    <dimen name="text.size.large">32sp</dimen>
+    <dimen name="text.size.button">28.10sp</dimen>
+    <dimen name="text.size.toolbar">25.80sp</dimen>
+    <dimen name="text.size.large">37.78sp</dimen>
 
 
     <dimen name="space.from.top">120dp</dimen>
@@ -25,12 +25,7 @@
     <dimen name="margin.popup">64dp</dimen>
 
 
-    <dimen name="tigoad.text.size">28sp</dimen>
-
-    <dimen name="tigoad.height.max">120dp</dimen>
-
     <dimen name="distance.logo.top">144dp</dimen>
 
-    <dimen name="text.size.progress">14.6sp</dimen>
+    <dimen name="text.size.progress">16.59sp</dimen>
 </resources>
-

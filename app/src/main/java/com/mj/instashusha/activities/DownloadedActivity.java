@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -84,6 +85,7 @@ public class DownloadedActivity extends AppCompatActivity {
 
 
         final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings_home);
+        btnMenu.setVisibility(View.GONE);
         btnMenu.setOnClickListener(new MenuClick(this));
 
         final DopeTextView titleTv = (DopeTextView) findViewById(R.id.tv_appname);

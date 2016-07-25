@@ -2,14 +2,14 @@
     <dimen name="padding.top.bottom">5dp</dimen>
     <dimen name="padding.left.right">12dp</dimen>
 
-    <dimen name="radius.small">2dp</dimen>
+    <dimen name="radius.small">24dp</dimen>
 
 
     <dimen name="margin.button">6dp</dimen>
     <dimen name="margin.button.side">12dp</dimen>
 
-    <dimen name="text.size.button">12sp</dimen>
-    <dimen name="text.size.toolbar">16sp</dimen>
+    <dimen name="text.size.button">14.04sp</dimen>
+    <dimen name="text.size.toolbar">18.72sp</dimen>
 
 
     <dimen name="margin.popup">16dp</dimen>
@@ -17,5 +17,5 @@
 
     <dimen name="distance.logo.top">24dp</dimen>
 
-    <item name="text.size.progress" format="float" type="dimen">13.2</item>
+    <dimen name="text.size.progress">15.39sp</dimen>
 </resources>

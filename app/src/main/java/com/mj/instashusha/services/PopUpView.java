@@ -14,11 +14,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.mj.instashusha.Constants;
 import com.mj.instashusha.R;
 import com.mj.instashusha.activities.SaveActivity;
 import com.mj.instashusha.utils.DopeTextView;
 import com.mj.instashusha.utils.Media;
+import com.mj.instashusha.utils.Prefs;
 import com.mj.instashusha.utils.Utils;
 
 import java.io.File;
@@ -117,7 +117,7 @@ public class PopUpView {
         PopUpDownloader.save(url, new PopUpDownloader.DownloadCompleteListener() {
             @Override
             public void done(String anchor_url, String path) {
-                Utils.setLastUrl(context, anchor_url);
+                Prefs.setLastUrl(context, anchor_url);
                 Utils.addFileToMediaDatabase(context, path);
                 nm.cancel(notification_id);
                 showNotifCompleted(notification_id + 99, path);

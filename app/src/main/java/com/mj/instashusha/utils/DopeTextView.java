@@ -7,11 +7,12 @@ import android.widget.TextView;
 
 /**
  * Created by Frank on 12/22/2015.
+ *
  */
 public class DopeTextView extends TextView {
 
 
-    private static final String FONT_PATH = "lato.ttf";
+    private static final String FONT_PATH = "dope_font.ttf"; //actually it's dosis
 
     public DopeTextView(Context context) {
         super(context);

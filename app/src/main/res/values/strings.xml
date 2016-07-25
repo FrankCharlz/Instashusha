@@ -16,7 +16,7 @@
     <string name="open_tutorial">HOW TO USE</string>
     <string name="open_instagram">OPEN INSTAGRAM</string>
 
-    <string name="instructions">Download photos and videos from Instagram, share na repost</string>
+    <string name="instructions">download photos and videos from Instagram, share na repost</string>
 
     <string name="share_to_string2">Freely available at: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
 
@@ -34,7 +34,7 @@
     <string name="share_to_string">Freely available at: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
     <string name="msg.subiri.kidogo">just a sec...</string>
 
-    <string name="downloaded_activity_title" translatable="false">Downloaded Photos</string>
+    <string name="downloaded_activity_title" translatable="false">Downloaded</string>
     <string name="photo_menu_item_delete" translatable="false">DELETE</string>
 
 

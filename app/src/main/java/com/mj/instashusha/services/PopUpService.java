@@ -8,6 +8,7 @@ import android.os.IBinder;
 
 import com.mj.instashusha.InstagramApp;
 import com.mj.instashusha.utils.Clip;
+import com.mj.instashusha.utils.Prefs;
 import com.mj.instashusha.utils.Utils;
 
 public class PopUpService extends Service implements ClipboardManager.OnPrimaryClipChangedListener {
@@ -56,7 +57,7 @@ public class PopUpService extends Service implements ClipboardManager.OnPrimaryC
     public void onPrimaryClipChanged() {
         InstagramApp.log("detected clip changed");
         String url = Clip.hasInstagramUrl(context);
-        String last_url = Utils.getLastUrl(context);
+        String last_url = Prefs.getLastUrl(context);
 
         if (url.isEmpty()) return; //return if not insta url
 

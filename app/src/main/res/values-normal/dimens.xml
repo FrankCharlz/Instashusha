@@ -13,7 +13,7 @@
 
     <dimen name="padding.top.bottom.toolbar">10dp</dimen>
 
-    <dimen name="radius.small">3dp</dimen>
+    <dimen name="radius.small">24dp</dimen>
     <dimen name="radius.card">5dp</dimen>
 
 
@@ -22,9 +22,10 @@
 
     <dimen name="progress.height">8dp</dimen>
 
-    <dimen name="text.size.button">15sp</dimen>
-    <dimen name="text.size.toolbar">20sp</dimen>
-    <dimen name="text.size.large">24sp</dimen>
+    <dimen name="text.size.button">17.60sp</dimen>
+    <dimen name="text.size.toolbar">23.41sp</dimen>
+    <dimen name="text.size.large">28.10sp</dimen>
+    <dimen name="text.size.progress">11.61sp</dimen>
 
 
     <dimen name="margin.popup">28dp</dimen>
@@ -39,5 +40,4 @@
     <dimen name="tigoad.height.max">60dp</dimen>
     <dimen name="zero_dip">0dip</dimen>
 
-    <dimen name="text.size.progress">12.6sp</dimen>
 </resources>
