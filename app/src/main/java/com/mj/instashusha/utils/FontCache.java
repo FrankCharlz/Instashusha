@@ -7,8 +7,9 @@ import java.util.HashMap;
 
 /**
  * Created by Frank on 12/22/2015.
+ *
  */
-public class FontCache {
+class FontCache {
 
     private static HashMap<String, Typeface> fontCache = new HashMap<>();
 

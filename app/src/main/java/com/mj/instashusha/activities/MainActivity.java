@@ -19,6 +19,7 @@ import com.mj.instashusha.utils.Clip;
 import com.mj.instashusha.utils.DopeTextView;
 import com.mj.instashusha.utils.OneTimeOps;
 import com.mj.instashusha.utils.Prefs;
+import com.mj.instashusha.utils.Utils;
 
 import java.util.Locale;
 
@@ -110,12 +111,9 @@ public class MainActivity extends AppCompatActivity {
         //all conditions GOOD proceed to process instagram link
         //make it a good consistent format
         //test if it's the last downloaded url
-        url = InstagramApp.processUrl(url);
+        url = Utils.processUrl(url);
         InstagramApp.log("URL is : " + url);
-        if (Prefs.isTheLastUr(context, url)) {
-            //no need to save this it again... it's already saved
-            //showInstructionFragment();
-        } else {
+        if (!Prefs.isTheLastUr(context, url)) {
             //proceed to save activity
             proceedLoading(url);
         }

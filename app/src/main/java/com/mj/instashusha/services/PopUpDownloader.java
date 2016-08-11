@@ -3,7 +3,6 @@ package com.mj.instashusha.services;
 
 import com.mj.instashusha.Constants;
 import com.mj.instashusha.InstagramApp;
-import com.mj.instashusha.activities.SaveActivity;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
 import com.mj.instashusha.utils.Utils;
@@ -83,8 +82,8 @@ public class PopUpDownloader {
                 new Runnable() {
                     @Override
                     public void run() {
-                        BufferedInputStream in = null;
-                        FileOutputStream fout = null;
+                        BufferedInputStream in;
+                        FileOutputStream fout;
                         try {
                             in = new BufferedInputStream(new URL(url).openStream());
                             fout = new FileOutputStream(path);
@@ -110,7 +109,6 @@ public class PopUpDownloader {
                             InstagramApp.log("downloading in service failed: " + e.getLocalizedMessage());
                             e.printStackTrace();
 
-                        } finally {
                         }
                     }
                 }, "Service downloading thread"

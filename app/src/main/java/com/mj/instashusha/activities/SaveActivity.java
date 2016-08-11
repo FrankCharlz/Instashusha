@@ -55,6 +55,7 @@ public class SaveActivity extends AppCompatActivity {
     public static final String FROM_SERVICE = "0x00123df3";
     public static final String SRC_URL = "0x025671f";
     private static final float TOOLBAR_BG_ALPHA = 0.49f;
+    private static final float BUTTONS_BG_ALPHA = 0.36f;
     private String image_url, video_url, source_url;
     private Context context;
     private ImageView imageView;
@@ -296,14 +297,14 @@ public class SaveActivity extends AppCompatActivity {
             public void onGenerated(Palette palette) {
                 InstagramApp.log("Palette loaded");
                 int bar_color = Utils.addAlphaToColor(Color.DKGRAY, 0.220f);
-                int btns_color = Utils.addAlphaToColor(bar_color, TOOLBAR_BG_ALPHA*0.30f);
+                int btns_color = Utils.addAlphaToColor(bar_color, TOOLBAR_BG_ALPHA * BUTTONS_BG_ALPHA);
                 int text_color = Color.BLACK;
 
                 Palette.Swatch swatch = palette.getVibrantSwatch();
                 if (swatch != null) {
                     bar_color = swatch.getRgb();
                     bar_color = Utils.addAlphaToColor(bar_color, TOOLBAR_BG_ALPHA);
-                    btns_color = Utils.addAlphaToColor(bar_color, TOOLBAR_BG_ALPHA * 0.30f);
+                    btns_color = Utils.addAlphaToColor(bar_color, TOOLBAR_BG_ALPHA * BUTTONS_BG_ALPHA);
                     text_color = swatch.getTitleTextColor();
                 }
 

@@ -15,7 +15,7 @@ public class BootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         //starts pop up service when the phone boots..
 
-        String intent_action = intent.getAction().toString();
+        String intent_action = intent.getAction();
         boolean received = intent_action.equals(Intent.ACTION_BOOT_COMPLETED) ||
                 intent_action.equalsIgnoreCase(CUSTOM_BROADCAST_ACTION_STRING);
 

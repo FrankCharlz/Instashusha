@@ -1,0 +1,29 @@
+<resources>
+
+    <string name="btn.repost">REPOST</string>
+
+    <string name="open_instagram">OFFEN INSTAGRAM</string>
+
+
+    <string name="maelezo_title_1"> Schritt 1</string>
+    <string name="maelezo_title_2"> Schritt 2</string>
+    <string name="maelezo_title_3"> Schritt 3</string>
+
+    <string name="maelezo_body_2"> tippen Sie auf \'Kopie Teilen URL\'</string>
+    <string name="message_when_loading">Bitte warten, nur eine sekunde...</string>
+
+    <string name="share_to_string2"> kostenlos erhältlich unter: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
+
+    <string name="share_to_string"> kostenlos erhältlich unter: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
+
+    <string name="msg.subiri.kidogo">einen moment</string>
+    <string name="save_finished"> kostenlos erhältlich unter: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
+    <string name="btn.download">SPEICHERN</string>
+    <string name="btn.share">TEILEN</string>
+    <string name="instructions"> laden Sie Fotos und Videos von Instagram , teilen und repost</string>
+    <string name="maelezo_body_1"> Auf Instagram auf einem Foto navigieren Sie auf den Pfeil tippen , wie oben gezeigt</string>
+    <string name="maelezo_body_3">Schließen Instagram und offene InstaShusha</string>
+    <string name="open_tutorial">WIE BENUTZT MAN</string>
+    <string name="view_downloaded"> HERUNTERGELADEN</string>
+
+</resources>

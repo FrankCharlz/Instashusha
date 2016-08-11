@@ -17,7 +17,7 @@ public class Downloader {
         BufferedInputStream in = null;
         FileOutputStream fout = null;
         long downloaded = 0;
-        int percent = 0;
+        int percent;
 
         progressListener.onStart();
 

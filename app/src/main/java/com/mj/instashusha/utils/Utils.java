@@ -68,9 +68,19 @@ public class Utils {
     }
 
 
-    public static int getColorCampat(Context context, int cid) {
-        return ContextCompat.getColor(context, cid);
+    public static String processUrl(String text) {
+        InstagramApp.log("processing url : "+text);
+        int _start = text.indexOf("https://www.instagram.com");
+        int _space = text.indexOf(" ", (_start + 1));
+        int _ending = text.length();
+
+        if (_space != -1) _ending = _space; //if contains space end at space
+        if (_start == -1) _start = 0; //foul proof
+
+        InstagramApp.log("processed url : "+text.substring(_start, _ending));
+        return text.substring(_start, _ending);
     }
+
 
 
 

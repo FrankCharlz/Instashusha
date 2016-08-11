@@ -1,6 +1,6 @@
 <resources>
 
-    <dimen name="text.size.xlarge">42dp</dimen>
+    <dimen name="text.size.xlarge">42sp</dimen>
 
     <dimen name="padding.popup.content">12dp</dimen>
 
@@ -41,7 +41,6 @@
 
     <!-- should be removed-->
     <dimen name="space.from.top">120dp</dimen>
-
     <dimen name="text.size.progress">16.5sp</dimen>
 </resources>
     

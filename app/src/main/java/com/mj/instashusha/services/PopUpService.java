@@ -61,7 +61,7 @@ public class PopUpService extends Service implements ClipboardManager.OnPrimaryC
 
         if (url.isEmpty()) return; //return if not insta url
 
-        url = InstagramApp.processUrl(url);
+        url = Utils.processUrl(url);
         if (url.equals(last_url)) return; //return if the same url
 
         /* the found url is new */
