@@ -4,7 +4,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 
 /**
  * Created by Frank on 7/10/2016.
@@ -27,10 +27,10 @@ public class ServiceMonitor {
         Intent serviceIntent = new Intent(context, PopUpService.class);
         boolean sup = isServiceRunning(context, PopUpService.class);
         if (!sup) {
-            InstagramApp.log("service was not running, I gotta start it..");
+            MyApp.log("service was not running, I gotta start it..");
             context.startService(serviceIntent);
         } else {
-            InstagramApp.log("service was still running");
+            MyApp.log("service was still running");
         }
     }
 

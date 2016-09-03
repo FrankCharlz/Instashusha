@@ -12,7 +12,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.mj.instashusha.Constants;
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.services.ServiceMonitor;
 import com.mj.instashusha.utils.Clip;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void track() {
-        Tracker mTracker = ((InstagramApp) getApplication()).getDefaultTracker();
+        Tracker mTracker = ((MyApp) getApplication()).getDefaultTracker();
         mTracker.enableAdvertisingIdCollection(true);
         mTracker.setScreenName("SCREEN_INSTRUCTION_FRAGMENT");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
@@ -92,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void programFlow() {
         //if back from save activity, then just  chill...
-        InstagramApp.log("from save activity : " + InstagramApp.BACK_FROM_SAVE_ACTIVITY);
-        if (InstagramApp.BACK_FROM_SAVE_ACTIVITY) {
-            InstagramApp.BACK_FROM_SAVE_ACTIVITY = false;
+        MyApp.log("from save activity : " + MyApp.BACK_FROM_SAVE_ACTIVITY);
+        if (MyApp.BACK_FROM_SAVE_ACTIVITY) {
+            MyApp.BACK_FROM_SAVE_ACTIVITY = false;
             return;
         }
 
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         if (url.isEmpty()) {
             //no instagram link in clipboard
             //launch instruction fragment
-            InstagramApp.log("No instagram url in clipboard");
+            MyApp.log("No instagram url in clipboard");
             return;
 
         }
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         //make it a good consistent format
         //test if it's the last downloaded url
         url = Utils.processUrl(url);
-        InstagramApp.log("URL is : " + url);
+        MyApp.log("URL is : " + url);
         if (!Prefs.isTheLastUr(context, url)) {
             //proceed to save activity
             proceedLoading(url);
@@ -168,12 +168,12 @@ public class MainActivity extends AppCompatActivity {
                                 .getLaunchIntentForPackage(Constants.INSTAGRAM_PACKAGE_NAME);
                         startActivity(instaIntent);
                     } catch (Exception e) {
-                        InstagramApp.log(e.getLocalizedMessage());
+                        MyApp.log(e.getLocalizedMessage());
                     }
                     break;
 
                 case R.id.btn_view_downloaded:
-                    int downloaded = InstagramApp.mediaDownloaded();
+                    int downloaded = MyApp.mediaDownloaded();
                     if (downloaded > 0) {
                         Intent t = new Intent(context, DownloadedActivity.class);
                         startActivity(t);

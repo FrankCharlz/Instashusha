@@ -17,7 +17,7 @@ import okhttp3.OkHttpClient;
  * <p/>
  * TODO: migrate some methods from here to Utils
  */
-public class InstagramApp extends Application {
+public class MyApp extends Application {
     public static final String GO_TO_INSTRUCTIONS = "hgGHGy";
     private static final String APP_FOLDER_NAME = "Instashusha/";
     private static final long SIZE_OF_OKHTTP_CACHE = 20 * 1024 * 1024; //20MB
@@ -26,7 +26,7 @@ public class InstagramApp extends Application {
     private Tracker mTracker;
 
     public static int mediaDownloaded() {
-        return InstagramApp.getAppFolder().listFiles().length;
+        return MyApp.getAppFolder().listFiles().length;
     }
 
     public static OkHttpClient getOkHttpClient() {
@@ -40,7 +40,7 @@ public class InstagramApp extends Application {
     public static File getAppFolder() {
         File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + APP_FOLDER_NAME);
         if (file.mkdirs()) {
-            InstagramApp.log("Folder created");
+            MyApp.log("Folder created");
         }
         return file;
     }

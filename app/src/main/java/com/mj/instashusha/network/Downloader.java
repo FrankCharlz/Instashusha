@@ -1,6 +1,6 @@
 package com.mj.instashusha.network;
 
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
@@ -42,7 +42,7 @@ public class Downloader {
 
         } catch (Exception e) {
             e.printStackTrace();
-            InstagramApp.log("Failed to download : " + e.getLocalizedMessage());
+            MyApp.log("Failed to download : " + e.getLocalizedMessage());
         } finally {
             try {
                 if (in != null) in.close();

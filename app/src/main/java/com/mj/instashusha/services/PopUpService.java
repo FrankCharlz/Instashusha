@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 import com.mj.instashusha.utils.Clip;
 import com.mj.instashusha.utils.Prefs;
 import com.mj.instashusha.utils.Utils;
@@ -19,14 +19,14 @@ public class PopUpService extends Service implements ClipboardManager.OnPrimaryC
     @Override
     public void onCreate() {
         super.onCreate();
-        InstagramApp.log("service on-create");
+        MyApp.log("service on-create");
         context = this;
     }
 
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        InstagramApp.log("service on-start-command");
+        MyApp.log("service on-start-command");
         cm = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         cm.addPrimaryClipChangedListener(this);
 
@@ -35,13 +35,13 @@ public class PopUpService extends Service implements ClipboardManager.OnPrimaryC
 
     @Override
     public void onLowMemory() {
-        InstagramApp.log("Memory Low, service can be terminated");
+        MyApp.log("Memory Low, service can be terminated");
         super.onLowMemory();
     }
 
     @Override
     public void onDestroy() {
-        InstagramApp.log("Service destroyed");
+        MyApp.log("Service destroyed");
         super.onDestroy();
         if (cm != null) {
             cm.removePrimaryClipChangedListener(this);
@@ -55,7 +55,7 @@ public class PopUpService extends Service implements ClipboardManager.OnPrimaryC
 
     @Override
     public void onPrimaryClipChanged() {
-        InstagramApp.log("detected clip changed");
+        MyApp.log("detected clip changed");
         String url = Clip.hasInstagramUrl(context);
         String last_url = Prefs.getLastUrl(context);
 
@@ -66,7 +66,7 @@ public class PopUpService extends Service implements ClipboardManager.OnPrimaryC
 
         /* the found url is new */
 
-        InstagramApp.log("Found: " + url);
+        MyApp.log("Found: " + url);
 
         PopUpView view = new PopUpView(context);
         view.setUrl(url);

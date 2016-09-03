@@ -2,7 +2,7 @@ package com.mj.instashusha.services;
 
 
 import com.mj.instashusha.Constants;
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
 import com.mj.instashusha.utils.Utils;
@@ -34,17 +34,17 @@ public class PopUpDownloader {
         listener = listener_;
 
 
-        InstagramApp.log("service saveStream procedure  started");
+        MyApp.log("service saveStream procedure  started");
 
         final Request request = new Request.Builder()
                 .url(Constants.BASE_URL + url)
                 .build();
 
-        InstagramApp.getOkHttpClient().newCall(request).enqueue(new HttpCallback() {
+        MyApp.getOkHttpClient().newCall(request).enqueue(new HttpCallback() {
             //here is main thread....
             @Override
             public void onUrlResponse(InstaResponse ir) {
-                InstagramApp.log("response in service : " + ir.toString());
+                MyApp.log("response in service : " + ir.toString());
                 if (ir.success == 1) {
                     if (ir.video_url.isEmpty()) {
                         saveMedia(ir.image_url);
@@ -62,7 +62,7 @@ public class PopUpDownloader {
     }
 
     private static void saveMedia(String url) {
-        String path = InstagramApp.getAppFolder().getAbsolutePath() +
+        String path = MyApp.getAppFolder().getAbsolutePath() +
                 File.separator + Utils.getTimeStamp() + getExtension(url);
         download(url, path);
     }
@@ -75,9 +75,9 @@ public class PopUpDownloader {
 
 
     private static void download(final String url, final String path) {
-        InstagramApp.log("downloading in service : ");
-        InstagramApp.log("from : " + url);
-        InstagramApp.log("to : " + path + "\n");
+        MyApp.log("downloading in service : ");
+        MyApp.log("from : " + url);
+        MyApp.log("to : " + path + "\n");
         new Thread(
                 new Runnable() {
                     @Override
@@ -101,12 +101,12 @@ public class PopUpDownloader {
 
                             listener.done(anchor_url, path);
 
-                            InstagramApp.log("service saveStream completed successfully");
-                            InstagramApp.log("from : " + url);
-                            InstagramApp.log("to : " + path + "\n");
+                            MyApp.log("service saveStream completed successfully");
+                            MyApp.log("from : " + url);
+                            MyApp.log("to : " + path + "\n");
 
                         } catch (IOException e) {
-                            InstagramApp.log("downloading in service failed: " + e.getLocalizedMessage());
+                            MyApp.log("downloading in service failed: " + e.getLocalizedMessage());
                             e.printStackTrace();
 
                         }

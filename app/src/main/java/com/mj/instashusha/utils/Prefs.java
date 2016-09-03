@@ -3,7 +3,7 @@ package com.mj.instashusha.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 
 /**
  * Created by Frank on 7/10/2016.
@@ -45,8 +45,8 @@ public class Prefs {
 
     public static boolean isTheLastUr(Context context, String url) {
         String last_url = getLastUrl(context);
-        InstagramApp.log("last url = " + last_url);
-        InstagramApp.log("current url = " + url);
+        MyApp.log("last url = " + last_url);
+        MyApp.log("current url = " + url);
         return (url.equalsIgnoreCase(last_url));
     }
 
@@ -65,7 +65,7 @@ public class Prefs {
 
         //take care of one time ops... may be slow //// TODO: 7/19/2016 optimize
         prefs.edit().putBoolean(FIRST_LAUNCH, false).apply();
-        prefs.edit().putInt(DOWNLOADED_MEDIA_COUNT, InstagramApp.getAppFolder().list().length).apply();
+        prefs.edit().putInt(DOWNLOADED_MEDIA_COUNT, MyApp.getAppFolder().list().length).apply();
         return res;
     }
 

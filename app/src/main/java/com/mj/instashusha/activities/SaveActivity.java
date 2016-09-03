@@ -25,7 +25,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.mj.instashusha.Constants;
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.network.Downloader;
 import com.mj.instashusha.network.HttpCallback;
@@ -143,13 +143,13 @@ public class SaveActivity extends AppCompatActivity {
     }
 
     private void proceedFromShare(String shared_text) {
-        InstagramApp.log("from intent : " + shared_text);
+        MyApp.log("from intent : " + shared_text);
 
         int start = shared_text.indexOf("https://www.instagram.com");
         if (start >= 0) {
             source_url = shared_text.substring(start).trim();
         } else {
-            InstagramApp.log("Url not available in shared text");
+            MyApp.log("Url not available in shared text");
             Snackbar
                     .make(activity_view_container,
                             "Url is not available in shared data, sorry!",
@@ -162,7 +162,7 @@ public class SaveActivity extends AppCompatActivity {
 
     private void track() {
         //// TODO: 7/21/2016 make tracker single
-        mTracker = ((InstagramApp) getApplication()).getDefaultTracker();
+        mTracker = ((MyApp) getApplication()).getDefaultTracker();
         mTracker.enableAdvertisingIdCollection(true);
         mTracker.setScreenName("SCREEN_SAVE_ACTIVITY");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
@@ -179,9 +179,9 @@ public class SaveActivity extends AppCompatActivity {
                 .url(Constants.BASE_URL + source_url)
                 .build();
 
-        InstagramApp.log("Request built: for url");
+        MyApp.log("Request built: for url");
 
-        InstagramApp.getOkHttpClient().newCall(request).enqueue(
+        MyApp.getOkHttpClient().newCall(request).enqueue(
                 new HttpCallback() {
                     @Override
                     public void onUrlResponse(InstaResponse response) {
@@ -278,13 +278,13 @@ public class SaveActivity extends AppCompatActivity {
         //ugly though
         String save_path;
         if (!isImage) {
-            InstagramApp.log("downloading video started");
-            save_path = InstagramApp.getAppFolder().getAbsolutePath() + File.separator + Utils.getTimeStamp() + getExtension(video_url);
+            MyApp.log("downloading video started");
+            save_path = MyApp.getAppFolder().getAbsolutePath() + File.separator + Utils.getTimeStamp() + getExtension(video_url);
             saveVideo(video_url, save_path);
             //do after saving will go into above method.
         } else {
-            InstagramApp.log("downloading image started");
-            save_path = InstagramApp.getAppFolder().getAbsolutePath() + File.separator + Utils.getTimeStamp() + getExtension(image_url);
+            MyApp.log("downloading image started");
+            save_path = MyApp.getAppFolder().getAbsolutePath() + File.separator + Utils.getTimeStamp() + getExtension(image_url);
             Utils.saveImage(imageView, save_path);
             doAfterSaving(save_path);
         }
@@ -295,7 +295,7 @@ public class SaveActivity extends AppCompatActivity {
     private void paletteColors(Bitmap bitmap) {
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
             public void onGenerated(Palette palette) {
-                InstagramApp.log("Palette loaded");
+                MyApp.log("Palette loaded");
                 int bar_color = Utils.addAlphaToColor(Color.DKGRAY, 0.220f);
                 int btns_color = Utils.addAlphaToColor(bar_color, TOOLBAR_BG_ALPHA * BUTTONS_BG_ALPHA);
                 int text_color = Color.BLACK;
@@ -322,7 +322,7 @@ public class SaveActivity extends AppCompatActivity {
 
     private void saveVideo(String video_url, final String save_path) {
         progressLine.setVisibility(View.VISIBLE);
-        InstagramApp.getOkHttpClient()
+        MyApp.getOkHttpClient()
                 .newCall(new Request.Builder()
                         .url(video_url)
                         .build()).enqueue(new HttpCallback() {
@@ -371,7 +371,7 @@ public class SaveActivity extends AppCompatActivity {
          * OR just use the alternative below:
          */
         super.onBackPressed();
-        InstagramApp.BACK_FROM_SAVE_ACTIVITY = true;
+        MyApp.BACK_FROM_SAVE_ACTIVITY = true;
         finish();
     }
 
@@ -401,7 +401,7 @@ public class SaveActivity extends AppCompatActivity {
 
                 case R.id.btn_download:
                 case R.id.btn_download_2:
-                    InstagramApp.log("clicked : " + view.toString());
+                    MyApp.log("clicked : " + view.toString());
                     download();
                     break;
                 default:

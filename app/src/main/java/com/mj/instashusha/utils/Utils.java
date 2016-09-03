@@ -6,18 +6,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
-import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
 
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -33,14 +28,14 @@ public class Utils {
         try {
             boolean fc = save_file.createNewFile();
             if (!fc) throw new FileNotFoundException("Failed to create file");
-            InstagramApp.log("File created : " + save_file.getAbsolutePath());
+            MyApp.log("File created : " + save_file.getAbsolutePath());
             FileOutputStream ostream = new FileOutputStream(save_file);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, ostream);
-            InstagramApp.log("File downloaded : "+save_path);
+            MyApp.log("File downloaded : "+save_path);
             ostream.close();
 
         } catch (Exception e) {
-            InstagramApp.log(e.getLocalizedMessage());
+            MyApp.log(e.getLocalizedMessage());
             e.printStackTrace();
         }
     }
@@ -50,7 +45,7 @@ public class Utils {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         mediaScanIntent.setData(contentUri);
         context.sendBroadcast(mediaScanIntent);
-        InstagramApp.log("Added to media database : "+path);
+        MyApp.log("Added to media database : "+path);
     }
 
 
@@ -69,7 +64,7 @@ public class Utils {
 
 
     public static String processUrl(String text) {
-        InstagramApp.log("processing url : "+text);
+        MyApp.log("processing url : "+text);
         int _start = text.indexOf("https://www.instagram.com");
         int _space = text.indexOf(" ", (_start + 1));
         int _ending = text.length();
@@ -77,7 +72,7 @@ public class Utils {
         if (_space != -1) _ending = _space; //if contains space end at space
         if (_start == -1) _start = 0; //foul proof
 
-        InstagramApp.log("processed url : "+text.substring(_start, _ending));
+        MyApp.log("processed url : "+text.substring(_start, _ending));
         return text.substring(_start, _ending);
     }
 

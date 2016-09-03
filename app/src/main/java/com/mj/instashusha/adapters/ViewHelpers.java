@@ -5,7 +5,7 @@ import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 import com.mj.instashusha.R;
 
 import java.io.File;
@@ -30,7 +30,7 @@ public class ViewHelpers {
 
                 if ( item.getItemId() == R.id.photo_menu_item_delete_image) {
                     boolean res = file.delete();
-                    InstagramApp.log("File deleted ? : "+res);
+                    MyApp.log("File deleted ? : "+res);
                     if (res) {
                         deleteListener.onDeleted();
                     }

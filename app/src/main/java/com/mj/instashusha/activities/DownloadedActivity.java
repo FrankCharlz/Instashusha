@@ -16,10 +16,9 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.mj.instashusha.Constants;
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.adapters.FileListAdapter;
-import com.mj.instashusha.ads.AdManager;
 import com.mj.instashusha.utils.DopeTextView;
 import com.mj.instashusha.utils.MenuClick;
 
@@ -31,7 +30,7 @@ import java.util.Random;
 public class DownloadedActivity extends AppCompatActivity {
 
 
-    private static final int MAX_DISPLAY_FILES = 32; //my age by june 20, 2016
+    private static final int MAX_DISPLAY_FILES = 32; //my age by june 20, 2016 + 9
     private InterstitialAd mInterstitialAd;
 
     @Override
@@ -40,15 +39,15 @@ public class DownloadedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_downloaded);
 
         //load an interstitial with probability of 3/7
-        if (new Random().nextInt(7) < 3) {
-            InstagramApp.log("Loading interstitial...");
+        if (new Random().nextInt(7) < 4) {
+            MyApp.log("Loading interstitial...");
             loadAdInterstitial();
         }
 
         initViews();
         loadAds(); //load banner..
 
-        File items[] = InstagramApp.getAppFolder().listFiles();
+        File items[] = MyApp.getAppFolder().listFiles();
         Arrays.sort(items, new Comparator<File>() {
             @Override
             public int compare(File a, File b) {
@@ -78,31 +77,30 @@ public class DownloadedActivity extends AppCompatActivity {
     }
 
     private void loadAdInterstitial() {
-        final InterstitialAd ad = AdManager.getAd();
 
-        if (ad.isLoaded()) {
-            InstagramApp.log("Interstitial is loaded++");
-            ad.show();
-            return;
-        }
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(Constants.DA_I_AD_ID);
 
-        ad.setAdListener(new AdListener() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        mInterstitialAd.loadAd(adRequest);
+
+        mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
-                InstagramApp.log("Interstitial is loaded");
-                ad.show();
+                MyApp.log("Interstitial is loaded");
+                mInterstitialAd.show();
             }
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
-                InstagramApp.log("Interstitial failed to load");
-                ad.show();
+                MyApp.log("Interstitial failed to load : "+errorCode);
             }
         });
     }
 
     private void track() {
-        Tracker mTracker = ((InstagramApp) getApplication()).getDefaultTracker();
+        Tracker mTracker = ((MyApp) getApplication()).getDefaultTracker();
         mTracker.enableAdvertisingIdCollection(true);
         mTracker.setScreenName("SCREEN_DOWNLOADED_ACTIVITY");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
@@ -120,7 +118,7 @@ public class DownloadedActivity extends AppCompatActivity {
         if (toolbar != null)
             toolbar.setBackgroundColor(Color.BLACK);
         else {
-            InstagramApp.log("Toolbar is null");
+            MyApp.log("Toolbar is null");
         }
 
 

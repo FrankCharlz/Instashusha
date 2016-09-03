@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 import com.mj.instashusha.activities.MainActivity;
 
 /**
@@ -19,10 +19,10 @@ public class MenuClick implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        InstagramApp.log("Home clicked...");
+        MyApp.log("Home clicked...");
         //start main activity and go to instruction fragment...
         Intent t = new Intent(context, MainActivity.class);
-        t.putExtra(InstagramApp.GO_TO_INSTRUCTIONS, true);
+        t.putExtra(MyApp.GO_TO_INSTRUCTIONS, true);
         context.startActivity(t);
 
     }

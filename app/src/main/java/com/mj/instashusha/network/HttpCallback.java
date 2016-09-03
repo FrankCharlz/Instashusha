@@ -5,7 +5,7 @@ import android.os.Looper;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mj.instashusha.InstagramApp;
+import com.mj.instashusha.MyApp;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +22,7 @@ public abstract class HttpCallback implements Callback, Instagrammable {
 
     @Override
     public void onFailure(Call call, IOException e) {
-        InstagramApp.log("okhttp request failed : " + e.getLocalizedMessage());
+        MyApp.log("okhttp request failed : " + e.getLocalizedMessage());
     }
 
 
@@ -32,7 +32,7 @@ public abstract class HttpCallback implements Callback, Instagrammable {
             processResponse(response);
         } else {
             //do something if response code != 200
-            InstagramApp.log("okhttp response code not 200");
+            MyApp.log("okhttp response code not 200");
         }
     }
 
