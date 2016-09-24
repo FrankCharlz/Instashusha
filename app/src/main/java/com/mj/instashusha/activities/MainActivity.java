@@ -4,11 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.AnticipateInterpolator;
+import android.widget.ImageView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.mj.instashusha.Constants;
@@ -21,14 +26,11 @@ import com.mj.instashusha.utils.OneTimeOps;
 import com.mj.instashusha.utils.Prefs;
 import com.mj.instashusha.utils.Utils;
 
-import java.util.Locale;
-
 public class MainActivity extends AppCompatActivity {
 
     private Context context;
     private boolean waking_from_pause = false;
     private View root_view;
-    private DopeTextView btnViewDownloaded, btnOpenTutorial, btnOpenInstagram;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         programFlow();
 
         ServiceMonitor.checkAndStartBackgroundService(getBaseContext());
-        loadAds();
         track();
 
     }
@@ -62,29 +63,50 @@ public class MainActivity extends AppCompatActivity {
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
-    private void loadAds() {
-        final AdView mAdView = (AdView) findViewById(R.id.adview_main);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
-
     private void initViews() {
 
         root_view = findViewById(R.id.root_view_main_activity);
 
-        btnOpenTutorial = (DopeTextView) findViewById(R.id.btn_maelezo_zaidi);
-        btnOpenTutorial.setOnClickListener(new ButtonClicks());
+        final ButtonClicks buttonClicks = new ButtonClicks();
+        final DopeTextView btnViewDownloaded, btnOpenTutorial, btnOpenInstagram;
 
-        btnOpenInstagram = (DopeTextView) findViewById(R.id.btn_fungua_insta);
-        btnOpenInstagram.setOnClickListener(new ButtonClicks());
+        btnOpenTutorial = (DopeTextView) findViewById(R.id.container_help);
+        btnOpenTutorial.setOnClickListener(buttonClicks);
 
-        btnViewDownloaded = (DopeTextView) findViewById(R.id.btn_view_downloaded);
-        btnViewDownloaded.setOnClickListener(new ButtonClicks());
+        btnOpenInstagram = (DopeTextView) findViewById(R.id.container_start_instagram);
+        btnOpenInstagram.setOnClickListener(buttonClicks);
 
-        int idadi = Prefs.getNumberOfSavedMedia(context);
-        btnViewDownloaded.setText(String.
-                format(Locale.US,
-                "%s (%d)", context.getResources().getString(R.string.view_downloaded), idadi));
+        btnViewDownloaded = (DopeTextView) findViewById(R.id.container_downloaded);
+        btnViewDownloaded.setOnClickListener(buttonClicks);
+
+        ImageView logo = (ImageView) findViewById(R.id.logo_main_activity);
+
+
+
+        Animation bottomsUpAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_up);
+
+        bottomsUpAnim.setInterpolator(new AccelerateDecelerateInterpolator());
+        logo.startAnimation(bottomsUpAnim);
+
+        MyApp.log(bottomsUpAnim.getInterpolator().toString());
+
+        bottomsUpAnim.setInterpolator(new AnticipateInterpolator());
+        btnOpenTutorial.startAnimation(bottomsUpAnim);
+
+        MyApp.log(bottomsUpAnim.getInterpolator().toString());
+
+        bottomsUpAnim.setInterpolator(new LinearOutSlowInInterpolator());
+        btnOpenInstagram.startAnimation(bottomsUpAnim);
+
+        MyApp.log(bottomsUpAnim.getInterpolator().toString());
+
+        bottomsUpAnim.setInterpolator(new FastOutSlowInInterpolator());
+        btnViewDownloaded.startAnimation(bottomsUpAnim);
+
+        MyApp.log(bottomsUpAnim.getInterpolator().toString());
+
+
+
 
 
     }
@@ -157,12 +179,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
+            MyApp.log("something clicked : "+view.getId());
             switch (view.getId()) {
-                case R.id.btn_maelezo_zaidi:
+                case R.id.container_help:
                     startActivity(new Intent(context, IntroActivity.class));
                     break;
 
-                case R.id.btn_fungua_insta:
+                case R.id.container_start_instagram:
                     try {
                         Intent instaIntent = context.getPackageManager()
                                 .getLaunchIntentForPackage(Constants.INSTAGRAM_PACKAGE_NAME);
@@ -172,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
 
-                case R.id.btn_view_downloaded:
+                case R.id.container_downloaded:
                     int downloaded = MyApp.mediaDownloaded();
                     if (downloaded > 0) {
                         Intent t = new Intent(context, DownloadedActivity.class);

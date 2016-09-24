@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal|top"
-    android:background="@color/popup.title"
+    android:background="@color/colorPrimary"
     android:minHeight="?android:attr/actionBarSize"
     android:paddingBottom="@dimen/padding.top.bottom.toolbar"
     android:paddingTop="@dimen/padding.top.bottom.toolbar">
@@ -17,6 +17,7 @@
         android:paddingLeft="@dimen/padding.left.right"
         android:paddingStart="@dimen/padding.left.right"
         android:text="@string/app_name"
+        android:textColor="@color/white"
         android:textSize="@dimen/text.size.toolbar" />
 
     <ImageView

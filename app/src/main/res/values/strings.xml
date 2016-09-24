@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">InstaShusha</string>
+    <string name="app_name" translatable="false">Instashusha</string>
 
     <string name="banner_ad_unit_id_home" translatable="false">ca-app-pub-8621518791154354/3031579423</string>
     <string name="banner_ad_unit_id_save" translatable="false">ca-app-pub-8621518791154354/6124646624</string>
