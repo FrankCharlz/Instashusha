@@ -12,8 +12,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -31,7 +33,6 @@ import com.mj.instashusha.network.Downloader;
 import com.mj.instashusha.network.HttpCallback;
 import com.mj.instashusha.network.InstaResponse;
 import com.mj.instashusha.network.ProgressListener;
-import com.mj.instashusha.utils.MenuClick;
 import com.mj.instashusha.utils.Prefs;
 import com.mj.instashusha.utils.Sharer;
 import com.mj.instashusha.utils.Utils;
@@ -202,6 +203,7 @@ public class SaveActivity extends AppCompatActivity {
 
     private void initViews() {
         imageView = (ImageView) findViewById(R.id.image_view);
+        imageView.setOnTouchListener(new ImageTouched());
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_universal);
         textViewToolbar = (TextView) findViewById(R.id.tv_appname);
@@ -218,9 +220,6 @@ public class SaveActivity extends AppCompatActivity {
         buttonsContainer.setVisibility(View.GONE);
 
         progressLine = (NumberProgressBar) findViewById(R.id.number_progress_bar);
-
-        final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings_home);
-        btnMenu.setOnClickListener(new MenuClick(this));
 
         activity_view_container = findViewById(R.id.container_layout_activity_save);
 
@@ -440,4 +439,59 @@ public class SaveActivity extends AppCompatActivity {
     }
 
 
+    private class ImageTouched implements View.OnTouchListener {
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+            //view = (View) view.getParent();
+            int og_top = view.getTop();
+            float startY = 0;
+            float dy = 0, move = 0;
+
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    startY = event.getRawY();
+                    break;
+
+                case MotionEvent.ACTION_MOVE:
+                    //MyApp.log(" start : "+startY);
+                    //MyApp.log(" current : "+event.getRawY());
+                    dy = event.getRawY() - startY;
+                    dy/=8;
+                    if (dy > 150) dy = 150;
+
+                    MyApp.log(" moved : "+dy);
+                    view.animate()
+                            .y(dy)
+                            .setDuration(0)
+                            .start();
+
+                    buttonsContainer
+                            .animate()
+                            //.y(dy)
+                            .alpha(1 - dy/150)
+                            .setDuration(0)
+                            .setInterpolator(new AccelerateDecelerateInterpolator())
+                            .start();
+                    break;
+
+                case MotionEvent.ACTION_UP:
+                    MyApp.log(" up : "+event.getRawY());
+                    view.animate()
+                            .y(og_top)
+                            .setDuration(93)
+                            .start();
+
+                    buttonsContainer
+                            .animate()
+                            .alpha(1)
+                            .setDuration(93)
+                            .start();
+                    break;
+
+                default: break;
+            }
+
+            return true;
+        }
+    }
 }

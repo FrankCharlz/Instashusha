@@ -56,7 +56,7 @@
         <item name="android:layout_height">wrap_content</item>
 
         <item name="android:textColor">@color/black.alpha</item>
-        <!--<item name="android:textSize">@dimen/tigoad.text.size</item>-->
+        <item name="android:textSize">@dimen/text.size.button</item>
 
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/tigoad.padding</item>

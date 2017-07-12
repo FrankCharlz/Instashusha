@@ -4,7 +4,7 @@
 
     <dimen name="padding.popup.content">12dp</dimen>
 
-    <dimen name="tigoad.padding">12dp</dimen>
+    <dimen name="tigoad.padding">10dp</dimen>
 
     <dimen name="button.dope.min.width">180dp</dimen>
     <dimen name="tigoad.height.max">60dp</dimen>
@@ -29,8 +29,8 @@
     <dimen name="progress.height">8dp</dimen>
 
 
-    <dimen name="text.size.button">19.1sp</dimen>
-    <dimen name="text.size.toolbar">25.4sp</dimen>
+    <dimen name="text.size.button">22sp</dimen>
+    <dimen name="text.size.toolbar">23sp</dimen>
     <dimen name="text.size.large">30.5sp</dimen>
 
     <dimen name="margin.popup">28dp</dimen>

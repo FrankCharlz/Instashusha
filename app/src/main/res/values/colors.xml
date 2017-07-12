@@ -6,7 +6,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="black97">#de000000</color>
-    <color name="black.alpha">#63000000</color>
+    <color name="black.alpha">#93000000</color>
 
     <color name="transparent">#00ffffff</color>
 
@@ -31,5 +31,7 @@
     <color name="green.whatsapp.transparent">#0f29B540</color>
 
     <color name="black.overlay">#29000000</color>
+    <color name="white.alpha">#88ffffff</color>
+    <color name="black.alpha2">#27000000</color>
 
 </resources>

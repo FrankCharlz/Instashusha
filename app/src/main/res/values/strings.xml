@@ -8,13 +8,13 @@
     <string name="sample_url" translatable="false">https://www.instagram.com/p/_oJiUqFPdy/</string><string name="btn.share.whatsapp" translatable="false">SHARE TO </string>
 
 
-    <string name="btn.download">SAVE</string>
-    <string name="btn.share">SHARE</string>
-    <string name="btn.repost">REPOST</string>
+    <string name="btn.download">save</string>
+    <string name="btn.share">share</string>
+    <string name="btn.repost">repost</string>
 
-    <string name="view_downloaded">DOWNLOADED</string>
-    <string name="open_tutorial">HOW TO USE</string>
-    <string name="open_instagram">OPEN INSTAGRAM</string>
+    <string name="view_downloaded">downloaded</string>
+    <string name="open_tutorial">help</string>
+    <string name="open_instagram">open instagram</string>
 
     <string name="instructions">download photos and videos from Instagram, share na repost</string>
 
@@ -34,8 +34,8 @@
     <string name="share_to_string">Freely available at: https://play.google.com/store/apps/details?id=com.mj.pichazainsta</string>
     <string name="msg.subiri.kidogo">just a sec...</string>
 
-    <string name="downloaded_activity_title" translatable="false">Downloaded</string>
     <string name="photo_menu_item_delete" translatable="false">DELETE</string>
+    <string name="downloaded_activity_title" translatable="false">Saved</string>
 
 
 </resources>

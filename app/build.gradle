@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 23
     buildToolsVersion "24.0.2"
 
     defaultConfig {
         applicationId "com.mj.pichazainsta"
         minSdkVersion 15
-        targetSdkVersion 24
-        versionCode 19
-        versionName "7.0.0"
+        targetSdkVersion 23
+        versionCode 24
+        versionName "9.0.0"
     }
     buildTypes {
         release {
@@ -28,17 +28,18 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
 
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.google.code.gson:gson:2.5'
-    compile 'com.squareup.picasso:picasso:2.5.2'
 
     compile 'com.android.support:palette-v7:23.3.0'
     compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile 'com.google.android.gms:play-services-analytics:8.4.0'
 
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.squareup.okio:okio:1.11.0'
+
     compile 'com.github.codechimp-org.apprater:library:1.0.30'
     compile 'com.github.paolorotolo:appintro:3.3.0'
-
     compile 'com.daimajia.numberprogressbar:library:1.2@aar'
 
 

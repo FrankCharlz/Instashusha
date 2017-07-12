@@ -38,18 +38,33 @@
     <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/container_start_instagram"
         style="@style/TextButtonStyle"
-        android:text="start instagram"/>
+        android:text="@string/open_instagram"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="96dp"
+        android:layout_marginRight="96dp"
+        android:background="@color/black.alpha2"/>
+
 
     <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/container_downloaded"
         style="@style/TextButtonStyle"
-        android:text="downloaded"/>
+        android:text="@string/view_downloaded"/>
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="96dp"
+        android:layout_marginRight="96dp"
+        android:background="@color/black.alpha2"/>
 
     <com.mj.instashusha.utils.DopeTextView
         android:id="@+id/container_help"
         style="@style/TextButtonStyle"
-        android:text="help"/>
+        android:text="@string/open_tutorial"/>
 
 
 

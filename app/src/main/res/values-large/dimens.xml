@@ -12,8 +12,8 @@
     <dimen name="margin.button">16dp</dimen>
     <dimen name="margin.button.side">32dp</dimen>
 
-    <dimen name="text.size.button">28.10sp</dimen>
-    <dimen name="text.size.toolbar">25.80sp</dimen>
+    <dimen name="text.size.button">32sp</dimen>
+    <dimen name="text.size.toolbar">24sp</dimen>
     <dimen name="text.size.large">37.78sp</dimen>
 
 

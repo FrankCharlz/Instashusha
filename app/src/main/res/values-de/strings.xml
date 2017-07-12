@@ -2,7 +2,7 @@
 
     <string name="btn.repost">REPOST</string>
 
-    <string name="open_instagram">OFFEN INSTAGRAM</string>
+    <string name="open_instagram">offen instagram</string>
 
 
     <string name="maelezo_title_1"> Schritt 1</string>
@@ -23,7 +23,7 @@
     <string name="instructions"> laden Sie Fotos und Videos von Instagram , teilen und repost</string>
     <string name="maelezo_body_1"> Auf Instagram auf einem Foto navigieren Sie auf den Pfeil tippen , wie oben gezeigt</string>
     <string name="maelezo_body_3">Schließen Instagram und offene InstaShusha</string>
-    <string name="open_tutorial">WIE BENUTZT MAN</string>
-    <string name="view_downloaded"> HERUNTERGELADEN</string>
+    <string name="open_tutorial">wie benutzt man</string>
+    <string name="view_downloaded">heruntergeladen</string>
 
 </resources>

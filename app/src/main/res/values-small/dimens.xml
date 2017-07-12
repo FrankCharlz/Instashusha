@@ -8,8 +8,8 @@
     <dimen name="margin.button">6dp</dimen>
     <dimen name="margin.button.side">12dp</dimen>
 
-    <dimen name="text.size.button">14.04sp</dimen>
-    <dimen name="text.size.toolbar">18.72sp</dimen>
+    <dimen name="text.size.button">16.4sp</dimen>
+    <dimen name="text.size.toolbar">16sp</dimen>
 
 
     <dimen name="margin.popup">16dp</dimen>

@@ -4,9 +4,9 @@
     <string name="btn.share">PARTAGER</string>
     <string name="btn.repost">RE-POSTER</string>
 
-    <string name="view_downloaded">SAUVÉ</string>
-    <string name="open_tutorial">COMMENT UTILISER</string>
-    <string name="open_instagram">OUVERT INSTAGRAM</string>
+    <string name="view_downloaded">sauvé</string>
+    <string name="open_tutorial">comment utiliser</string>
+    <string name="open_instagram">ouvert instagram</string>
 
     <string name="instructions">télécharger des photos et des vidéos provenant d\'Instagram , partager na repost</string>
 

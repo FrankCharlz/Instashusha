@@ -6,7 +6,7 @@
 
     <dimen name="padding.popup.content">12dp</dimen>
 
-    <dimen name="tigoad.padding">12dp</dimen>
+    <dimen name="tigoad.padding">10dp</dimen>
 
     <dimen name="padding.top.bottom">5dp</dimen>
     <dimen name="padding.left.right">12dp</dimen>
@@ -22,8 +22,8 @@
 
     <dimen name="progress.height">8dp</dimen>
 
-    <dimen name="text.size.button">17.60sp</dimen>
-    <dimen name="text.size.toolbar">23.41sp</dimen>
+    <dimen name="text.size.button">20sp</dimen>
+    <dimen name="text.size.toolbar">21sp</dimen>
     <dimen name="text.size.large">28.10sp</dimen>
     <dimen name="text.size.progress">11.61sp</dimen>
 

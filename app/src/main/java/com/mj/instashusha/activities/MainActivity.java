@@ -4,14 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
-import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.AnticipateInterpolator;
 import android.widget.ImageView;
 
 import com.google.android.gms.analytics.HitBuilders;
@@ -43,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 OneTimeOps.checkAppIntroduction(context);
-                OneTimeOps.getUserEmail(context);
             }
         }).start();
 
@@ -80,34 +73,6 @@ public class MainActivity extends AppCompatActivity {
         btnViewDownloaded.setOnClickListener(buttonClicks);
 
         ImageView logo = (ImageView) findViewById(R.id.logo_main_activity);
-
-
-
-        Animation bottomsUpAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_up);
-
-        bottomsUpAnim.setInterpolator(new AccelerateDecelerateInterpolator());
-        logo.startAnimation(bottomsUpAnim);
-
-        MyApp.log(bottomsUpAnim.getInterpolator().toString());
-
-        bottomsUpAnim.setInterpolator(new AnticipateInterpolator());
-        btnOpenTutorial.startAnimation(bottomsUpAnim);
-
-        MyApp.log(bottomsUpAnim.getInterpolator().toString());
-
-        bottomsUpAnim.setInterpolator(new LinearOutSlowInInterpolator());
-        btnOpenInstagram.startAnimation(bottomsUpAnim);
-
-        MyApp.log(bottomsUpAnim.getInterpolator().toString());
-
-        bottomsUpAnim.setInterpolator(new FastOutSlowInInterpolator());
-        btnViewDownloaded.startAnimation(bottomsUpAnim);
-
-        MyApp.log(bottomsUpAnim.getInterpolator().toString());
-
-
-
-
 
     }
 
@@ -192,6 +157,11 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(instaIntent);
                     } catch (Exception e) {
                         MyApp.log(e.getLocalizedMessage());
+                        Snackbar
+                                .make(root_view,
+                                        "Could not open Instagram App. Make sure it is installed!",
+                                        Snackbar.LENGTH_LONG)
+                                .show();
                     }
                     break;
 

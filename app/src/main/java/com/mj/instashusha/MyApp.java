@@ -26,7 +26,9 @@ public class MyApp extends Application {
     private Tracker mTracker;
 
     public static int mediaDownloaded() {
-        return MyApp.getAppFolder().listFiles().length;
+        File[] fs = MyApp.getAppFolder().listFiles();
+        if (fs != null) return fs.length;
+        return  0;
     }
 
     public static OkHttpClient getOkHttpClient() {

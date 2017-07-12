@@ -39,7 +39,7 @@ public class DownloadedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_downloaded);
 
         //load an interstitial with probability of 3/7
-        if (new Random().nextInt(7) < 4) {
+        if (new Random().nextInt(7) < 3) {
             MyApp.log("Loading interstitial...");
             loadAdInterstitial();
         }
@@ -114,17 +114,6 @@ public class DownloadedActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_universal);
-        if (toolbar != null)
-            toolbar.setBackgroundColor(Color.BLACK);
-        else {
-            MyApp.log("Toolbar is null");
-        }
-
-
-        final ImageView btnMenu = (ImageView) findViewById(R.id.toolbar_action_settings_home);
-        btnMenu.setVisibility(View.GONE);
-        btnMenu.setOnClickListener(new MenuClick(this));
 
         final DopeTextView titleTv = (DopeTextView) findViewById(R.id.tv_appname);
         titleTv.setText(R.string.downloaded_activity_title);
