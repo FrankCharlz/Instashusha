@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -61,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
     private void doPermissions() {
 
         String[] permissions = new String[]{
-                Manifest.permission.SYSTEM_ALERT_WINDOW,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.RECEIVE_BOOT_COMPLETED
+//                Manifest.permission.SYSTEM_ALERT_WINDOW,
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                Manifest.permission.RECEIVE_BOOT_COMPLETED,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
         };
 
         boolean hasAllPermissions = true;
@@ -94,25 +95,18 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
-
                     MyApp.log("permissions str: "+ Arrays.toString(permissions));
                     MyApp.log("permissions: "+ Arrays.toString(grantResults));
 
                 } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
+                    // not giving shit any more
+                    Toast.makeText(this, "App may mis-behave due to limited permissions. Please allow app to access" +
+                            " your storage either through settings or by refreshing. ", Toast.LENGTH_LONG).show();
                 }
-                return;
             }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
         }
     }
 
