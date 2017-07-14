@@ -44,6 +44,7 @@ import org.codechimp.apprater.AppRater;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 
 import okhttp3.Request;
 
@@ -138,9 +139,12 @@ public class SaveActivity extends AppCompatActivity {
         initViews();
         proceed(source_url);
 
-        loadAds();
-        track();
+        if (new Random().nextInt(100) < 60) {
+            MyApp.log("Loading banner...");
+            loadAds(); //load banner..
+        }
 
+        track();
     }
 
     private void proceedFromShare(String shared_text) {

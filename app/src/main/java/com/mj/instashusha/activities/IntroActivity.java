@@ -34,7 +34,7 @@ public class IntroActivity extends AppIntro2 {
         addSlide(AppIntroFragment.newInstance(
                 getResources().getString(R.string.maelezo_title_3),
                 getResources().getString(R.string.maelezo_body_3),
-                R.drawable.ins_icon,
+                R.drawable.ins_logo,
                 Color.parseColor("#020302")
         ));
 

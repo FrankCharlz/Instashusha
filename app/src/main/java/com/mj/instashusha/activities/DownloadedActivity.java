@@ -39,15 +39,25 @@ public class DownloadedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_downloaded);
 
         //load an interstitial with probability of 3/7
-        if (new Random().nextInt(7) < 3) {
+        if (new Random().nextInt(100) < 5) {
             MyApp.log("Loading interstitial...");
             loadAdInterstitial();
         }
 
+        if (new Random().nextInt(100) < 60) {
+            MyApp.log("Loading banner...");
+            loadAds(); //load banner..
+        }
+
+
         initViews();
-        loadAds(); //load banner..
+        track();
+
 
         File items[] = MyApp.getAppFolder().listFiles();
+
+        if (items == null) return;
+
         Arrays.sort(items, new Comparator<File>() {
             @Override
             public int compare(File a, File b) {
@@ -71,8 +81,6 @@ public class DownloadedActivity extends AppCompatActivity {
         }
 
         //todo: add on scroll listener...
-
-        track();
 
     }
 

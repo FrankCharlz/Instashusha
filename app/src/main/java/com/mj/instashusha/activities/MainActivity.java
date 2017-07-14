@@ -1,9 +1,13 @@
 package com.mj.instashusha.activities;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,8 +24,11 @@ import com.mj.instashusha.utils.OneTimeOps;
 import com.mj.instashusha.utils.Prefs;
 import com.mj.instashusha.utils.Utils;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
 
+    private static final int MY_PERMISSIONS_REQUEST = 2;
     private Context context;
     private boolean waking_from_pause = false;
     private View root_view;
@@ -40,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
 
+        doPermissions();
+
 
         initViews();
         programFlow();
@@ -47,6 +56,64 @@ public class MainActivity extends AppCompatActivity {
         ServiceMonitor.checkAndStartBackgroundService(getBaseContext());
         track();
 
+    }
+
+    private void doPermissions() {
+
+        String[] permissions = new String[]{
+                Manifest.permission.SYSTEM_ALERT_WINDOW,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.RECEIVE_BOOT_COMPLETED
+        };
+
+        boolean hasAllPermissions = true;
+
+        for (String perm : permissions) {
+            if (ContextCompat.checkSelfPermission(MainActivity.this, perm)
+                    != PackageManager.PERMISSION_GRANTED) {
+                MyApp.log("permission not granted: " + perm);
+                hasAllPermissions = false;
+                break;
+            }
+        }
+
+        if (!hasAllPermissions) {
+            //just ask for all the permissions, even if only one is missing
+            ActivityCompat.requestPermissions(
+                    MainActivity.this,
+                    permissions,
+                    MY_PERMISSIONS_REQUEST
+            );
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                    MyApp.log("permissions str: "+ Arrays.toString(permissions));
+                    MyApp.log("permissions: "+ Arrays.toString(grantResults));
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
     private void track() {

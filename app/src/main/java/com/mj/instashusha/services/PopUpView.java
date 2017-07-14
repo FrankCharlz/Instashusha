@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.mj.instashusha.MyApp;
 import com.mj.instashusha.R;
 import com.mj.instashusha.activities.SaveActivity;
 import com.mj.instashusha.utils.DopeTextView;
@@ -26,9 +27,9 @@ import java.util.Random;
 
 /**
  * Created by Frank on 3/12/2016.
- * -kemmy's tycs graduation @ chief sec school...
+ * kemmy's TYCS graduation @ chief sec school...
  */
-public class PopUpView {
+class PopUpView {
 
     private final Context context;
     private final NotificationManager nm;
@@ -61,7 +62,7 @@ public class PopUpView {
         }
     };
 
-    public PopUpView(Context context) {
+    PopUpView(Context context) {
         this.context = context;
         nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -77,7 +78,8 @@ public class PopUpView {
         params = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_PHONE,
+                //WindowManager.LayoutParams.TYPE_PHONE,
+                WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |
                         WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
                 PixelFormat.TRANSLUCENT
@@ -102,7 +104,12 @@ public class PopUpView {
     }
 
     public void show() {
-        windowManager.addView(popView, params);
+        try {
+            windowManager.addView(popView, params);
+        } catch (WindowManager.BadTokenException e) {
+            e.printStackTrace();
+            MyApp.log("Cant show poup: "+e.getLocalizedMessage());
+        }
     }
 
     private void removeView() {
