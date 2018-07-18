@@ -27,8 +27,9 @@ import java.util.Random;
 
 /**
  * Created by Frank on 3/12/2016.
- * kemmy's TYCS graduation @ chief sec school...
+ * Kemmy's TYCS graduation @ chief sec school...
  */
+
 class PopUpView {
 
     private final Context context;

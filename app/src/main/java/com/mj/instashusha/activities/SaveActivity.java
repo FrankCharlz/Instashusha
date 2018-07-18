@@ -24,8 +24,7 @@ import android.widget.TextView;
 import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+
 import com.mj.instashusha.Constants;
 import com.mj.instashusha.MyApp;
 import com.mj.instashusha.R;
@@ -65,7 +64,7 @@ public class SaveActivity extends AppCompatActivity {
     private TextView textViewToolbar;
     private View buttonsContainer;
 
-    private NumberProgressBar progressLine;
+    //private NumberProgressBar progressLine;
 
     private View btnSave;
     private View btnShare;
@@ -77,7 +76,6 @@ public class SaveActivity extends AppCompatActivity {
     private boolean from_service;
     private ButtonClicks buttonClicks;
     private boolean share_to_whatsapp = false;
-    private Tracker mTracker;
 
 
     private Target picasso_target = new Target() {
@@ -167,10 +165,10 @@ public class SaveActivity extends AppCompatActivity {
 
     private void track() {
         //// TODO: 7/21/2016 make tracker single
-        mTracker = ((MyApp) getApplication()).getDefaultTracker();
-        mTracker.enableAdvertisingIdCollection(true);
-        mTracker.setScreenName("SCREEN_SAVE_ACTIVITY");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+//        mTracker = ((MyApp) getApplication()).getDefaultTracker();
+//        mTracker.enableAdvertisingIdCollection(true);
+//        mTracker.setScreenName("SCREEN_SAVE_ACTIVITY");
+//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     private void loadAds() {
@@ -223,7 +221,7 @@ public class SaveActivity extends AppCompatActivity {
 
         buttonsContainer.setVisibility(View.GONE);
 
-        progressLine = (NumberProgressBar) findViewById(R.id.number_progress_bar);
+//        progressLine = (NumberProgressBar) findViewById(R.id.number_progress_bar);
 
         activity_view_container = findViewById(R.id.container_layout_activity_save);
 
@@ -315,16 +313,16 @@ public class SaveActivity extends AppCompatActivity {
                 buttonsContainer.setBackgroundColor(btns_color);
                 textViewToolbar.setTextColor(text_color);
 
-                progressLine.setReachedBarColor(bar_color);
-                progressLine.setUnreachedBarColor(btns_color);
-                progressLine.setProgressTextColor(Color.DKGRAY);
+//                progressLine.setReachedBarColor(bar_color);
+//                progressLine.setUnreachedBarColor(btns_color);
+//                progressLine.setProgressTextColor(Color.DKGRAY);
 
             }
         });
     }
 
     private void saveVideo(String video_url, final String save_path) {
-        progressLine.setVisibility(View.VISIBLE);
+        //progressLine.setVisibility(View.VISIBLE);
         MyApp.getOkHttpClient()
                 .newCall(new Request.Builder()
                         .url(video_url)
@@ -350,11 +348,11 @@ public class SaveActivity extends AppCompatActivity {
         Utils.addFileToMediaDatabase(context, save_path);
         Prefs.incrementDownloadedMedia(context);
         if (share_after_download) {
-            Sharer.share(context, new File(save_path), share_to_whatsapp, mTracker);
+            Sharer.share(context, new File(save_path), share_to_whatsapp);
             share_after_download = false;
             share_to_whatsapp = false;
         } else if (repost_after_download) {
-            Sharer.repost(context, new File(save_path), mTracker);
+            Sharer.repost(context, new File(save_path));
             repost_after_download = false;
         } else {
             //open downloaded activity....
@@ -425,7 +423,8 @@ public class SaveActivity extends AppCompatActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    progressLine.setProgress(progress);
+//                    progressLine.setProgress(progress);
+                    MyApp.log("progress: "+progress);
                 }
             });
         }
@@ -435,7 +434,7 @@ public class SaveActivity extends AppCompatActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    progressLine.setVisibility(View.GONE);
+//                    progressLine.setVisibility(View.GONE);
                     doAfterSaving(save_path);
                 }
             });

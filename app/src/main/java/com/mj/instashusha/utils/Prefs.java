@@ -7,8 +7,8 @@ import com.mj.instashusha.MyApp;
 
 /**
  * Created by Frank on 7/10/2016.
- *
  */
+
 public class Prefs {
 
 

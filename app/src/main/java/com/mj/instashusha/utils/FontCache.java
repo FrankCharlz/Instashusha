@@ -13,7 +13,7 @@ class FontCache {
 
     private static HashMap<String, Typeface> fontCache = new HashMap<>();
 
-    public static Typeface getTypeface(String fontname, Context context) {
+    static Typeface getTypeface(String fontname, Context context) {
         Typeface typeface = fontCache.get(fontname);
 
         if (typeface == null) {

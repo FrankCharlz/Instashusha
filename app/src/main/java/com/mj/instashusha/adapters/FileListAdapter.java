@@ -25,6 +25,7 @@ import java.util.List;
  * Created by Frank on 1/9/2016.
  *
  */
+
 public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHolder> {
 
 
@@ -106,7 +107,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
             if (view.getTag().equals(TAG_FPIC)) {
                 Media.openItem(context, items.get(getAdapterPosition()));
             } else if (view.getTag().equals(TAG_FSHARE)) {
-                Sharer.share(context, items.get(getLayoutPosition()), false, null);
+                Sharer.share(context, items.get(getLayoutPosition()), false);
             }
         }
 

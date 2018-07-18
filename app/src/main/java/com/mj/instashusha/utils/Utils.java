@@ -77,7 +77,9 @@ public class Utils {
     }
 
 
-
-
-
+    public static int numberOfDownloaded() {
+        File folder = MyApp.getAppFolder();
+        if (folder != null && folder.listFiles() != null) return folder.listFiles().length;
+        return  0;
+    }
 }

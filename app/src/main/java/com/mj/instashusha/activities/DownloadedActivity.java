@@ -13,8 +13,6 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.mj.instashusha.Constants;
 import com.mj.instashusha.MyApp;
 import com.mj.instashusha.R;
@@ -108,10 +106,11 @@ public class DownloadedActivity extends AppCompatActivity {
     }
 
     private void track() {
-        Tracker mTracker = ((MyApp) getApplication()).getDefaultTracker();
-        mTracker.enableAdvertisingIdCollection(true);
-        mTracker.setScreenName("SCREEN_DOWNLOADED_ACTIVITY");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // TODO: 18-Jul-18 sort this
+//        Tracker mTracker = ((MyApp) getApplication()).getDefaultTracker();
+//        mTracker.enableAdvertisingIdCollection(true);
+//        mTracker.setScreenName("SCREEN_DOWNLOADED_ACTIVITY");
+//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
 

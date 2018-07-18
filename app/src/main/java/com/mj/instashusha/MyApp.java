@@ -4,8 +4,6 @@ import android.app.Application;
 import android.os.Environment;
 import android.util.Log;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
 
 import java.io.File;
 
@@ -23,13 +21,6 @@ public class MyApp extends Application {
     private static final long SIZE_OF_OKHTTP_CACHE = 20 * 1024 * 1024; //20MB
     public static boolean BACK_FROM_SAVE_ACTIVITY = false;
     private static OkHttpClient okhttpClient;
-    private Tracker mTracker;
-
-    public static int mediaDownloaded() {
-        File[] fs = MyApp.getAppFolder().listFiles();
-        if (fs != null) return fs.length;
-        return  0;
-    }
 
     public static OkHttpClient getOkHttpClient() {
         return okhttpClient;
@@ -57,14 +48,6 @@ public class MyApp extends Application {
 
     }
 
-
-    synchronized public Tracker getDefaultTracker() {
-        if (mTracker == null) {
-            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            mTracker = analytics.newTracker(R.xml.global_tracker);
-        }
-        return mTracker;
-    }
 
 }
 

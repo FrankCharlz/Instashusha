@@ -15,7 +15,7 @@ public class Clip {
         //should return link or empty string
         ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         String copied_text = null;
-        if (cm.hasPrimaryClip()) {
+        if (cm != null && cm.hasPrimaryClip()) {
             ClipData.Item item = cm.getPrimaryClip().getItemAt(0);
             copied_text = item.getText().toString();
         }

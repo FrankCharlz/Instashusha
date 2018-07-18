@@ -13,8 +13,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.mj.instashusha.Constants;
 import com.mj.instashusha.MyApp;
 import com.mj.instashusha.R;
@@ -26,6 +24,7 @@ import com.mj.instashusha.utils.Prefs;
 import com.mj.instashusha.utils.Utils;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,14 +38,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        context = this;
+        if (Prefs.isFirstLaunch(context)) {
+            startActivity(new Intent(context, IntroActivity.class));
+        }
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                OneTimeOps.checkAppIntroduction(context);
-            }
-        }).start();
+        context = this;
 
         doPermissions();
 
@@ -62,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
     private void doPermissions() {
 
         String[] permissions = new String[]{
-//                Manifest.permission.SYSTEM_ALERT_WINDOW,
-//                Manifest.permission.READ_EXTERNAL_STORAGE,
-//                Manifest.permission.RECEIVE_BOOT_COMPLETED,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
         };
 
@@ -111,10 +104,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void track() {
-        Tracker mTracker = ((MyApp) getApplication()).getDefaultTracker();
-        mTracker.enableAdvertisingIdCollection(true);
-        mTracker.setScreenName("SCREEN_INSTRUCTION_FRAGMENT");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+//        Tracker mTracker = ((MyApp) getApplication()).getDefaultTracker();
+//        mTracker.enableAdvertisingIdCollection(true);
+//        mTracker.setScreenName("SCREEN_INSTRUCTION_FRAGMENT");
+//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     private void initViews() {
@@ -131,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         btnOpenInstagram.setOnClickListener(buttonClicks);
 
         btnViewDownloaded = (DopeTextView) findViewById(R.id.container_downloaded);
+        btnViewDownloaded.setText(String.format(Locale.CANADA, "%s (%d)", btnViewDownloaded.getText(), Utils.numberOfDownloaded()));
         btnViewDownloaded.setOnClickListener(buttonClicks);
 
         ImageView logo = (ImageView) findViewById(R.id.logo_main_activity);
@@ -227,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.container_downloaded:
-                    int downloaded = MyApp.mediaDownloaded();
+                    int downloaded = Utils.numberOfDownloaded();
                     if (downloaded > 0) {
                         Intent t = new Intent(context, DownloadedActivity.class);
                         startActivity(t);
